@@ -2,7 +2,7 @@
 
 The existing host provided for this project serves **campong.online** (with `a`), not `compong.online`. SUAY is published at **https://campong.online/projects/suay/** using host Nginx. No Docker or public coordinator is needed for this static site.
 
-Only these files are allowed into a release: `landing/index.html`, `style.css`, `main.js`, `assets/suay-network.svg`, `assets/suay-logo.svg`, `assets/suay-neural-devices.png`. The controller, API, SQLite database, environment files and SSH password are never uploaded. The architecture figure is a repository documentation asset and is not needed by the static website.
+Only these files are allowed into a release: `landing/index.html`, `style.css`, `main.js`, `assets/suay-network.svg`, `assets/suay-logo.svg`, `assets/suay-device-landing.jpg`. The controller, API, SQLite database, environment files and SSH password are never uploaded. The architecture figure is a repository documentation asset and is not needed by the static website.
 
 ## Workflow
 

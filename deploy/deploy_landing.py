@@ -19,7 +19,7 @@ SNIPPET = '/etc/nginx/snippets/campong-suay.conf'
 INCLUDE = '    include /etc/nginx/snippets/campong-suay.conf;'
 BASE = '/opt/suay'
 PUBLIC_FILES = ('index.html', 'style.css', 'main.js', 'assets/suay-network.svg',
-                'assets/suay-logo.svg', 'assets/suay-neural-devices.png')
+                'assets/suay-logo.svg', 'assets/suay-device-landing.jpg')
 
 
 def settings():
