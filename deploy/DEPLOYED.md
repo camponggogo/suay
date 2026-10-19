@@ -1,9 +1,9 @@
 # Public landing deployment
 
 - URL: https://campong.online/projects/suay/
-- Deployed: 2026-10-19, 18:46 Asia/Bangkok (11:46 UTC)
-- Release ID: `20261019T114629127447Z`
-- Files: only the six static assets listed in `deploy_landing.py`, including the user-selected suay-device-landing.jpg
+- Deployed: 2026-10-19, 18:50 Asia/Bangkok (11:50 UTC)
+- Release ID: `20261019T115025387224Z`
+- Files: only the six static assets listed in `deploy_landing.py`, including the user-selected suay-device-landing.png
 - Nginx preflight and post-change syntax checks: passed
 - Public landing HTTPS content check: passed
 - Existing company-root HTTPS check: passed

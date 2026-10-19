@@ -12,7 +12,7 @@ Distributed AI compute and local resource sharing for organizations with big amb
 
 [Star SUAY](https://github.com/camponggogo/suay) · [Support development](#support-the-project)
 
-![SUAY shared-compute concept: older computers, phones, servers and edge boards linked by neural fibers](landing/assets/suay-device-landing.jpg)
+![SUAY shared-compute concept: older computers, phones, servers and edge boards linked by neural fibers](landing/assets/suay-device-landing.png)
 
 *Concept illustration. It does not claim that all pictured devices currently run the Petals pilot.*
 
