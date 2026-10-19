@@ -40,20 +40,6 @@ Developers call the inference gateway with scoped API keys. The gateway checks t
 
 The editable [architecture source and flow notes](docs/ARCHITECTURE.md) are the technical reference. The figure is an explanatory illustration, not proof of deployed worker integration.
 
-## Repository layout
-
-```text
-landing/             Public website, brand art and step-by-step Anatomy GIF
-versions/python/     Python control plane, compute pilots and landing analytics
-versions/rust/       Experimental local hardware and memory supervisor
-deploy/              Static-site deployment helper and Nginx snippet
-docs/                Native-service architecture and GitHub launch notes
-tests/               Authorization, compute discovery and deployment checks
-.github/workflows/   Source validation on pull requests and pushes
-```
-
-Keep `versions/python/control/` and local state out of the public web root. Deployment uploads only the explicitly allowlisted `landing/` assets. The normal GitHub-rendered entrypoint is this **README.md**.
-
 Choose [Python Version](versions/python/) or [Rust Version](versions/rust/). These are separate source directories with different roles, not interchangeable implementations. The directory name is **versions/** (plural).
 
 ## Available now
