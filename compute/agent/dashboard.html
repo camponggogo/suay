@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="th"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Office AI Swarm</title>
+<style>body{font:18px system-ui;background:#f4f6f9;color:#203044;max-width:850px;margin:40px auto;padding:20px}section{background:white;border-radius:12px;padding:24px;margin:18px 0}dt{color:#567}dd{margin:5px 0 20px;font-weight:600;overflow-wrap:anywhere}#connection{color:#276}</style>
+<h1>Office AI Swarm</h1><p id="connection" role="status">กำลังเชื่อมต่อ…</p>
+<section><dl><dt>จำนวนเอเจนต์ที่ติดต่อได้</dt><dd id="nodes">—</dd><dt>RAM ของระบบที่แต่ละเอเจนต์มองเห็น (ไม่ใช่ RAM ว่างสำหรับโมเดล)</dt><dd id="ram">—</dd><dt>Coordinator</dt><dd id="leader">—</dd><dt>โมเดลที่ตั้งค่า</dt><dd id="model">—</dd><dt>Petals process ที่ทำงานอยู่</dt><dd id="processes">—</dd></dl></section>
+<p>จำนวน process ไม่ยืนยันว่าโหลดโมเดลเสร็จหรือมี block ครบ ต้องทดสอบสร้างคำตอบผ่าน Client</p>
+<script>
+async function update(){try{const r=await fetch('/api/status',{signal:AbortSignal.timeout(4000)});if(!r.ok)throw Error(r.status);const d=await r.json();for(const [id,value] of Object.entries({nodes:d.total_nodes,ram:d.total_ram+' GiB',leader:d.coordinator_ip||'กำลังเลือก',model:d.current_model,processes:d.running_processes}))document.getElementById(id).textContent=value;document.getElementById('connection').textContent='เชื่อมต่อ • '+new Date().toLocaleTimeString();}catch(e){document.getElementById('connection').textContent='ขาดการเชื่อมต่อ — เปิดหน้าเว็บของเอเจนต์ที่ยังออนไลน์';}finally{setTimeout(update,3000);}}update();
+</script></html>
