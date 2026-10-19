@@ -2,7 +2,7 @@
 
 The existing host provided for this project serves **campong.online** (with `a`), not `compong.online`. SUAY is published at **https://campong.online/projects/suay/** using host Nginx. No Docker or public coordinator is needed for this static site.
 
-Only these files are allowed into a release: `landing/index.html`, `style.css`, `main.js`, `assets/suay-network.svg`, `assets/suay-logo.svg`, `assets/suay-device-landing.png`. The controller, API, SQLite database, environment files and SSH password are never uploaded. The architecture figure is a repository documentation asset and is not needed by the static website.
+Only the explicit `PUBLIC_FILES` allowlist in `deploy_landing.py` enters a release: English/Thai HTML, stylesheet/script, three brand/image assets, the project sitemap and a public IndexNow verification text file. The controller, API, SQLite database, environment files and SSH password are never uploaded. The architecture figure is a repository documentation asset and is not needed by the static website.
 
 ## Workflow
 
@@ -11,6 +11,7 @@ Only these files are allowed into a release: `landing/index.html`, `style.css`, 
 3. Verify the server's SSH host key with its administrator/provider and add it to your user's known-hosts file. The helper rejects unknown or changed host keys.
 4. Run `python deploy/deploy_landing.py` for a dry-run and preflight Nginx validation.
 5. Run `python deploy/deploy_landing.py --apply` to publish.
+6. After public asset checks pass, run `python deploy/submit_indexnow.py` to notify participating search engines of changed SUAY URLs. The key file is intentionally public. Accepted notification is not proof of indexing. Submit the project sitemap separately through the owner's Google Search Console and Bing Webmaster Tools accounts.
 
 The helper targets the already inspected `/etc/nginx/sites-available/campong.online` server block. It deliberately refuses an unfamiliar vhost layout. It adds one include for `nginx-suay-snippet.conf` and keeps the existing root and other projects intact. For a different host/domain, review and adapt the helper/config rather than reusing credentials blindly.
 

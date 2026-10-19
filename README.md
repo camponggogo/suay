@@ -8,7 +8,7 @@
 
 Distributed AI compute and local resource sharing for organizations with big ambitions and real-world budgets. SUAY explores how existing CPU/GPU capacity can support local inference, developer access and centrally managed AI workloads.
 
-[Website](https://campong.online/projects/suay/) · [Source & community](https://github.com/camponggogo/suay) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [MIT license](LICENSE)
+[Website](https://campong.online/projects/suay/) · [ภาษาไทย](https://campong.online/projects/suay/th/) · [Source & community](https://github.com/camponggogo/suay) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [MIT license](LICENSE)
 
 [Star SUAY](https://github.com/camponggogo/suay) · [Support development](#support-the-project)
 
@@ -19,6 +19,8 @@ Distributed AI compute and local resource sharing for organizations with big amb
 > Early-stage software. The organization control plane and Petals LAN agent are separate pilots. Native service installers, authenticated worker transport and automatic model migration are not implemented. No cost savings, model throughput or production availability are guaranteed.
 
 ## Why SUAY?
+
+SUAY is an open-source **distributed AI compute and local resource-sharing project** for teams evaluating on-premise LLM inference. It includes a scoped developer API gateway and a separate experimental Petals LAN pool; it does not yet provide a production native-service fleet.
 
 Cloud inference bills grow. New GPUs require budget approval. Internal teams need a controlled way to experiment with AI. SUAY starts with the hardware an organization already has, makes access explicit, and invites the community to measure what works.
 
@@ -172,6 +174,8 @@ cd suay
 The source is maintained at [camponggogo/suay](https://github.com/camponggogo/suay). Read [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md) and [GitHub launch guidance](docs/GITHUB_LAUNCH.md). Useful first contributions: native packaging, worker authentication, safe model placement, hardware benchmarks, reproducible dependencies and organization-specific usage policies.
 
 ## Support the project
+
+Questions about hardware support, licensing or API access? Read the [English FAQ](https://campong.online/projects/suay/#faq) or [คำถามภาษาไทย](https://campong.online/projects/suay/th/#faq). Website indexing and measurement are documented in [SEARCH_DISCOVERY.md](docs/SEARCH_DISCOVERY.md).
 
 If SUAY helps your work, [star the repository](https://github.com/camponggogo/suay). It helps other teams discover the project. Reproducible issues, hardware measurements and focused pull requests are equally useful.
 

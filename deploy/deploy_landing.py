@@ -19,7 +19,8 @@ SNIPPET = '/etc/nginx/snippets/campong-suay.conf'
 INCLUDE = '    include /etc/nginx/snippets/campong-suay.conf;'
 BASE = '/opt/suay'
 PUBLIC_FILES = ('index.html', 'style.css', 'main.js', 'assets/suay-network.svg',
-                'assets/suay-logo.svg', 'assets/suay-device-landing.png')
+                'assets/suay-logo.svg', 'assets/suay-device-landing.png',
+                'th/index.html', 'sitemap.xml', '2c32c7eab328501fa941d3ce2559fe59.txt')
 
 
 def settings():
@@ -126,7 +127,8 @@ def main():
             release_id = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
             release = BASE + '/releases/' + release_id
             backup = BASE + '/backups/' + release_id
-            run('mkdir -p ' + shlex.quote(release + '/assets') + ' ' + shlex.quote(backup))
+            run('mkdir -p ' + shlex.quote(release + '/assets') + ' ' +
+                shlex.quote(release + '/th') + ' ' + shlex.quote(backup))
             write(backup + '/vhost.conf', original)
             if previous_snippet is not None:
                 write(backup + '/snippet.conf', previous_snippet)
