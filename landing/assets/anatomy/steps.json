@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Send an AI request",
+    "description": "A developer app submits a prompt with a scoped API key."
+  },
+  {
+    "title": "Check access",
+    "description": "The gateway verifies key scope, expiry and revocation."
+  },
+  {
+    "title": "Enforce the policy",
+    "description": "Only approved models pass. Accepted requests use the key budget."
+  },
+  {
+    "title": "Run the approved backend",
+    "description": "The gateway forwards to the fixed endpoint configured by the operator."
+  },
+  {
+    "title": "Return the response",
+    "description": "The backend result returns to the app. The submission is audited."
+  }
+]

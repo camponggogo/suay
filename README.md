@@ -30,6 +30,10 @@ Older hardware is useful only when its supported runtime, memory, energy use and
 
 ## System overview
 
+![SUAY request flow in five steps](landing/assets/anatomy/suay-system-steps.gif)
+
+[Step-by-step figure and editable assets](docs/SYSTEM_ANATOMY.md) explain the current gateway. Animation timing is illustrative, not a benchmark.
+
 ![SUAY system architecture, showing the implemented inference gateway, control-plane pilot, separate Petals experiment and planned native workers](landing/assets/suay-system-overview.png)
 
 Developers call the inference gateway with scoped API keys. The gateway checks the approved model list and request budget, then forwards to an operator-configured backend. Admins manage users, credentials, inventory and desired state separately. The Petals LAN experiment is not automatically connected to this gateway; native worker commands are not applied yet.
@@ -39,17 +43,18 @@ The editable [architecture source and flow notes](docs/ARCHITECTURE.md) are the 
 ## Repository layout
 
 ```text
-landing/             Public static website and SVG brand assets
-control/             Private organization API and dashboard
-compute/agent/       Experimental Petals LAN worker supervisor
-compute/client/      Experimental Petals prompt client
+landing/             Public website, brand art and step-by-step Anatomy GIF
+versions/python/     Python control plane, compute pilots and landing analytics
+versions/rust/       Experimental local hardware and memory supervisor
 deploy/              Static-site deployment helper and Nginx snippet
 docs/                Native-service architecture and GitHub launch notes
 tests/               Authorization, compute discovery and deployment checks
 .github/workflows/   Source validation on pull requests and pushes
 ```
 
-Keep `control/` and local state out of the public web root. Deployment uploads only the explicitly allowlisted `landing/` assets. The normal GitHub-rendered entrypoint is this **README.md**.
+Keep `versions/python/control/` and local state out of the public web root. Deployment uploads only the explicitly allowlisted `landing/` assets. The normal GitHub-rendered entrypoint is this **README.md**.
+
+Choose [Python Version](versions/python/) or [Rust Version](versions/rust/). These are separate source directories with different roles, not interchangeable implementations. The directory name is **versions/** (plural).
 
 ## Available now
 
@@ -68,21 +73,21 @@ Use Python 3.10+ in a virtual environment. From the project root:
 
 ```powershell
 python -m venv .venv
-.\.venv\Scripts\python -m pip install -r control/requirements.txt
-.\.venv\Scripts\python -m uvicorn control.app:create_app --factory --host 127.0.0.1 --port 8090
+.\.venv\Scripts\python -m pip install -r versions/python/control/requirements.txt
+.\.venv\Scripts\python -m uvicorn control.app:create_app --factory --app-dir versions/python --host 127.0.0.1 --port 8090
 ```
 
 Linux/macOS:
 
 ```sh
 python3 -m venv .venv
-.venv/bin/python -m pip install -r control/requirements.txt
-.venv/bin/python -m uvicorn control.app:create_app --factory --host 127.0.0.1 --port 8090
+.venv/bin/python -m pip install -r versions/python/control/requirements.txt
+.venv/bin/python -m uvicorn control.app:create_app --factory --app-dir versions/python --host 127.0.0.1 --port 8090
 ```
 
 Open **http://127.0.0.1:8090**. First login is **admin / suay1234**. A password change of at least 12 characters is required before accessing data or creating keys. The password is hashed with PBKDF2-HMAC-SHA256; raw API keys and session secrets are not stored. Password changes invalidate sessions and keys; sign in again afterward.
 
-Set `SUAY_BOOTSTRAP_PASSWORD` before creating the first database to override the public bootstrap password. This variable does not reset an existing account. The SQLite database defaults to `control/data/suay.sqlite3` and must never be committed. Back it up securely; configure its file permissions for the service account.
+Set `SUAY_BOOTSTRAP_PASSWORD` before creating the first database to override the public bootstrap password. This variable does not reset an existing account. The SQLite database defaults to `versions/python/control/data/suay.sqlite3` and must never be committed. Back it up securely; configure its file permissions for the service account.
 
 Keep the listener local until HTTPS/reverse proxy and organizational access policies are configured. Set `SUAY_COOKIE_SECURE=1` when serving through HTTPS. The public landing page must never host this dashboard or its database.
 
@@ -136,7 +141,7 @@ The public landing page is deployed at **https://campong.online/projects/suay/**
 
 ## Experimental Petals setup
 
-The original `compute/agent/` and `compute/client/` remain for trusted LAN experiments. Their Docker files and launchers are optional legacy artifacts, not the new organization control plane.
+The original `versions/python/compute/agent/` and `versions/python/compute/client/` remain for trusted LAN experiments. Their Docker files and launchers are optional legacy artifacts, not the new organization control plane.
 
 For a native Linux pilot, create a **separate Python 3.10 environment**, install the agent's requirements and run `auto_agent.py`. Use the Client's environment to run `app.py`. Do not install both the control plane and compute stack into the same environment without compatibility checks. Petals is pinned to 2.3.0; transitive dependencies still need a reproducible lockfile/build validation.
 
@@ -153,10 +158,10 @@ Android starts as a gateway client. Android background/foreground-service rules 
 ## Development and tests
 
 ```sh
-python -m pip install -r control/requirements.txt
+python -m pip install -r versions/python/control/requirements.txt
 python -m unittest discover -s tests -v
-python -m compileall -q control 'compute/agent' 'compute/client'
-node --check control/static/app.js
+python -m compileall -q versions/python deploy
+node --check versions/python/control/static/app.js
 node --check landing/main.js
 ```
 

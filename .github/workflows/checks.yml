@@ -18,8 +18,23 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: python -m pip install -r control/requirements.txt
+      - run: python -m pip install -r versions/python/control/requirements.txt -r versions/python/visitor_analytics/requirements.txt
       - run: python -m unittest discover -s tests -v
-      - run: python -m compileall -q control compute deploy
+      - run: python -m compileall -q versions/python deploy
       - run: node --check landing/main.js
-      - run: node --check control/static/app.js
+      - run: node --check landing/anatomy.js
+      - run: node --check landing/language-menu.js
+      - run: node --check landing/metrics.js
+      - run: node --check versions/python/control/static/app.js
+  rust:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: versions/rust
+    steps:
+      - uses: actions/checkout@v4
+      - run: rustup toolchain install stable --profile minimal
+      - run: cargo +stable test --locked

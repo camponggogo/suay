@@ -20,7 +20,13 @@ INCLUDE = '    include /etc/nginx/snippets/campong-suay.conf;'
 BASE = '/opt/suay'
 PUBLIC_FILES = ('index.html', 'style.css', 'main.js', 'assets/suay-network.svg',
                 'assets/suay-logo.svg', 'assets/suay-device-landing.png',
-                'th/index.html', 'sitemap.xml', '2c32c7eab328501fa941d3ce2559fe59.txt')
+                'assets/suay-promote.mp4', 'assets/suay-promote.en.vtt',
+                'th/index.html', 'hi/index.html', 'zh/index.html', 'ja/index.html', 'ko/index.html',
+                'ms/index.html', 'id/index.html', 'sw/index.html', 'es/index.html', 'fr/index.html', 'pt/index.html',
+                'language-menu.js', 'anatomy.js', 'metrics.js', 'metrics.css', 'sitemap.xml', '2c32c7eab328501fa941d3ce2559fe59.txt',
+                'assets/anatomy/suay-system-steps.gif', 'assets/anatomy/suay-system.svg',
+                'assets/anatomy/suay-system-light.svg', 'assets/anatomy/steps.json',
+                *(f'assets/anatomy/step-{i}.{ext}' for i in range(1,6) for ext in ('png','svg')))
 
 
 def settings():
@@ -127,8 +133,8 @@ def main():
             release_id = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
             release = BASE + '/releases/' + release_id
             backup = BASE + '/backups/' + release_id
-            run('mkdir -p ' + shlex.quote(release + '/assets') + ' ' +
-                shlex.quote(release + '/th') + ' ' + shlex.quote(backup))
+            directories={posixpath.dirname(posixpath.join(release,name)) for name in PUBLIC_FILES}
+            run('mkdir -p '+' '.join(shlex.quote(directory) for directory in sorted(directories))+' '+shlex.quote(backup))
             write(backup + '/vhost.conf', original)
             if previous_snippet is not None:
                 write(backup + '/snippet.conf', previous_snippet)

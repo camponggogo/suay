@@ -5,7 +5,7 @@ import threading
 import unittest
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
-spec = importlib.util.spec_from_file_location('client', Path(__file__).resolve().parents[1] / 'compute' / 'client' / 'app.py')
+spec = importlib.util.spec_from_file_location('client', Path(__file__).resolve().parents[1] / 'versions' / 'python' / 'compute' / 'client' / 'app.py')
 client = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(client)
 

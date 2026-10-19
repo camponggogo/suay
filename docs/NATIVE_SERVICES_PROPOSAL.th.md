@@ -1,6 +1,6 @@
 # ข้อเสนอระบบ Native AI Services และการบริหารส่วนกลาง
 
-สถานะ: แบบออกแบบสำหรับพัฒนารุ่นถัดไป ปัจจุบันมี Python control-plane pilot ใน `control/` สำหรับบัญชี สิทธิ์ API token และ desired state แต่ยังไม่มี native installer, authenticated worker transport หรือ Android agent ที่ทำงานจริง โค้ด Docker/UDP เดิมเป็นต้นแบบและไม่ผ่านข้อกำหนดความปลอดภัยของแบบนี้
+สถานะ: แบบออกแบบสำหรับพัฒนารุ่นถัดไป ปัจจุบันมี Python control-plane pilot ใน `versions/python/control/` สำหรับบัญชี สิทธิ์ API token และ desired state แต่ยังไม่มี native installer, authenticated worker transport หรือ Android agent ที่ทำงานจริง โค้ด Docker/UDP เดิมเป็นต้นแบบและไม่ผ่านข้อกำหนดความปลอดภัยของแบบนี้
 
 ## ข้อสรุปที่แนะนำ
 

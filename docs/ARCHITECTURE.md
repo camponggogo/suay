@@ -32,4 +32,6 @@ Solid connections show existing pilot behavior. The dashed edge is a proposed in
 
 ## Figures and maintenance
 
+The [system anatomy](SYSTEM_ANATOMY.md) provides five SVG/PNG steps and a GIF of the implemented gateway request path. Petals and Rust are explicitly identified as separate experiments.
+
 The device-network illustration is a conceptual visual. Phones and edge boards in it express the project's direction, not a compatibility certification. The architecture image was composed with ChatGPT ImageGen, reviewed against the current code, and is accompanied by the editable flow above. Keep this source and the README synchronized when worker transport or native services are implemented.

@@ -7,6 +7,8 @@ from unittest.mock import patch
 import httpx
 from fastapi.testclient import TestClient
 
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'versions' / 'python'))
 from control.app import create_app
 
 

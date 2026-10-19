@@ -1,0 +1,8 @@
+{
+  "executable": "/absolute/path/to/approved/inference-backend",
+  "args": [],
+  "max_backend_memory_mib": 1024,
+  "host_reserve_mib": 1024,
+  "resume_headroom_mib": 1536,
+  "poll_seconds": 2
+}

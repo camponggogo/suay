@@ -3,7 +3,7 @@ from pathlib import Path
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-spec = importlib.util.spec_from_file_location('agent', ROOT / 'compute' / 'agent' / 'auto_agent.py')
+spec = importlib.util.spec_from_file_location('agent', ROOT / 'versions' / 'python' / 'compute' / 'agent' / 'auto_agent.py')
 agent = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(agent)
 

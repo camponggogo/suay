@@ -1,0 +1,66 @@
+[
+  {
+    "@type": "Question",
+    "name": "What is SUAY?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "SUAY is an open-source project for local AI resource sharing. It provides an organization access and inference-gateway pilot, alongside a separate experimental Petals LAN compute pool."
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "Can old computers run AI together?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Some older machines can contribute if their supported runtime, memory and network meet the workload requirements. SUAY does not guarantee that every old device can run a model or improve performance."
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "Does SUAY combine the RAM of every device?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "The Petals experiment distributes supported model blocks across workers. It is not a general shared-memory system. A request-routing inference pool and splitting one large model are different approaches."
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "What works today?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "The pilot includes user roles, zone and selected-node visibility, expiring API keys, request budgets, audit events and an inference proxy to an approved backend. Worker commands remain pending until native transport is implemented."
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "Which operating systems are supported?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "The Python control-plane pilot can be evaluated where its dependencies run. The compute pilot needs a verified Petals environment. Native Windows, macOS and Linux service installers are planned; Android compute is not a released feature."
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "Is SUAY free for business use?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Original SUAY code is MIT licensed and can be used commercially under that license. Model weights and dependencies have separate terms; BLOOM uses BigScience RAIL. Review each model before organizational use."
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "Can developers use SUAY through an API?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. An operator can configure an approved inference backend and issue scoped API keys for non-streaming chat completions. Budgets count accepted requests; reported model-token usage is tracked separately."
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "Is SUAY ready for production?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "SUAY is an early pilot. Native worker identity, SSO/MFA, signed deployment and automatic model migration are not complete. Evaluate it on a trusted test network before considering production."
+    }
+  }
+]

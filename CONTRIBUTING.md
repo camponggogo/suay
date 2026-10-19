@@ -4,7 +4,7 @@ SUAY helps organizations experiment with local AI and shared compute. Useful con
 
 1. Open an issue explaining the business problem, OS/hardware and expected behavior. Never include employee documents, prompts containing private data, API keys or device certificates.
 2. Make a focused change and add tests when changing authorization, budgets, process lifecycle or networking.
-3. Run `python -m unittest discover -s tests -v` after installing `control/requirements.txt`. Run `node --check landing/main.js` and `node --check control/static/app.js` for the browser scripts.
+3. Run `python -m unittest discover -s tests -v` after installing `versions/python/control/requirements.txt`. Run `node --check landing/main.js` and `node --check versions/python/control/static/app.js` for the browser scripts.
 4. In your pull request, explain what changed, what you verified and remaining platform limitations. Distinguish simulated telemetry from connected workers.
 
 By submitting original contributions you agree to license them under the project's MIT license and confirm that you have the right to submit them. Preserve upstream notices for third-party material. Do not contribute model weights, copied proprietary code or employer-owned material without authorization.

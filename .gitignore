@@ -20,3 +20,8 @@ node_modules/
 *.bin
 *.pt
 *.pth
+
+.local/
+
+versions/python/control/data/
+versions/rust/target/
