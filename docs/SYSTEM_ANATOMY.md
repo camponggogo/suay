@@ -48,10 +48,12 @@ not claim to pass that missing kit's full clearance/depth/line-end audit.
 
 ## Landing behavior
 
-The initial view is a still PNG. Visitors select any step or explicitly play the
-GIF; Pause restores the current still. No GIF loads until Play is pressed.
-Playback stops when the figure leaves view or the page is hidden. A change to
-reduced-motion preference stops playback. No audio, video player or external
+The initial view is a still PNG. The GIF automatically plays when the figure
+enters view, unless reduced motion is requested. Pause or selecting a step
+restores a still and prevents automatic restarting until Play is pressed.
+Playback stops outside the viewport or when the page is hidden, and resumes
+when visible if the visitor has not paused it. A change to reduced-motion
+preference stops playback; explicit Play remains available. No audio, video player or external
 media service is required. Step descriptions remain available as HTML text.
 
 The existing promotional video exports are retained as earlier project assets,

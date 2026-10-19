@@ -10,6 +10,8 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let current = 0;
   let playing = false;
+  let userPaused = false;
+  let inView = false;
   let timer;
 
   function select(index) {
@@ -28,11 +30,12 @@
     select(current);
   }
   buttons.forEach((button, i) => button.addEventListener('click', () => {
+    userPaused = true;
     pause();
     select(i);
   }));
-  toggle.addEventListener('click', () => {
-    if (playing) { pause(); return; }
+  function play() {
+    if (playing) return;
     playing = true;
     current = 0;
     readout.setAttribute('aria-live', 'off');
@@ -41,11 +44,24 @@
     toggle.textContent = toggle.dataset.pause;
     toggle.setAttribute('aria-pressed', 'true');
     timer = setInterval(() => select(current + 1), 3000);
+  }
+  function syncAutoplay() {
+    if (document.hidden || !inView || reduced.matches) {
+      if (playing) pause();
+    } else if (!userPaused) {
+      play();
+    }
+  }
+  toggle.addEventListener('click', () => {
+    userPaused = playing;
+    if (playing) pause();
+    else play();
   });
-  document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); });
+  document.addEventListener('visibilitychange', syncAutoplay);
   new IntersectionObserver(entries => {
-    if (!entries[0].isIntersecting && playing) pause();
+    inView = entries[0].isIntersecting && entries[0].intersectionRatio >= 0.05;
+    syncAutoplay();
   }, {threshold: 0.05}).observe(picture);
-  reduced.addEventListener('change', () => { if (reduced.matches) pause(); });
-  select(0); // Animation is opt-in, including when reduced motion is requested.
+  reduced.addEventListener('change', syncAutoplay);
+  select(0); // Autoplay when visible; respect reduced motion and explicit pauses.
 })();
