@@ -1,0 +1,128 @@
+{
+  "en": {
+    "title": "Install SUAY: gateway, workers and client",
+    "intro": "Choose a path first. A runs the organization gateway. B runs the separate Petals compute pilot: start agents before the terminal client. Rust is optional local supervision.",
+    "guide": "Read the full machine-by-machine guide (Thai)",
+    "cards": [
+      {
+        "id": "gateway",
+        "tag": "PATH A / ONE MANAGEMENT MACHINE",
+        "title": "1. Organization gateway",
+        "steps": [
+          "Clone SUAY; create a separate control environment.",
+          "Install control requirements and start uvicorn on this machine.",
+          "Open localhost:8090, change the initial password, then configure your own inference backend before issuing inference keys."
+        ],
+        "command": ".venv-control/bin/python -m uvicorn control.app:create_app --factory --app-dir versions/python --host 127.0.0.1 --port 8090",
+        "note": "Linux/macOS launch after installation. The gateway has no bundled model. It does not automatically connect to the Petals pool.",
+        "link": "https://github.com/camponggogo/suay/blob/main/docs/GETTING_STARTED.th.md",
+        "cta": "Gateway installation guide"
+      },
+      {
+        "id": "worker",
+        "tag": "PATH B / EACH COMPUTE MACHINE",
+        "title": "2. Coordinator + workers",
+        "steps": [
+          "On supported Linux hosts, create a Petals Python 3.10 environment and install agent requirements.",
+          "Set the same model and broadcast settings, and each machine’s own LAN IP; start the same agent file on every compute host.",
+          "The lowest active IPv4 becomes coordinator and also serves blocks. Check agent status at port 8080 and verify model block coverage."
+        ],
+        "command": ".venv-petals-agent/bin/python versions/python/compute/agent/auto_agent.py",
+        "note": "Experimental trusted-LAN pilot. No separate coordinator program, manual role switch or universal device certification.",
+        "link": "https://github.com/camponggogo/suay/blob/main/versions/python/compute/agent/README.md",
+        "cta": "Coordinator and worker guide"
+      },
+      {
+        "id": "client",
+        "tag": "PATH B / USER MACHINE / AFTER AGENTS",
+        "title": "3. Terminal prompt client",
+        "steps": [
+          "Wait for a ready agent with nonempty bootstrap peers.",
+          "Install client requirements in a separate Petals Python 3.10 environment.",
+          "Use the agent’s LAN IP and port 8080. Wait for the terminal prompt; type /quit to exit."
+        ],
+        "command": ".venv-petals-client/bin/python versions/python/compute/client/app.py --coordinator http://AGENT_IP:8080 --max-new-tokens 32",
+        "note": "Replace AGENT_IP. This uses Petals P2P, not the 8090 gateway. The client is not a browser chat; the GIF’s AI Agent UI is illustrative.",
+        "link": "https://github.com/camponggogo/suay/blob/main/versions/python/compute/client/README.md",
+        "cta": "Client installation guide"
+      },
+      {
+        "id": "rust",
+        "tag": "OPTIONAL / ONE LOCAL BACKEND",
+        "title": "4. Rust resource supervisor",
+        "steps": [
+          "Install Rust 1.88+ and a compatible linker. Inspect hardware with the status command.",
+          "Configure an existing absolute backend executable and appropriate memory budgets.",
+          "Validate the config before supervision. Do not start a duplicate backend separately."
+        ],
+        "command": "cargo run --manifest-path versions/rust/Cargo.toml --locked -- status",
+        "note": "Not required for A or B. Rust does not replace the Python coordinator, workers or client.",
+        "link": "https://github.com/camponggogo/suay/blob/main/versions/rust/README.md",
+        "cta": "Rust supervision guide"
+      }
+    ]
+  },
+  "th": {
+    "title": "ติดตั้ง SUAY: เครื่องไหนรันอะไร",
+    "intro": "เลือกทางก่อนติดตั้ง: A สำหรับ gateway ขององค์กร ส่วน B เป็น Petals pilot ที่แยกกัน ต้องเปิด agent ก่อน client และยังไม่ต้องใช้ Rust เพื่อเปิดสองทางนี้",
+    "guide": "อ่านคู่มือแยกเครื่อง พร้อมคำสั่ง Windows/Linux และวิธีแก้ปัญหา",
+    "cards": [
+      {
+        "id": "gateway",
+        "tag": "ทาง A / เครื่องจัดการ 1 เครื่อง",
+        "title": "1. Dashboard และ gateway",
+        "steps": [
+          "Clone SUAY และสร้าง environment แยกสำหรับ control",
+          "ติดตั้ง control requirements แล้วรัน uvicorn บนเครื่องนี้",
+          "เปิด localhost:8090 เปลี่ยนรหัสเริ่มต้น และเตรียม inference backend ของคุณก่อนออก key เพื่อเรียก AI"
+        ],
+        "command": ".venv-control/bin/python -m uvicorn control.app:create_app --factory --app-dir versions/python --host 127.0.0.1 --port 8090",
+        "note": "คำสั่งเปิดบน Linux/macOS หลังติดตั้งแล้ว ดู PowerShell ในคู่มือ Gateway ไม่มีโมเดลติดมา และยังไม่เชื่อม Petals pool อัตโนมัติ",
+        "link": "https://github.com/camponggogo/suay/blob/main/docs/GETTING_STARTED.th.md",
+        "cta": "วิธีติดตั้ง gateway"
+      },
+      {
+        "id": "worker",
+        "tag": "ทาง B / ทุกเครื่องที่แบ่ง COMPUTE",
+        "title": "2. Coordinator และ worker",
+        "steps": [
+          "ใช้ Linux ที่ติดตั้ง dependencies ของ Petals ได้ สร้าง environment Python 3.10 และติดตั้ง agent requirements",
+          "ตั้งโมเดลและ broadcast ให้ตรงกัน แต่ NODE_IP ต้องเป็น LAN IP ของแต่ละเครื่อง แล้วรัน agent ไฟล์เดียวกันทุกเครื่อง",
+          "ระบบเลือก IPv4 ต่ำสุดที่ active เป็น coordinator ซึ่งเป็น worker ด้วย ตรวจสถานะพอร์ต 8080 และ model block coverage"
+        ],
+        "command": ".venv-petals-agent/bin/python versions/python/compute/agent/auto_agent.py",
+        "note": "เป็น trusted-LAN pilot ไม่มี coordinator อีกโปรแกรมหรือ flag เลือก role และยังไม่ได้รับรองอุปกรณ์ทุกประเภท",
+        "link": "https://github.com/camponggogo/suay/blob/main/versions/python/compute/agent/README.md",
+        "cta": "วิธีติดตั้ง coordinator/worker"
+      },
+      {
+        "id": "client",
+        "tag": "ทาง B / เครื่องผู้ใช้ / เปิดหลัง AGENT",
+        "title": "3. Client สำหรับส่ง prompt",
+        "steps": [
+          "รอ agent พร้อม และ initial_peers ไม่ว่างก่อน",
+          "สร้าง environment Python 3.10 แยกสำหรับ client แล้วติดตั้ง client requirements",
+          "ระบุ LAN IP ของ agent กับพอร์ต 8080 รอ prompt ใน terminal แล้วพิมพ์คำถาม ออกด้วย /quit"
+        ],
+        "command": ".venv-petals-client/bin/python versions/python/compute/client/app.py --coordinator http://AGENT_IP:8080 --max-new-tokens 32",
+        "note": "แทนค่า AGENT_IP ก่อนรัน Client ใช้ Petals P2P ไม่ใช่ gateway 8090 และยังไม่มีหน้าเว็บแชตแบบภาพสาธิตใน GIF",
+        "link": "https://github.com/camponggogo/suay/blob/main/versions/python/compute/client/README.md",
+        "cta": "วิธีติดตั้ง client"
+      },
+      {
+        "id": "rust",
+        "tag": "ทางเลือกเสริม / BACKEND ในเครื่องเดียว",
+        "title": "4. Rust ดูแลทรัพยากร",
+        "steps": [
+          "ติดตั้ง Rust 1.88+ และ linker ที่รองรับ เริ่มด้วยคำสั่ง status เพื่อดูเครื่อง",
+          "เตรียม backend executable ที่มีอยู่จริง แล้วตั้ง absolute path และงบหน่วยความจำ",
+          "ตรวจ config ก่อนให้ Rust ดูแล process และอย่าเปิด backend ตัวเดิมซ้ำเอง"
+        ],
+        "command": "cargo run --manifest-path versions/rust/Cargo.toml --locked -- status",
+        "note": "ไม่ต้องรัน Rust เพื่อเปิด A/B และยังใช้แทน coordinator, worker หรือ client ของ Python ไม่ได้",
+        "link": "https://github.com/camponggogo/suay/blob/main/versions/rust/README.md",
+        "cta": "วิธีใช้ Rust supervisor"
+      }
+    ]
+  }
+}

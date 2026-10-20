@@ -2,12 +2,17 @@
 
 This is a local hardware/memory supervisor, not a Rust rewrite of Petals, the organization controller or the public analytics service. It exposes no HTTP listener, remote shell or remotely supplied command channel. Model inference remains in an explicitly configured local backend.
 
+**This is not required for either Python setup path.** For coordinator/worker/client
+roles, start with the [Thai setup guide](../../docs/GETTING_STARTED.th.md). Run the
+commands below **from `versions/rust`**; the guide also shows a repository-root
+command using `--manifest-path`.
+
 ```sh
 cargo build --release --locked
 cargo test --locked
 cargo run --locked -- status
-cargo run --locked -- check local.example.json
 # Edit the example to an existing absolute executable path before running it:
+cargo run --locked -- check local.example.json
 cargo run --release --locked -- run local.example.json
 ```
 

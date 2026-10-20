@@ -26,7 +26,8 @@ PUBLIC_FILES = ('index.html', 'style.css', 'main.js', 'assets/suay-network.svg',
                 'language-menu.js', 'anatomy.js', 'metrics.js', 'metrics.css', 'sitemap.xml', '2c32c7eab328501fa941d3ce2559fe59.txt',
                 'assets/anatomy/suay-system-steps.gif', 'assets/anatomy/suay-system.svg',
                 'assets/anatomy/suay-system-light.svg', 'assets/anatomy/steps.json',
-                *(f'assets/anatomy/step-{i}.{ext}' for i in range(1,6) for ext in ('png','svg')))
+                *(f'assets/anatomy/step-{i}.{ext}' for i in range(1,6) for ext in ('png','svg')),
+                *(f'assets/install/{name}.svg' for name in ('gateway','worker','client','rust')))
 
 
 def settings():

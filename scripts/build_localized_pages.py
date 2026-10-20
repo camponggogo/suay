@@ -10,6 +10,7 @@ import xml.etree.ElementTree as ET
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'https://campong.online/projects/suay/'
 LOCALES = json.loads((ROOT/'site_content/locales.json').read_text(encoding='utf-8'))
+INSTALL = json.loads((ROOT/'site_content/installation.json').read_text(encoding='utf-8'))
 
 
 def url(code):
@@ -24,7 +25,7 @@ def language_menu(code):
 
 def header(code):
     prefix = './' if code=='en' else '../'
-    return f'<header class="nav"><a class="wordmark" href="{prefix}"><img class="brand-network" src="{prefix}assets/suay-network.svg" width="40" height="40" alt="">suay</a><nav aria-label="Navigation"><a href="#versions">Python / Rust</a><a href="#faq">FAQ</a></nav>{language_menu(code)}<a class="github" href="https://github.com/camponggogo/suay">Star on GitHub ↗</a></header>'
+    return f'<header class="nav"><a class="wordmark" href="{prefix}"><img class="brand-network" src="{prefix}assets/suay-network.svg" width="40" height="40" alt="">suay</a><nav aria-label="Navigation"><a href="#versions">Python / Rust</a><a href="#faq">FAQ</a><a href="#installation">{"ติดตั้ง" if code=="th" else "Install"}</a></nav>{language_menu(code)}<a class="github" href="https://github.com/camponggogo/suay">Star on GitHub ↗</a></header>'
 
 
 def versions(code):
@@ -58,6 +59,16 @@ def anatomy(code, prefix):
     return f'''<section class="wrap system-anatomy" id="system-anatomy" data-anatomy data-assets="{prefix}assets/anatomy" aria-labelledby="anatomy-heading"><p class="eyebrow">SUAY / SYSTEM ANATOMY</p><h2 id="anatomy-heading">{title}</h2>{benefit_html}<figure><img data-anatomy-image src="{prefix}assets/anatomy/step-1.png" width="1800" height="1120" loading="lazy" decoding="async" alt="SUAY concept: desktops, laptops, Raspberry Pi, phones, edge computer, gateway and server exchanging data beside a demo AI Agent web UI"><figcaption>{note}</figcaption></figure><div class="anatomy-steps" role="group" aria-label="{'เลือกขั้นตอน' if thai else 'Choose a step'}">{buttons}</div><p class="anatomy-readout" data-anatomy-readout aria-live="polite">{descriptions[0]}</p><div class="anatomy-actions"><button type="button" data-anatomy-play data-play="{play}" data-pause="{pause}" aria-pressed="false">{play}</button><a href="{prefix}assets/anatomy/suay-system-steps.gif" download>{'ดาวน์โหลด GIF' if thai else 'Download GIF'}</a><a href="{prefix}assets/anatomy/suay-system.svg" download>SVG</a><a href="{prefix}assets/anatomy/step-5.png" target="_blank" rel="noopener">{'ดูภาพขนาดเต็ม' if thai else 'View full size'}</a></div><noscript><p>Five steps: send a scoped request; verify access; check model and request budget; run the approved backend; return its response. Download the GIF to view the sequence.</p></noscript></section>'''
 
 
+def installation(code, prefix):
+    lang='th' if code=='th' else 'en'
+    data=INSTALL[lang]
+    cards=[]
+    for card in data['cards']:
+        steps=''.join('<li>'+html.escape(step)+'</li>' for step in card['steps'])
+        cards.append(f'''<article id="install-{card['id']}" class="install-card"><p class="eyebrow">{card['tag']}</p><h3>{card['title']}</h3><img src="{prefix}assets/install/{card['id']}.svg" width="800" height="460" loading="lazy" decoding="async" alt="{html.escape(card['title'],quote=True)} — isometric SUAY setup illustration"><ol>{steps}</ol><details><summary>{'คำสั่งเปิดหลังติดตั้งแล้ว' if lang=='th' else 'Launch command after installation'}</summary><pre><code>{html.escape(card['command'])}</code></pre></details><p class="install-note">{card['note']}</p><a class="install-link" href="{card['link']}">{card['cta']} ↗</a></article>''')
+    return f'''<section class="wrap installation" id="installation" lang="{lang}" aria-labelledby="installation-title"><p class="eyebrow">START HERE / MACHINE BY MACHINE</p><h2 id="installation-title">{data['title']}</h2><p class="install-intro">{data['intro']}</p><a class="install-guide" href="https://github.com/camponggogo/suay/blob/main/docs/GETTING_STARTED.th.md">{data['guide']} ↗</a><div class="install-grid">{''.join(cards)}</div></section>'''
+
+
 def main():
     template=(ROOT/'site_content/index.template.html').read_text(encoding='utf-8')
     template=template.replace('<!-- SITE_HEADER -->',header('en')).replace('<!-- VERSION_CHOOSER -->',versions('en'))
@@ -68,19 +79,24 @@ def main():
         if code=='en':
             body=template
             faq=faq_en
-            desc='SUAY: open-source local AI resource sharing, a Python organization gateway and an experimental Rust memory supervisor. Explore source, limits and LAN compute.'
+            desc='Run a local AI gateway or explore distributed inference with SUAY. Follow coordinator, worker and client setup steps for the Python pilots and Rust supervisor.'
+            faq_markup=''.join('<details><summary>'+html.escape(item['name'])+'</summary><p>'+html.escape(item['acceptedAnswer']['text'])+'</p></details>' for item in faq)
+            start=body.index('<section class="wrap search-faq"')
+            end=body.index('</section>',start)+len('</section>')
+            body=body[:start]+'<section class="wrap search-faq" id="faq"><p class="eyebrow">LOCAL AI SETUP / FAQ</p><h2>SUAY coordinator, worker and client questions</h2>'+faq_markup+'</section>'+body[end:]
         else:
             desc=row['intro']
-            faq=[{'@type':'Question','name':row['q'+str(i)],'acceptedAnswer':{'@type':'Answer','text':row['a'+str(i)]}} for i in [1,2,3]]
+            faq=[{'@type':'Question','name':row['q'+str(i)],'acceptedAnswer':{'@type':'Answer','text':row['a'+str(i)]}} for i in range(1,10) if 'q'+str(i) in row]
             details=''.join('<details><summary>'+item['name']+'</summary><p>'+item['acceptedAnswer']['text']+'</p></details>' for item in faq)
             body=f'''<!doctype html><html lang="{code}"><head><!-- SEO_HEAD --></head><body><a class="skip" href="#main">Skip to content</a>{header(code)}<main id="main"><section class="hero wrap"><div class="hero-copy"><p class="eyebrow">LOCAL AI / OPEN SOURCE / SHARED COMPUTE</p><h1>{row['hero']}<br><span>{row['hero2']}</span></h1><p class="lead">{row['intro']}</p><div class="actions"><a class="btn lime" href="https://github.com/camponggogo/suay">{row['source']} ↗</a></div></div><figure class="network-hero"><img src="../assets/suay-device-landing.png" width="1536" height="1024" fetchpriority="high" alt="SUAY shared-compute concept"><figcaption>Concept illustration · Not a hardware compatibility certification</figcaption></figure></section><section class="wrap project-answer"><h2>{row['how_title']}</h2><p>{row['how']}</p><a href="https://github.com/camponggogo/suay/blob/main/docs/ARCHITECTURE.md">Architecture ↗</a></section>{versions(code)}<section class="wrap search-faq" id="faq"><h2>{row['faq_title']}</h2>{details}</section><section class="join"><div class="wrap"><h2>{row['source']}</h2><pre class="thai-clone"><code>git clone https://github.com/camponggogo/suay.git</code></pre><div class="join-links"><a href="https://github.com/camponggogo/suay">GitHub Star ↗</a><a href="https://github.com/camponggogo/suay/blob/main/CONTRIBUTING.md">Contribute ↗</a></div><p class="license-note">MIT code · Model licenses vary · GitHub Sponsors: setup pending</p></div></section></main><footer class="wrap"><a href="../">SUAY</a><a href="../sitemap.xml">Sitemap</a><span>© 2026 SUAY contributors</span></footer></body></html>'''
         marker='<section class="wrap search-faq"'
-        body=body.replace(marker,anatomy(code,prefix)+marker,1)
+        body=body.replace(marker,anatomy(code,prefix)+installation(code,prefix)+marker,1)
         graph={'@context':'https://schema.org','@graph':[
             {'@type':'WebSite','@id':BASE+'#website','name':'SUAY','url':BASE,'inLanguage':list(LOCALES)},
             {'@type':'WebPage','@id':url(code)+'#page','url':url(code),'name':row['title'],'inLanguage':code,'isPartOf':{'@id':BASE+'#website'},'about':{'@id':BASE+'#software'}},
             {'@type':'SoftwareSourceCode','@id':BASE+'#software','name':'SUAY','url':BASE,'codeRepository':'https://github.com/camponggogo/suay','license':'https://github.com/camponggogo/suay/blob/main/LICENSE','programmingLanguage':['Python','Rust','JavaScript'],'developmentStatus':'Experimental pilot','author':{'@type':'Person','name':'campong','url':'https://github.com/camponggogo'}},
-            {'@type':'FAQPage','@id':url(code)+'#faq','inLanguage':code,'mainEntity':faq}]}
+            {'@type':'FAQPage','@id':url(code)+'#faq','inLanguage':code,'mainEntity':faq},
+            {'@type':'TechArticle','@id':url(code)+'#installation','url':url(code)+'#installation','headline':INSTALL['th' if code=='th' else 'en']['title'],'description':INSTALL['th' if code=='th' else 'en']['intro'],'inLanguage':'th' if code=='th' else 'en','dateModified':'2026-10-20','about':{'@id':BASE+'#software'},'author':{'@type':'Person','name':'campong','url':'https://github.com/camponggogo'},'isPartOf':{'@id':url(code)+'#page'}}]}
         data=json.dumps(graph,ensure_ascii=False,separators=(',',':'))
         hashes.append('sha256-'+base64.b64encode(hashlib.sha256(data.encode()).digest()).decode())
         alternates=''.join(f'<link rel="alternate" hreflang="{lang}" href="{url(lang)}">' for lang in LOCALES)+f'<link rel="alternate" hreflang="x-default" href="{BASE}">'
@@ -94,7 +110,7 @@ def main():
     ET.register_namespace('',ns);ET.register_namespace('xhtml',xhtml)
     sitemap=ET.Element('{'+ns+'}urlset')
     for code in LOCALES:
-        node=ET.SubElement(sitemap,'{'+ns+'}url');ET.SubElement(node,'{'+ns+'}loc').text=url(code);ET.SubElement(node,'{'+ns+'}lastmod').text='2026-10-19'
+        node=ET.SubElement(sitemap,'{'+ns+'}url');ET.SubElement(node,'{'+ns+'}loc').text=url(code);ET.SubElement(node,'{'+ns+'}lastmod').text='2026-10-20'
         for lang in [*LOCALES,'x-default']:ET.SubElement(node,'{'+xhtml+'}link',{'rel':'alternate','hreflang':lang,'href':url('en' if lang=='x-default' else lang)})
     ET.ElementTree(sitemap).write(ROOT/'landing/sitemap.xml',encoding='utf-8',xml_declaration=True)
     path=ROOT/'deploy/nginx-suay-snippet.conf';config=path.read_text();config=re.sub(r"script-src 'self'(?: 'sha256-[^']+')*;", "script-src 'self' "+' '.join("'"+h+"'" for h in hashes)+';',config);path.write_text(config)

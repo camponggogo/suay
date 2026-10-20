@@ -62,5 +62,37 @@
       "@type": "Answer",
       "text": "SUAY is an early pilot. Native worker identity, SSO/MFA, signed deployment and automatic model migration are not complete. Evaluate it on a trusted test network before considering production."
     }
+  },
+  {
+    "@type": "Question",
+    "name": "Which machine is the SUAY coordinator?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "In the Petals LAN pilot, every compute machine runs the same auto_agent.py. The lowest active IPv4 becomes coordinator and also serves model blocks. The organization gateway on port 8090 is a separate pilot."
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "How do I start a SUAY worker?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Use a dedicated Petals Python 3.10 environment on a supported Linux host, install agent requirements, configure its LAN IP and shared model settings, then run versions/python/compute/agent/auto_agent.py. Check port 8080 and actual model block coverage before starting a client."
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "Does the SUAY client include a web AI chat?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "The current Petals client is a terminal application. Run versions/python/compute/client/app.py with --coordinator http://AGENT_IP:8080 after agents are ready. The AI Agent web window in the GIF is an illustration, not a released chat UI."
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "Does installing the SUAY gateway install an AI model?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No. The organization dashboard and inference gateway manage access and forward requests. An operator must configure a separately running OpenAI-compatible inference backend. The gateway is not automatically connected to the Petals LAN pool."
+    }
   }
 ]

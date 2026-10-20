@@ -18,6 +18,24 @@ Distributed AI compute and local resource sharing for organizations with big amb
 
 > Early-stage software. The organization control plane and Petals LAN agent are separate pilots. Native service installers, authenticated worker transport and automatic model migration are not implemented. No cost savings, model throughput or production availability are guaranteed.
 
+## Start here — who runs what?
+
+**Read the [step-by-step setup guide in Thai](docs/GETTING_STARTED.th.md) before installing.** It separates machines, environments, startup order, expected results and troubleshooting.
+
+Choose **one path first**:
+
+| Path | Goal | What to run |
+|---|---|---|
+| **A — Organization gateway** | Users, scoped API keys, model policy, request budgets and forwarding to your own inference backend | One management machine runs `control.app:create_app` with uvicorn, port **8090**. No Petals worker/client is needed. |
+| **B — Experimental Petals LAN** | Several supported machines serve model blocks | Every compute machine runs `versions/python/compute/agent/auto_agent.py`. A user machine runs `versions/python/compute/client/app.py`. Agent status is port **8080**. |
+| **Rust — optional local supervisor** | Inspect memory/CPU and supervise one locally configured backend | `versions/rust/`; not a coordinator, distributed worker or chat client. |
+
+In **B**, coordinator and worker run **the same agent file**. The lowest active IPv4 is automatically elected coordinator and still serves model blocks. There is no separate `coordinator.py` and no manual `--role` setting. The client reads bootstrap status from an agent and generates through Petals P2P.
+
+In **A**, the management dashboard does **not** run a model itself. You must provide a working inference backend before API requests can return AI output. The A gateway is not connected automatically to the B pool; registering inventory or requesting run/stop does not control those agents yet.
+
+The Petals client is a **terminal prompt application**, not a web chat. The AI Agent window in the GIF is an illustrative UI. The public landing page and its visitor analytics are not required to run either path.
+
 ## Why SUAY?
 
 SUAY is an open-source **distributed AI compute and local resource-sharing project** for teams evaluating on-premise LLM inference. It includes a scoped developer API gateway and a separate experimental Petals LAN pool; it does not yet provide a production native-service fleet.
@@ -40,21 +58,7 @@ Developers call the inference gateway with scoped API keys. The gateway checks t
 
 The editable [architecture source and flow notes](docs/ARCHITECTURE.md) are the technical reference. The figure is an explanatory illustration, not proof of deployed worker integration.
 
-## Repository layout
-
-```text
-landing/             Public website, brand art and step-by-step Anatomy GIF
-versions/python/     Python control plane, compute pilots and landing analytics
-versions/rust/       Experimental local hardware and memory supervisor
-deploy/              Static-site deployment helper and Nginx snippet
-docs/                Native-service architecture and GitHub launch notes
-tests/               Authorization, compute discovery and deployment checks
-.github/workflows/   Source validation on pull requests and pushes
-```
-
-Keep `versions/python/control/` and local state out of the public web root. Deployment uploads only the explicitly allowlisted `landing/` assets. The normal GitHub-rendered entrypoint is this **README.md**.
-
-Choose [Python Version](versions/python/) or [Rust Version](versions/rust/). These are separate source directories with different roles, not interchangeable implementations. The directory name is **versions/** (plural).
+Choose [Python Version](https://github.com/camponggogo/suay/tree/main/versions/python) or [Rust Version](https://github.com/camponggogo/suay/tree/main/versions/rust). These have different roles; Rust is not a complete replacement for the Python stack.
 
 ## Available now
 
@@ -67,22 +71,22 @@ Choose [Python Version](versions/python/) or [Rust Version](versions/rust/). The
 | Petals LAN experiment | Discovery, coordinator selection, process supervision, prompt client | Separate unauthenticated LAN prototype; supported hardware/models and full block coverage required |
 | Public landing page | Responsive static page, clone command, interactive capacity illustration | Independent from control APIs; illustrative figures are not benchmarks |
 
-## Quick start — organization dashboard, no Docker
+## Path A — organization dashboard, no Docker
 
-Use Python 3.10+ in a virtual environment. From the project root:
+Use Python 3.10+ in a virtual environment. Clone the repository, run `cd suay`, then run the commands for your OS below. Keep this terminal running. These steps open the dashboard only; an inference backend is a separate prerequisite for AI responses. See [guide A1–A2](docs/GETTING_STARTED.th.md) for the complete sequence.
 
 ```powershell
-python -m venv .venv
-.\.venv\Scripts\python -m pip install -r versions/python/control/requirements.txt
-.\.venv\Scripts\python -m uvicorn control.app:create_app --factory --app-dir versions/python --host 127.0.0.1 --port 8090
+python -m venv .venv-control
+.\.venv-control\Scripts\python -m pip install -r versions/python/control/requirements.txt
+.\.venv-control\Scripts\python -m uvicorn control.app:create_app --factory --app-dir versions/python --host 127.0.0.1 --port 8090
 ```
 
 Linux/macOS:
 
 ```sh
-python3 -m venv .venv
-.venv/bin/python -m pip install -r versions/python/control/requirements.txt
-.venv/bin/python -m uvicorn control.app:create_app --factory --app-dir versions/python --host 127.0.0.1 --port 8090
+python3 -m venv .venv-control
+.venv-control/bin/python -m pip install -r versions/python/control/requirements.txt
+.venv-control/bin/python -m uvicorn control.app:create_app --factory --app-dir versions/python --host 127.0.0.1 --port 8090
 ```
 
 Open **http://127.0.0.1:8090**. First login is **admin / suay1234**. A password change of at least 12 characters is required before accessing data or creating keys. The password is hashed with PBKDF2-HMAC-SHA256; raw API keys and session secrets are not stored. Password changes invalidate sessions and keys; sign in again afterward.
@@ -107,7 +111,7 @@ API keys never grant admin user management. User disablement, changed permission
 
 ### Developer inference access
 
-Provide an existing trusted OpenAI-compatible backend by setting these variables before launch:
+Start and verify your own OpenAI-compatible backend first. If the gateway is already running, stop it with Ctrl+C. Set these variables in its terminal **before restarting uvicorn** using the command for your OS above. Replace the example model ID and URL with actual values; this configuration does not install a backend:
 
 ```powershell
 $env:SUAY_MODELS = 'your-approved-model-id'
@@ -139,11 +143,17 @@ Open **http://127.0.0.1:8070**. This is a separate static site with no control-p
 
 The public landing page is deployed at **https://campong.online/projects/suay/**, using the existing host Nginx and no Docker. See [deploy/README.md](deploy/README.md) for preflight, deployment, backups and rollback. `deploy/.env` is private local configuration and is ignored by Git. The host configured in the supplied deployment files uses **campong.online**, not `compong.online`.
 
-## Experimental Petals setup
+## Path B — experimental Petals LAN
 
-The original `versions/python/compute/agent/` and `versions/python/compute/client/` remain for trusted LAN experiments. Their Docker files and launchers are optional legacy artifacts, not the new organization control plane.
+Use the [machine-by-machine guide, B1–B6](docs/GETTING_STARTED.th.md). It includes native Linux commands with separate Python 3.10 environments. Docker files and launchers under the compute directories are legacy alternatives; they are not required by that guide.
 
-For a native Linux pilot, create a **separate Python 3.10 environment**, install the agent's requirements and run `auto_agent.py`. Use the Client's environment to run `app.py`. Do not install both the control plane and compute stack into the same environment without compatibility checks. Petals is pinned to 2.3.0; transitive dependencies still need a reproducible lockfile/build validation.
+1. On each compute machine, install `versions/python/compute/agent/requirements.txt` in its own Petals environment.
+2. Start `versions/python/compute/agent/auto_agent.py` on the first machine; wait for discovery, DHT and Petals startup.
+3. Run the **same agent command** on additional compute machines, with each machine's own `NODE_IP` and the same model/broadcast settings. Coordinator election is automatic.
+4. Check an agent's `http://AGENT_IP:8080/api/status`. Nonempty peers and running processes are not proof of full model coverage.
+5. On the user machine, install `versions/python/compute/client/requirements.txt` in a separate client environment, then run `app.py --coordinator http://AGENT_IP:8080`. Wait for the terminal prompt before typing.
+
+Petals is pinned to 2.3.0; transitive dependencies and hardware compatibility still require validation. This is not a release of native workers for every OS. Do not combine this environment with the Path A environment.
 
 Agent configuration: `MODEL_NAME` (default `bigscience/bloom-560m`), `NUM_BLOCKS` (default 2), `PETALS_DEVICE` (default cpu), `NODE_IP`, `BROADCAST_ADDRESS`, `DISCOVERY_PORT` (31338), `DASHBOARD_PORT` (8080). Allow TCP 31337/31339, UDP 31338 and TCP 8080 only within the trusted pilot network. The model must have complete block coverage across healthy workers. The default BLOOM-560m model has 24 layers; a one-machine experiment requires an appropriate block allocation and enough memory. It is a small base model, not an instruction-tuned enterprise assistant.
 
@@ -158,7 +168,7 @@ Android starts as a gateway client. Android background/foreground-service rules 
 ## Development and tests
 
 ```sh
-python -m pip install -r versions/python/control/requirements.txt
+python -m pip install -r versions/python/control/requirements.txt -r versions/python/visitor_analytics/requirements.txt
 python -m unittest discover -s tests -v
 python -m compileall -q versions/python deploy
 node --check versions/python/control/static/app.js

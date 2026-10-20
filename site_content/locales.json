@@ -1,11 +1,11 @@
 {
   "en": {
     "name": "English",
-    "title": "SUAY | Open-source Distributed AI Compute & Local Inference"
+    "title": "SUAY | Local AI Gateway & Distributed Compute Setup"
   },
   "th": {
     "name": "ไทย",
-    "title": "SUAY | แชร์ทรัพยากรคอมเก่า รัน AI ภายในองค์กร",
+    "title": "SUAY | ติดตั้ง Local AI: Gateway, Worker และ Client",
     "hero": "ปลุกเครื่องเก่า",
     "hero2": "ให้ร่วมกันรัน AI",
     "intro": "SUAY เป็นโครงการโอเพนซอร์สสำหรับแบ่งปันทรัพยากรเพื่อรัน AI ภายในองค์กร มีระบบบัญชีและ inference gateway รุ่นทดลอง และส่วนแบ่ง model blocks ด้วย Petals ที่แยกจากกัน",
@@ -21,7 +21,15 @@
     "q3": "พร้อมใช้งาน production หรือยัง?",
     "a3": "ยังเป็นรุ่นทดลอง ต้องประเมิน hardware ความปลอดภัยและการทำงานจริงก่อน ระบบย้ายโมเดลและ fleet integration ยังไม่สมบูรณ์",
     "source": "ดูซอร์สโค้ดและกด Star",
-    "faq": "คำถามที่พบบ่อย"
+    "faq": "คำถามที่พบบ่อย",
+    "q4": "เครื่องไหนเป็น coordinator ของ SUAY?",
+    "a4": "ใน Petals pilot ทุกเครื่อง compute รัน auto_agent.py เหมือนกัน ระบบเลือก IPv4 ต่ำสุดที่ active เป็น coordinator ซึ่งเป็น worker ด้วย ส่วน gateway 8090 เป็นอีกระบบที่แยกกัน",
+    "q5": "ต้องเปิด worker หรือ client ก่อน?",
+    "a5": "เปิด agent บนเครื่อง compute ก่อน ตรวจสถานะพอร์ต 8080 และ model block coverage แล้วจึงเปิด client ใน terminal โดยระบุ LAN IP ของ agent",
+    "q6": "ติดตั้ง gateway แล้วรัน AI ได้ทันทีหรือไม่?",
+    "a6": "ยังไม่ได้ ต้องเตรียม inference backend ที่รันโมเดลจริงแยกเอง แล้วตั้งค่าให้ gateway ส่งคำขอไปยัง backend นั้น การติดตั้ง control อย่างเดียวไม่ได้ติดตั้งโมเดล",
+    "q7": "มีเว็บ AI Agent ให้ใช้เหมือนใน GIF หรือไม่?",
+    "a7": "ยังไม่มีใน Petals client ปัจจุบัน client รับ prompt และแสดงคำตอบใน terminal หน้าต่าง AI Agent ใน GIF เป็นภาพสาธิต"
   },
   "hi": {
     "name": "हिन्दी · India",
