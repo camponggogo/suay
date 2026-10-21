@@ -3,6 +3,13 @@
 > Log การเปลี่ยนแปลงทุกครั้ง (ใหม่สุดอยู่บนสุด) · รูปแบบ 4 ฟิลด์ · เวลา Asia/Bangkok
 > วิธีทำงานกับไฟล์นี้: `.agents/skills/ai-update-log/SKILL.md`
 
+## เผยแพร่: research page บนเว็บ + commit (push ติดสิทธิ์)
+
+- **วิธีแก้ไข:** สร้าง `landing/research.html` (สรุป 6 ตัวเลขหลัก + caveats + negative results + collaboration), เพิ่มลิงก์ Research ใน nav ทั้ง 11 ภาษา (ไทยใช้ “งานวิจัย”) + sitemap + whitelist ใน `deploy/deploy_landing.py`; อัปเดต `paper/STORY.md` (บท 9 port trap, บท 10), `paper/README.md` (ลิงก์หน้าเว็บ), commit 225 ไฟล์ (`cf52c3c`); deploy จริงด้วย `python deploy/deploy_landing.py --apply` → release `20261021T081916412622Z`
+- **วันเวลา:** 2026-10-21 15:20 (Asia/Bangkok)
+- **ผลของการแก้ไข:** เว็บ live — `https://campong.online/projects/suay/research.html` HTTP 200 (7,743 bytes), หน้าแรกมีลิงก์; nginx syntax ok + HTTPS check ผ่านทั้งสองโดเมน; **push GitHub ไม่สำเร็จ**: credential ที่ stored เป็นบัญชี `campong-hot` → 403 (ไม่มีสิทธิ์ใน camponggogo/suay) ต้องใช้ token ของบัญชีเจ้าของ repo
+- **ไฟล์/หลักฐาน:** `landing/research.html`, `scripts/{add_research_link,wire_research_page}.py`, `deploy/deploy_landing.py`, `deploy/DEPLOYED.md`, commit `cf52c3c`, `paper/{STORY,README}.md`
+
 ## ทดสอบการขยายเป็น >100 ports (วัดจริงถึง 8 ports + extrapolate)
 
 - **วิธีแก้ไข:** เขียน `sim/gateway/scale_ports.py` สตาร์ท/ลบ gateway containers ตามจำนวนพอร์ต แล้ววัด 1/2/4/8 ports ด้วย `parallel_probe.py` (C=16 และ C=32/64), วัด memory ต่อพอร์ต (45 MiB) และ memory รวมของ fleet (55 containers 1,313 MiB), เขียน `report/MULTIPORT_100.md` + fig41 + เติม §4.12/ตาราง 8 ports ใน whitepaper; ลบ containers กลับ baseline

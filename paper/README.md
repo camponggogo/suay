@@ -31,6 +31,9 @@ regenerated it and the JSON it produced:
 
 ## Publishing
 
+The same summary is live at **https://campong.online/projects/suay/research.html** (English, linked from all
+eleven language pages). Re-deploy with `python deploy/deploy_landing.py --apply`.
+
 The white paper is Markdown so it diffs cleanly and converts anywhere. For a PDF build:
 
 ```sh
