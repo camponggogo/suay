@@ -1,0 +1,47 @@
+{
+  "sizes": [
+    {
+      "machines": 50,
+      "seconds": 12.87,
+      "ok": 250,
+      "errors": 0,
+      "error_kinds": [],
+      "success_pct": 100.0,
+      "rps": 19.42,
+      "p50_ms": 104.5,
+      "p95_ms": 1146.8,
+      "p99_ms": 1252.8,
+      "mean_ms": 418.9,
+      "achieved_share_pct": 83.3
+    },
+    {
+      "machines": 75,
+      "seconds": 13.26,
+      "ok": 317,
+      "errors": 0,
+      "error_kinds": [],
+      "success_pct": 100.0,
+      "rps": 23.91,
+      "p50_ms": 233.4,
+      "p95_ms": 2694.5,
+      "p99_ms": 3093.1,
+      "mean_ms": 877.9,
+      "achieved_share_pct": 70.4
+    },
+    {
+      "machines": 100,
+      "seconds": 13.02,
+      "ok": 328,
+      "errors": 0,
+      "error_kinds": [],
+      "success_pct": 100.0,
+      "rps": 25.19,
+      "p50_ms": 2247.9,
+      "p95_ms": 3496.5,
+      "p99_ms": 3892.6,
+      "mean_ms": 1591.1,
+      "achieved_share_pct": 54.7
+    }
+  ],
+  "interval_s": 2.0
+}

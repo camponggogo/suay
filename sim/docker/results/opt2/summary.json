@@ -1,0 +1,88 @@
+{
+  "steps": [
+    {
+      "concurrency": 8,
+      "requests": 80,
+      "ok": 80,
+      "errors": 0,
+      "elapsed_s": 6.226,
+      "rps": 12.85,
+      "success_rps": 12.85,
+      "mean_ms": 610.0,
+      "p50_ms": 508.5,
+      "p95_ms": 1702.64,
+      "p99_ms": 1770.29,
+      "max_ms": 1900.6,
+      "stdev_ms": 482.68,
+      "bandwidth_mbps": 0.0403,
+      "bytes_per_request": 392.0,
+      "nodes_live": 50,
+      "server": {
+        "dispatch_mean_ms": 80.82,
+        "dispatch_p95_ms": 244.83,
+        "upstream_mean_ms": 48.03,
+        "upstream_p95_ms": 114.13,
+        "requests_delta": 29,
+        "nodes_dispatched": 20,
+        "fairness_min": 1,
+        "fairness_max": 5
+      }
+    },
+    {
+      "concurrency": 16,
+      "requests": 112,
+      "ok": 112,
+      "errors": 0,
+      "elapsed_s": 6.549,
+      "rps": 17.1,
+      "success_rps": 17.1,
+      "mean_ms": 895.85,
+      "p50_ms": 793.51,
+      "p95_ms": 1726.94,
+      "p99_ms": 2352.99,
+      "max_ms": 2424.33,
+      "stdev_ms": 456.73,
+      "bandwidth_mbps": 0.0536,
+      "bytes_per_request": 392.0,
+      "nodes_live": 47,
+      "server": {
+        "dispatch_mean_ms": 57.36,
+        "dispatch_p95_ms": 193.79,
+        "upstream_mean_ms": 480.97,
+        "upstream_p95_ms": 1504.55,
+        "requests_delta": 57,
+        "nodes_dispatched": 36,
+        "fairness_min": 1,
+        "fairness_max": 6
+      }
+    },
+    {
+      "concurrency": 32,
+      "requests": 113,
+      "ok": 113,
+      "errors": 0,
+      "elapsed_s": 6.937,
+      "rps": 16.29,
+      "success_rps": 16.29,
+      "mean_ms": 1835.08,
+      "p50_ms": 1518.32,
+      "p95_ms": 4469.54,
+      "p99_ms": 5061.31,
+      "max_ms": 5646.4,
+      "stdev_ms": 1180.72,
+      "bandwidth_mbps": 0.0511,
+      "bytes_per_request": 392.0,
+      "nodes_live": 48,
+      "server": {
+        "dispatch_mean_ms": 50.44,
+        "dispatch_p95_ms": 74.87,
+        "upstream_mean_ms": 687.65,
+        "upstream_p95_ms": 1847.65,
+        "requests_delta": 56,
+        "nodes_dispatched": 42,
+        "fairness_min": 1,
+        "fairness_max": 8
+      }
+    }
+  ]
+}

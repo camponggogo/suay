@@ -1,0 +1,77 @@
+{
+  "cloud_tps": {
+    "min": 19,
+    "median": 136.0,
+    "max": 359
+  },
+  "cloud_price": {
+    "min": 0.0,
+    "max": 1.75
+  },
+  "llama_cpp": {
+    "prompt_tps": 72.25,
+    "gen_tps": 11.74,
+    "cpu": "Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz",
+    "model": "qwen2 1B Q4_K - Medium",
+    "threads": 8,
+    "params": 630167424,
+    "build": 11757
+  },
+  "on_prem": {
+    "machines": 50,
+    "gen_tps_per_machine": 11.74,
+    "curve": [
+      {
+        "duty": 1.0,
+        "cost_per_mtok": 0.2863,
+        "fleet_tps": 587.0,
+        "annual_usd": 5300.0
+      },
+      {
+        "duty": 0.5,
+        "cost_per_mtok": 0.5726,
+        "fleet_tps": 293.5,
+        "annual_usd": 5300.0
+      },
+      {
+        "duty": 0.2,
+        "cost_per_mtok": 1.4315,
+        "fleet_tps": 117.4,
+        "annual_usd": 5300.0
+      },
+      {
+        "duty": 0.1,
+        "cost_per_mtok": 2.8631,
+        "fleet_tps": 58.7,
+        "annual_usd": 5300.0
+      },
+      {
+        "duty": 0.05,
+        "cost_per_mtok": 5.7261,
+        "fleet_tps": 29.4,
+        "annual_usd": 5300.0
+      }
+    ]
+  },
+  "our_shapes": [
+    {
+      "shape": "dense_8b",
+      "nodes": 15,
+      "fleet_rps": 0.06,
+      "tokens_per_s": 3.0
+    },
+    {
+      "shape": "moe_8x7b",
+      "nodes": 86,
+      "fleet_rps": 0.0,
+      "tokens_per_s": 1.8
+    },
+    {
+      "shape": "domain_experts",
+      "nodes": 32,
+      "fleet_rps": 0.635,
+      "tokens_per_s": 12.0
+    }
+  ],
+  "speed_gap_vs_cloud_median": 11.6
+}

@@ -1,0 +1,65 @@
+{
+  "rounds": 20000,
+  "rows": [
+    {
+      "size_bytes": 1048576,
+      "chunks": 1,
+      "mode": "sequential",
+      "ms_total": 120.42,
+      "ms_dispatch": null,
+      "ms_assembly": 0,
+      "nodes_used": 1,
+      "words": 41113,
+      "chars": 463361,
+      "sum_len": 422249,
+      "speedup": 1.0,
+      "efficiency": 1.0,
+      "throughput_mb_s": 8.708
+    },
+    {
+      "size_bytes": 1048576,
+      "chunks": 2,
+      "mode": "sharded",
+      "ms_total": 156.89,
+      "ms_dispatch": 156.59,
+      "ms_assembly": 0.043,
+      "nodes_used": 2,
+      "words": 41113,
+      "chars": 463361,
+      "sum_len": 422249,
+      "speedup": 0.77,
+      "efficiency": 0.385,
+      "throughput_mb_s": 6.684
+    },
+    {
+      "size_bytes": 1048576,
+      "chunks": 4,
+      "mode": "sharded",
+      "ms_total": 577.48,
+      "ms_dispatch": 577.06,
+      "ms_assembly": 0.065,
+      "nodes_used": 4,
+      "words": 41113,
+      "chars": 463361,
+      "sum_len": 422249,
+      "speedup": 0.21,
+      "efficiency": 0.052,
+      "throughput_mb_s": 1.816
+    },
+    {
+      "size_bytes": 1048576,
+      "chunks": 6,
+      "mode": "sharded",
+      "ms_total": 869.07,
+      "ms_dispatch": 868.68,
+      "ms_assembly": 0.048,
+      "nodes_used": 6,
+      "words": 41113,
+      "chars": 463361,
+      "sum_len": 422249,
+      "speedup": 0.14,
+      "efficiency": 0.023,
+      "throughput_mb_s": 1.207
+    }
+  ]
+}

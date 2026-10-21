@@ -1,0 +1,146 @@
+[
+  {
+    "tier": "ambiguous",
+    "query": "สัญญาจ้างนักเคมีวิเคราะห์ ต้องมีข้อกำหนดความปลอดภัยอะไร",
+    "source": "สัญญาจ้าง.pdf",
+    "label": "legal"
+  },
+  {
+    "tier": "easy",
+    "query": "มาตรา 420 เรื่องละเมิดใช้อย่างไร",
+    "source": "",
+    "label": "legal"
+  },
+  {
+    "tier": "easy",
+    "query": "สัญญาจ้างมีข้อจำกัดความรับผิดอย่างไร",
+    "source": "สัญญาจ้าง.pdf",
+    "label": "legal"
+  },
+  {
+    "tier": "easy",
+    "query": "interpret this NMR spectrum",
+    "source": "spectrum_run7.csv",
+    "label": "chemistry"
+  },
+  {
+    "tier": "ambiguous",
+    "query": "ซื้อกรดซัลฟิวริกผิดสเปก ฟ้องเรียกค่าเสียหายได้หรือไม่",
+    "source": "invoice.pdf",
+    "label": "legal"
+  },
+  {
+    "tier": "easy",
+    "query": "ช่วยเขียนอีเมลขอบคุณลูกค้า",
+    "source": "",
+    "label": "general"
+  },
+  {
+    "tier": "ambiguous",
+    "query": "สัญญาจ้างนักเคมีวิเคราะห์ ต้องมีข้อกำหนดความปลอดภัยอะไร",
+    "source": "สัญญาจ้าง.pdf",
+    "label": "legal"
+  },
+  {
+    "tier": "easy",
+    "query": "how do I reset my ticket password in the portal",
+    "source": "",
+    "label": "general"
+  },
+  {
+    "tier": "easy",
+    "query": "ช่วยเขียนอีเมลขอบคุณลูกค้า",
+    "source": "",
+    "label": "general"
+  },
+  {
+    "tier": "easy",
+    "query": "สรุปนโยบายลาพักร้อน",
+    "source": "policy.pdf",
+    "label": "general"
+  },
+  {
+    "tier": "ambiguous",
+    "query": "สัญญาซื้อขายสารเคมีในห้องแล็บ ต้องระบุความเข้มข้นไหม",
+    "source": "สัญญาซื้อขาย.pdf",
+    "label": "legal"
+  },
+  {
+    "tier": "easy",
+    "query": "ไทเทรตกรดอะซิติกด้วยเบสแก่",
+    "source": "lab_report.pdf",
+    "label": "chemistry"
+  },
+  {
+    "tier": "easy",
+    "query": "interpret this NMR spectrum",
+    "source": "spectrum_run7.csv",
+    "label": "chemistry"
+  },
+  {
+    "tier": "easy",
+    "query": "สัญญาจ้างมีข้อจำกัดความรับผิดอย่างไร",
+    "source": "สัญญาจ้าง.pdf",
+    "label": "legal"
+  },
+  {
+    "tier": "adversarial",
+    "query": "สรุปค่าใช้จ่ายในใบเสร็จ",
+    "source": "",
+    "label": "general"
+  },
+  {
+    "tier": "ambiguous",
+    "query": "สัญญาจ้างนักเคมีวิเคราะห์ ต้องมีข้อกำหนดความปลอดภัยอะไร",
+    "source": "สัญญาจ้าง.pdf",
+    "label": "legal"
+  },
+  {
+    "tier": "easy",
+    "query": "ช่วยเขียนอีเมลขอบคุณลูกค้า",
+    "source": "",
+    "label": "general"
+  },
+  {
+    "tier": "adversarial",
+    "query": "วิธีขอใบรับรองผลการวิเคราะห์ (COA)",
+    "source": "request_form.pdf",
+    "label": "general"
+  },
+  {
+    "tier": "adversarial",
+    "query": "มาตรฐานความปลอดภัยของห้องปฏิบัติการเคมี",
+    "source": "",
+    "label": "chemistry"
+  },
+  {
+    "tier": "ambiguous",
+    "query": "สัญญาจ้างนักเคมีวิเคราะห์ ต้องมีข้อกำหนดความปลอดภัยอะไร",
+    "source": "สัญญาจ้าง.pdf",
+    "label": "legal"
+  },
+  {
+    "tier": "easy",
+    "query": "draft a litigation hold notice",
+    "source": "complaint.docx",
+    "label": "legal"
+  },
+  {
+    "tier": "easy",
+    "query": "คำนวณโมลของ NaOH 0.5 M",
+    "source": "",
+    "label": "chemistry"
+  },
+  {
+    "tier": "ambiguous",
+    "query": "สารที่ระบุในสัญญาซื้อขายมีความบริสุทธิ์ตามข้อตกลงหรือไม่",
+    "source": "coa.pdf",
+    "label": "chemistry"
+  },
+  {
+    "tier": "easy",
+    "query": "draft a litigation hold notice",
+    "source": "complaint.docx",
+    "label": "legal"
+  }
+]

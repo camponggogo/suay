@@ -1,0 +1,78 @@
+{
+  "targets": [
+    {
+      "target": "http://127.0.0.1:8081/hb",
+      "levels": [
+        {
+          "concurrency": 1,
+          "seconds": 6.9,
+          "ok": 1010,
+          "rps": 145.9,
+          "p50_ms": 6.53,
+          "p95_ms": 9.6
+        },
+        {
+          "concurrency": 4,
+          "seconds": 7.1,
+          "ok": 1135,
+          "rps": 160.8,
+          "p50_ms": 23.26,
+          "p95_ms": 35.4
+        },
+        {
+          "concurrency": 16,
+          "seconds": 7.2,
+          "ok": 500,
+          "rps": 69.5,
+          "p50_ms": 97.64,
+          "p95_ms": 947.89
+        },
+        {
+          "concurrency": 64,
+          "seconds": 8.1,
+          "ok": 315,
+          "rps": 38.8,
+          "p50_ms": 946.73,
+          "p95_ms": 5282.69
+        }
+      ]
+    },
+    {
+      "target": "http://127.0.0.1:8080/api/node/heartbeat",
+      "levels": [
+        {
+          "concurrency": 1,
+          "seconds": 6.8,
+          "ok": 98,
+          "rps": 14.4,
+          "p50_ms": 66.96,
+          "p95_ms": 87.49
+        },
+        {
+          "concurrency": 4,
+          "seconds": 7.0,
+          "ok": 308,
+          "rps": 43.9,
+          "p50_ms": 87.04,
+          "p95_ms": 136.62
+        },
+        {
+          "concurrency": 16,
+          "seconds": 8.3,
+          "ok": 168,
+          "rps": 20.3,
+          "p50_ms": 427.7,
+          "p95_ms": 1674.13
+        },
+        {
+          "concurrency": 64,
+          "seconds": 9.2,
+          "ok": 210,
+          "rps": 22.8,
+          "p50_ms": 2028.62,
+          "p95_ms": 6608.17
+        }
+      ]
+    }
+  ]
+}

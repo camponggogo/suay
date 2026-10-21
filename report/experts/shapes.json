@@ -1,0 +1,46 @@
+{
+  "gateway_s": 0.098,
+  "answer_steps": 150,
+  "fleet": 50,
+  "shapes": [
+    {
+      "shape": "dense_8b",
+      "label": "Dense 8B (one catalogue for all queries)",
+      "active_b": 8.0,
+      "copy_gb": 16.0,
+      "nodes_per_copy": 15,
+      "nodes_total": 15,
+      "fits_50": true,
+      "parallel_copies": 3,
+      "latency_s": 50.1,
+      "fleet_rps": 0.06,
+      "node_hours_per_10k": 2087.4
+    },
+    {
+      "shape": "moe_8x7b",
+      "label": "MoE 8\u00d77B, top-2 (one shared catalogue)",
+      "active_b": 13.0,
+      "copy_gb": 94.0,
+      "nodes_per_copy": 86,
+      "nodes_total": 86,
+      "fits_50": false,
+      "parallel_copies": 0,
+      "latency_s": 81.18,
+      "fleet_rps": 0.0,
+      "node_hours_per_10k": 19392.8
+    },
+    {
+      "shape": "domain_experts",
+      "label": "8 domain experts 1B + shared 1B, routed",
+      "active_b": 2.0,
+      "copy_gb": 4.0,
+      "nodes_per_copy": 4,
+      "nodes_total": 32,
+      "fits_50": true,
+      "parallel_copies": 8,
+      "latency_s": 12.6,
+      "fleet_rps": 0.635,
+      "node_hours_per_10k": 1119.8
+    }
+  ]
+}

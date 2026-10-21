@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1"><meta name="theme-color" content="#101413"><title>SUAY Research | What 50 office machines measured</title><meta name="description" content="Measured results from the SUAY test bed: gateway ceiling, node plane, prefix cache, expert routing, multi-port transport and growth laws. Every number comes with its method and its caveat."><link rel="canonical" href="https://campong.online/projects/suay/research.html"><link rel="alternate" hreflang="en" href="https://campong.online/projects/suay/research.html"><link rel="stylesheet" href="./style.css"><meta property="og:title" content="SUAY Research: what 50 office machines measured"><meta property="og:description" content="Gateway ceiling, prefix cache, expert routing, multi-port transport and growth laws, with numbers and caveats."><meta property="og:type" content="article"><meta property="og:url" content="https://campong.online/projects/suay/research.html"></head>
+<body>
+<header class="nav"><a class="wordmark" href="./"><img class="brand-network" src="./assets/suay-network.svg" width="40" height="40" alt="">suay</a><nav aria-label="Navigation"><a href="./#versions">Python / Rust</a><a href="./#faq">FAQ</a><a href="./#installation">Install</a><a href="./research.html" aria-current="page">Research</a></nav><div class="language-switcher"><a class="github" href="https://github.com/camponggogo/suay">Star on GitHub ↗</a></div></header>
+<main id="main">
+
+<section class="hero wrap"><div class="hero-copy"><p class="eyebrow"><span class="live-dot"></span> RESEARCH NOTE / 2026-10-21</p><h1>We measured it.<br><span>Including what failed.</span></h1><p class="lead">Fifty ordinary office machines, one 8-vCPU host, 53 containers and a harness that reports medians and p95 instead of anecdotes. This page is the short version; the white paper has the tables, the method and the caveats.</p><div class="actions"><a class="btn lime" href="https://github.com/camponggogo/suay/blob/main/paper/WHITEPAPER.md">Read the white paper <span>↗</span></a><a class="text-link" href="https://github.com/camponggogo/suay/blob/main/paper/STORY.md">The story version <span>↗</span></a></div><p class="hero-note">Every figure is 300 dpi on white. Every study ships its script.</p></div></section>
+
+<section class="wrap project-answer" id="numbers"><p class="eyebrow">01 / THE SIX NUMBERS THAT MATTER</p><h2>What the test bed actually does</h2>
+<div class="version-grid">
+<article><span class="status available">CONTROL PLANE</span><h3>22.3 req/s at C=8</h3><p>24.8 req/s at C=16 with two gateway workers, <strong>0 errors</strong>. One worker caps at 15.7 — the limit is per-request loop time, not the network.</p></article>
+<article><span class="status available">NODE PLANE</span><h3>44 → 161 req/s</h3><p>Splitting heartbeats out of the gateway raised heartbeat throughput 3.7× (p50 67 → 3.1 ms) and halved single-request latency, 210 → 105 ms.</p></article>
+<article><span class="status available">PREFIX CACHE</span><h3>157× faster first token</h3><p>An 8 000-token document with 90 % reuse: TTFT 111.4 s → 0.71 s, 88.2 % of prompt tokens served from cache. p95 does not improve.</p></article>
+<article><span class="status experiment">EXPERT ROUTING</span><h3>90.15 % accuracy</h3><p>6 000 queries, 31.5 µs per routing decision. Eight 1B domain experts fit in 32 machines at 0.64 req/s versus 86 machines for a mixture of experts (10.7×).</p></article>
+<article><span class="status planned">MULTI-PORT</span><h3>26.5–28.8 req/s</h3><p>Two ports, clients direct, one worker each. A userspace proxy on the same host gives it back (−25 %). One hundred ports buy nothing but 4.4 GiB of memory.</p></article>
+<article><span class="status planned">GROWTH LAWS</span><h3>15.7 req/s ceiling</h3><p>Whether nodes grow as N+1 or N·log₂N, throughput saturates at the same gateway ceiling; the superlinear law just spends 6–9× more machines and adds dispatch latency.</p></article>
+</div></section>
+
+<section class="wrap" id="caveats"><p class="eyebrow">02 / WHAT THIS IS NOT</p><h2>Read the caveats with the numbers</h2>
+<div class="principles">
+<article><span>01</span><h3>Mock backend.</h3><p>These numbers isolate the control plane. With a real 0.5B model a single machine serves 0.14 req/s, so 50 machines deliver about 7 req/s — the gateway ceiling stops mattering.</p></article>
+<article><span>02</span><h3>One host, ±15 %.</h3><p>Fifty-three containers, Docker Desktop and the load generator share 8 vCPUs. Treat single runs as indicative; the repository ships JSON per run so you can see the spread.</p></article>
+<article><span>03</span><h3>Office pools are slower, not cheaper.</h3><p>Measured generation is 11.6× slower per stream than the median cloud endpoint, and $0.29–2.86 per million output tokens. The case for SUAY is residency, offline operation and control.</p></article>
+</div></section>
+
+<section class="wrap" id="failed"><p class="eyebrow">03 / NEGATIVE RESULTS</p><h2>What we tried and retired</h2>
+<p>50-way pipeline sharding (≤1.3×, worse at 50 chunks) · PostgreSQL on a split schema (4.5 req/s with errors) · 2–4 workers before the node cache (unstable) · 80 % CPU per machine (−25 % throughput) · DeepFilterNet-style denoising gate (−0.19 dB) · a userspace L4 proxy in front of the gateway (−25 %). Every one is written up with its numbers in the repository.</p>
+<p><a href="https://github.com/camponggogo/suay/tree/main/report">Browse the reports ↗</a></p></section>
+
+<section class="wrap" id="collaborate"><p class="eyebrow">04 / COLLABORATE</p><h2>Where the next measurement should come from</h2>
+<ol>
+<li><strong>A real backend.</strong> Replace the mock with llama.cpp or Petals on real machines and re-run the load test.</li>
+<li><strong>The control-plane migration.</strong> Move users and audit into the same store as tokens, then re-test two and four workers with the pooled adapter that already exists.</li>
+<li><strong>A second host.</strong> Everything here is single-host; a two-host fleet would test whether dispatch latency and fairness degrade as predicted.</li>
+<li><strong>Router hardening.</strong> The adversarial bucket is 50.75 % — a small classifier over the attached document would likely fix it.</li>
+</ol>
+<p class="build-note">MIT licensed. Bug reports, measured results and pull requests are welcome. If a number on this page disagrees with your hardware, send the JSON.</p>
+<div class="actions"><a class="btn lime" href="https://github.com/camponggogo/suay">Get the source <span>↗</span></a><a class="text-link" href="https://github.com/camponggogo/suay/issues">Share an idea <span>↗</span></a></div></section>
+
+<section class="manifesto wrap"><img class="giant-network" src="./assets/suay-network.svg" width="300" height="300" alt="Connected neural network nodes"><div><p class="eyebrow">A SHARED STARTING POINT</p><h2>Measure it.<br>Then improve it.</h2><p>Fifty machines, one host and a long list of things that did not work. That list is the most useful artefact we have — it is the part that saves the next team a week.</p><p>Use it. Inspect it. Improve it. Share what you learn.</p></div></section>
+
+</main>
+<footer class="wrap"><a class="wordmark" href="./"><img class="brand-network" src="./assets/suay-network.svg" width="40" height="40" alt="">suay</a><p> · <a href="./sitemap.xml">Sitemap</a> · <a href="https://github.com/camponggogo/suay/blob/main/paper/WHITEPAPER.md">White paper</a> · <a href="https://github.com/camponggogo/suay/blob/main/paper/STORY.md">Story</a></p><span>© 2026 SUAY contributors</span></footer>
+</body></html>

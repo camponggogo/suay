@@ -1,0 +1,20 @@
+{
+  "262144": {
+    "best_chunks": 1,
+    "speedup": 1.0,
+    "efficiency": 1.0,
+    "sequential_ms": 466.26
+  },
+  "1048576": {
+    "best_chunks": 4,
+    "speedup": 1.28,
+    "efficiency": 0.32,
+    "sequential_ms": 865.13
+  },
+  "2097152": {
+    "best_chunks": 4,
+    "speedup": 1.32,
+    "efficiency": 0.33,
+    "sequential_ms": 1259.03
+  }
+}

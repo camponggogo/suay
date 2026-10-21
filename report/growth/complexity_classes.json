@@ -1,0 +1,389 @@
+{
+  "constants": {
+    "per_node_rps": 0.1409,
+    "gateway_rps": 15.7,
+    "delivery_floor": 0.35,
+    "machine_usd_s": 1.0439999999999998e-05,
+    "nodes_for_ceiling": 319
+  },
+  "ceiling_reached_at_n": {
+    "O(1)": null,
+    "O(log n)": null,
+    "O(n)": 319,
+    "O(2n)": 160,
+    "O(n log n)": 230,
+    "O(n\u00b2)": 127,
+    "O(c\u207f)": 88,
+    "O(n\u207f)": 61
+  },
+  "table": [
+    [
+      {
+        "law": "O(1)",
+        "n": 50,
+        "nodes": 50,
+        "delivery": 0.844,
+        "effective_rps": 5.94,
+        "rps_per_100_nodes": 11.88,
+        "dispatch_ms": 28.0,
+        "cost_per_mtok": 0.586,
+        "capped": false
+      },
+      {
+        "law": "O(1)",
+        "n": 100,
+        "nodes": 50,
+        "delivery": 0.844,
+        "effective_rps": 5.94,
+        "rps_per_100_nodes": 11.88,
+        "dispatch_ms": 28.0,
+        "cost_per_mtok": 0.586,
+        "capped": false
+      },
+      {
+        "law": "O(1)",
+        "n": 200,
+        "nodes": 50,
+        "delivery": 0.844,
+        "effective_rps": 5.94,
+        "rps_per_100_nodes": 11.88,
+        "dispatch_ms": 28.0,
+        "cost_per_mtok": 0.586,
+        "capped": false
+      },
+      {
+        "law": "O(1)",
+        "n": 500,
+        "nodes": 50,
+        "delivery": 0.844,
+        "effective_rps": 5.94,
+        "rps_per_100_nodes": 11.88,
+        "dispatch_ms": 28.0,
+        "cost_per_mtok": 0.586,
+        "capped": false
+      }
+    ],
+    [
+      {
+        "law": "O(log n)",
+        "n": 50,
+        "nodes": 50,
+        "delivery": 0.844,
+        "effective_rps": 5.94,
+        "rps_per_100_nodes": 11.88,
+        "dispatch_ms": 28.0,
+        "cost_per_mtok": 0.586,
+        "capped": false
+      },
+      {
+        "law": "O(log n)",
+        "n": 100,
+        "nodes": 59,
+        "delivery": 0.782,
+        "effective_rps": 6.5,
+        "rps_per_100_nodes": 11.01,
+        "dispatch_ms": 31.6,
+        "cost_per_mtok": 0.632,
+        "capped": false
+      },
+      {
+        "law": "O(log n)",
+        "n": 200,
+        "nodes": 68,
+        "delivery": 0.724,
+        "effective_rps": 6.93,
+        "rps_per_100_nodes": 10.2,
+        "dispatch_ms": 35.2,
+        "cost_per_mtok": 0.682,
+        "capped": false
+      },
+      {
+        "law": "O(log n)",
+        "n": 500,
+        "nodes": 79,
+        "delivery": 0.659,
+        "effective_rps": 7.34,
+        "rps_per_100_nodes": 9.29,
+        "dispatch_ms": 39.6,
+        "cost_per_mtok": 0.749,
+        "capped": false
+      }
+    ],
+    [
+      {
+        "law": "O(n)",
+        "n": 50,
+        "nodes": 50,
+        "delivery": 0.844,
+        "effective_rps": 5.94,
+        "rps_per_100_nodes": 11.88,
+        "dispatch_ms": 28.0,
+        "cost_per_mtok": 0.586,
+        "capped": false
+      },
+      {
+        "law": "O(n)",
+        "n": 100,
+        "nodes": 100,
+        "delivery": 0.552,
+        "effective_rps": 7.77,
+        "rps_per_100_nodes": 7.77,
+        "dispatch_ms": 48.0,
+        "cost_per_mtok": 0.896,
+        "capped": false
+      },
+      {
+        "law": "O(n)",
+        "n": 200,
+        "nodes": 200,
+        "delivery": 0.35,
+        "effective_rps": 9.86,
+        "rps_per_100_nodes": 4.93,
+        "dispatch_ms": 88.0,
+        "cost_per_mtok": 1.412,
+        "capped": false
+      },
+      {
+        "law": "O(n)",
+        "n": 500,
+        "nodes": 500,
+        "delivery": 0.35,
+        "effective_rps": 15.7,
+        "rps_per_100_nodes": 3.14,
+        "dispatch_ms": 208.0,
+        "cost_per_mtok": 2.217,
+        "capped": false
+      }
+    ],
+    [
+      {
+        "law": "O(2n)",
+        "n": 50,
+        "nodes": 100,
+        "delivery": 0.552,
+        "effective_rps": 7.77,
+        "rps_per_100_nodes": 7.77,
+        "dispatch_ms": 48.0,
+        "cost_per_mtok": 0.896,
+        "capped": false
+      },
+      {
+        "law": "O(2n)",
+        "n": 100,
+        "nodes": 200,
+        "delivery": 0.35,
+        "effective_rps": 9.86,
+        "rps_per_100_nodes": 4.93,
+        "dispatch_ms": 88.0,
+        "cost_per_mtok": 1.412,
+        "capped": false
+      },
+      {
+        "law": "O(2n)",
+        "n": 200,
+        "nodes": 400,
+        "delivery": 0.35,
+        "effective_rps": 15.7,
+        "rps_per_100_nodes": 3.92,
+        "dispatch_ms": 168.0,
+        "cost_per_mtok": 1.773,
+        "capped": false
+      },
+      {
+        "law": "O(2n)",
+        "n": 500,
+        "nodes": 1000,
+        "delivery": 0.35,
+        "effective_rps": 15.7,
+        "rps_per_100_nodes": 1.57,
+        "dispatch_ms": 408.0,
+        "cost_per_mtok": 4.433,
+        "capped": false
+      }
+    ],
+    [
+      {
+        "law": "O(n log n)",
+        "n": 50,
+        "nodes": 50,
+        "delivery": 0.844,
+        "effective_rps": 5.94,
+        "rps_per_100_nodes": 11.88,
+        "dispatch_ms": 28.0,
+        "cost_per_mtok": 0.586,
+        "capped": false
+      },
+      {
+        "law": "O(n log n)",
+        "n": 100,
+        "nodes": 118,
+        "delivery": 0.473,
+        "effective_rps": 7.87,
+        "rps_per_100_nodes": 6.67,
+        "dispatch_ms": 55.2,
+        "cost_per_mtok": 1.044,
+        "capped": false
+      },
+      {
+        "law": "O(n log n)",
+        "n": 200,
+        "nodes": 271,
+        "delivery": 0.35,
+        "effective_rps": 13.36,
+        "rps_per_100_nodes": 4.93,
+        "dispatch_ms": 116.4,
+        "cost_per_mtok": 1.412,
+        "capped": false
+      },
+      {
+        "law": "O(n log n)",
+        "n": 500,
+        "nodes": 794,
+        "delivery": 0.35,
+        "effective_rps": 15.7,
+        "rps_per_100_nodes": 1.98,
+        "dispatch_ms": 325.6,
+        "cost_per_mtok": 3.52,
+        "capped": false
+      }
+    ],
+    [
+      {
+        "law": "O(n\u00b2)",
+        "n": 50,
+        "nodes": 50,
+        "delivery": 0.844,
+        "effective_rps": 5.94,
+        "rps_per_100_nodes": 11.88,
+        "dispatch_ms": 28.0,
+        "cost_per_mtok": 0.586,
+        "capped": false
+      },
+      {
+        "law": "O(n\u00b2)",
+        "n": 100,
+        "nodes": 200,
+        "delivery": 0.35,
+        "effective_rps": 9.86,
+        "rps_per_100_nodes": 4.93,
+        "dispatch_ms": 88.0,
+        "cost_per_mtok": 1.412,
+        "capped": false
+      },
+      {
+        "law": "O(n\u00b2)",
+        "n": 200,
+        "nodes": 800,
+        "delivery": 0.35,
+        "effective_rps": 15.7,
+        "rps_per_100_nodes": 1.96,
+        "dispatch_ms": 328.0,
+        "cost_per_mtok": 3.546,
+        "capped": false
+      },
+      {
+        "law": "O(n\u00b2)",
+        "n": 500,
+        "nodes": 5000,
+        "delivery": 0.35,
+        "effective_rps": 15.7,
+        "rps_per_100_nodes": 0.31,
+        "dispatch_ms": 2008.0,
+        "cost_per_mtok": 22.166,
+        "capped": false
+      }
+    ],
+    [
+      {
+        "law": "O(c\u207f)",
+        "n": 50,
+        "nodes": 50,
+        "delivery": 0.844,
+        "effective_rps": 5.94,
+        "rps_per_100_nodes": 11.88,
+        "dispatch_ms": 28.0,
+        "cost_per_mtok": 0.586,
+        "capped": false
+      },
+      {
+        "law": "O(c\u207f)",
+        "n": 100,
+        "nodes": 573,
+        "delivery": 0.35,
+        "effective_rps": 15.7,
+        "rps_per_100_nodes": 2.74,
+        "dispatch_ms": 237.2,
+        "cost_per_mtok": 2.54,
+        "capped": false
+      },
+      {
+        "law": "O(c\u207f)",
+        "n": 200,
+        "nodes": 20000,
+        "delivery": 0.35,
+        "effective_rps": 15.7,
+        "rps_per_100_nodes": 0.08,
+        "dispatch_ms": 8008.0,
+        "cost_per_mtok": 88.662,
+        "capped": true
+      },
+      {
+        "law": "O(c\u207f)",
+        "n": 500,
+        "nodes": 20000,
+        "delivery": 0.35,
+        "effective_rps": 15.7,
+        "rps_per_100_nodes": 0.08,
+        "dispatch_ms": 8008.0,
+        "cost_per_mtok": 88.662,
+        "capped": true
+      }
+    ],
+    [
+      {
+        "law": "O(n\u207f)",
+        "n": 50,
+        "nodes": 50,
+        "delivery": 0.844,
+        "effective_rps": 5.94,
+        "rps_per_100_nodes": 11.88,
+        "dispatch_ms": 28.0,
+        "cost_per_mtok": 0.586,
+        "capped": false
+      },
+      {
+        "law": "O(n\u207f)",
+        "n": 100,
+        "nodes": 20000,
+        "delivery": 0.35,
+        "effective_rps": 15.7,
+        "rps_per_100_nodes": 0.08,
+        "dispatch_ms": 8008.0,
+        "cost_per_mtok": 88.662,
+        "capped": true
+      },
+      {
+        "law": "O(n\u207f)",
+        "n": 200,
+        "nodes": 20000,
+        "delivery": 0.35,
+        "effective_rps": 15.7,
+        "rps_per_100_nodes": 0.08,
+        "dispatch_ms": 8008.0,
+        "cost_per_mtok": 88.662,
+        "capped": true
+      },
+      {
+        "law": "O(n\u207f)",
+        "n": 500,
+        "nodes": 20000,
+        "delivery": 0.35,
+        "effective_rps": 15.7,
+        "rps_per_100_nodes": 0.08,
+        "dispatch_ms": 8008.0,
+        "cost_per_mtok": 88.662,
+        "capped": true
+      }
+    ]
+  ]
+}

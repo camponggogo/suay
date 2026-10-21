@@ -1,0 +1,60 @@
+{
+  "steps": [
+    {
+      "concurrency": 8,
+      "requests": 94,
+      "ok": 94,
+      "errors": 0,
+      "elapsed_s": 6.271,
+      "rps": 14.99,
+      "success_rps": 14.99,
+      "mean_ms": 526.66,
+      "p50_ms": 484.06,
+      "p95_ms": 847.87,
+      "p99_ms": 973.63,
+      "max_ms": 4401.17,
+      "stdev_ms": 439.48,
+      "bandwidth_mbps": 0.047,
+      "bytes_per_request": 392.0,
+      "nodes_live": 48,
+      "server": {
+        "dispatch_mean_ms": 0,
+        "dispatch_p95_ms": 0.0,
+        "upstream_mean_ms": 375.86,
+        "upstream_p95_ms": 679.55,
+        "requests_delta": 94,
+        "nodes_dispatched": 0,
+        "fairness_min": 0,
+        "fairness_max": 0
+      }
+    },
+    {
+      "concurrency": 16,
+      "requests": 99,
+      "ok": 99,
+      "errors": 0,
+      "elapsed_s": 6.292,
+      "rps": 15.73,
+      "success_rps": 15.73,
+      "mean_ms": 993.98,
+      "p50_ms": 773.57,
+      "p95_ms": 2453.64,
+      "p99_ms": 2914.89,
+      "max_ms": 3064.98,
+      "stdev_ms": 638.88,
+      "bandwidth_mbps": 0.0493,
+      "bytes_per_request": 392.0,
+      "nodes_live": 46,
+      "server": {
+        "dispatch_mean_ms": 0,
+        "dispatch_p95_ms": 0.0,
+        "upstream_mean_ms": 587.54,
+        "upstream_p95_ms": 1669.28,
+        "requests_delta": 99,
+        "nodes_dispatched": 0,
+        "fairness_min": 0,
+        "fairness_max": 0
+      }
+    }
+  ]
+}

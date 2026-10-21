@@ -1,0 +1,188 @@
+{
+  "per_node_rps": 0.1409,
+  "gateway_rps": 15.7,
+  "nodes_to_saturate_gateway": 111.5,
+  "delivery_floor_node": 153.5,
+  "table": [
+    {
+      "base": 10,
+      "law": "N+1",
+      "result": {
+        "nodes": 11,
+        "node_capacity_rps": 1.55,
+        "gateway_bound": false,
+        "delivery_factor": 1.0,
+        "effective_rps": 1.55,
+        "capacity_per_100_nodes": 14.09,
+        "heartbeat_rps": 1.1,
+        "shards": 1,
+        "dispatch_ms": 28.0
+      }
+    },
+    {
+      "base": 10,
+      "law": "N\u00b7log2(N)",
+      "result": {
+        "nodes": 33,
+        "node_capacity_rps": 4.53,
+        "gateway_bound": false,
+        "delivery_factor": 0.975,
+        "effective_rps": 4.53,
+        "capacity_per_100_nodes": 13.73,
+        "heartbeat_rps": 3.3,
+        "shards": 1,
+        "dispatch_ms": 28.0
+      }
+    },
+    {
+      "base": 25,
+      "law": "N+1",
+      "result": {
+        "nodes": 26,
+        "node_capacity_rps": 3.66,
+        "gateway_bound": false,
+        "delivery_factor": 1.0,
+        "effective_rps": 3.66,
+        "capacity_per_100_nodes": 14.09,
+        "heartbeat_rps": 2.6,
+        "shards": 1,
+        "dispatch_ms": 28.0
+      }
+    },
+    {
+      "base": 25,
+      "law": "N\u00b7log2(N)",
+      "result": {
+        "nodes": 116,
+        "node_capacity_rps": 7.87,
+        "gateway_bound": false,
+        "delivery_factor": 0.481,
+        "effective_rps": 7.87,
+        "capacity_per_100_nodes": 6.78,
+        "heartbeat_rps": 11.6,
+        "shards": 1,
+        "dispatch_ms": 54.4
+      }
+    },
+    {
+      "base": 50,
+      "law": "N+1",
+      "result": {
+        "nodes": 51,
+        "node_capacity_rps": 6.01,
+        "gateway_bound": false,
+        "delivery_factor": 0.837,
+        "effective_rps": 6.01,
+        "capacity_per_100_nodes": 11.78,
+        "heartbeat_rps": 5.1,
+        "shards": 1,
+        "dispatch_ms": 28.4
+      }
+    },
+    {
+      "base": 50,
+      "law": "N\u00b7log2(N)",
+      "result": {
+        "nodes": 282,
+        "node_capacity_rps": 13.9,
+        "gateway_bound": false,
+        "delivery_factor": 0.35,
+        "effective_rps": 13.9,
+        "capacity_per_100_nodes": 4.93,
+        "heartbeat_rps": 28.2,
+        "shards": 1,
+        "dispatch_ms": 120.8
+      }
+    },
+    {
+      "base": 100,
+      "law": "N+1",
+      "result": {
+        "nodes": 101,
+        "node_capacity_rps": 7.78,
+        "gateway_bound": false,
+        "delivery_factor": 0.547,
+        "effective_rps": 7.78,
+        "capacity_per_100_nodes": 7.7,
+        "heartbeat_rps": 10.1,
+        "shards": 1,
+        "dispatch_ms": 48.4
+      }
+    },
+    {
+      "base": 100,
+      "law": "N\u00b7log2(N)",
+      "result": {
+        "nodes": 664,
+        "node_capacity_rps": 32.74,
+        "gateway_bound": true,
+        "delivery_factor": 0.35,
+        "effective_rps": 15.7,
+        "capacity_per_100_nodes": 2.36,
+        "heartbeat_rps": 66.4,
+        "shards": 1,
+        "dispatch_ms": 273.6
+      }
+    },
+    {
+      "base": 200,
+      "law": "N+1",
+      "result": {
+        "nodes": 201,
+        "node_capacity_rps": 9.91,
+        "gateway_bound": false,
+        "delivery_factor": 0.35,
+        "effective_rps": 9.91,
+        "capacity_per_100_nodes": 4.93,
+        "heartbeat_rps": 20.1,
+        "shards": 1,
+        "dispatch_ms": 88.4
+      }
+    },
+    {
+      "base": 200,
+      "law": "N\u00b7log2(N)",
+      "result": {
+        "nodes": 1529,
+        "node_capacity_rps": 75.38,
+        "gateway_bound": true,
+        "delivery_factor": 0.35,
+        "effective_rps": 15.7,
+        "capacity_per_100_nodes": 1.03,
+        "heartbeat_rps": 152.9,
+        "shards": 2,
+        "dispatch_ms": 619.6
+      }
+    },
+    {
+      "base": 500,
+      "law": "N+1",
+      "result": {
+        "nodes": 501,
+        "node_capacity_rps": 24.7,
+        "gateway_bound": true,
+        "delivery_factor": 0.35,
+        "effective_rps": 15.7,
+        "capacity_per_100_nodes": 3.13,
+        "heartbeat_rps": 50.1,
+        "shards": 1,
+        "dispatch_ms": 208.4
+      }
+    },
+    {
+      "base": 500,
+      "law": "N\u00b7log2(N)",
+      "result": {
+        "nodes": 4483,
+        "node_capacity_rps": 221.03,
+        "gateway_bound": true,
+        "delivery_factor": 0.35,
+        "effective_rps": 15.7,
+        "capacity_per_100_nodes": 0.35,
+        "heartbeat_rps": 448.3,
+        "shards": 4,
+        "dispatch_ms": 1801.2
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "steps": [
+    {
+      "concurrency": 1,
+      "requests": 40,
+      "ok": 40,
+      "errors": 0,
+      "elapsed_s": 8.1,
+      "rps": 4.9,
+      "mean_ms": 202.46,
+      "p50_ms": 166.01,
+      "p95_ms": 418.95,
+      "p99_ms": 542.0,
+      "max_ms": 542.0,
+      "nodes_live": 50,
+      "heartbeats": 8845
+    },
+    {
+      "concurrency": 5,
+      "requests": 60,
+      "ok": 60,
+      "errors": 0,
+      "elapsed_s": 8.2,
+      "rps": 7.3,
+      "mean_ms": 675.42,
+      "p50_ms": 694.91,
+      "p95_ms": 938.94,
+      "p99_ms": 988.13,
+      "max_ms": 992.25,
+      "nodes_live": 50,
+      "heartbeats": 8995
+    },
+    {
+      "concurrency": 10,
+      "requests": 70,
+      "ok": 70,
+      "errors": 0,
+      "elapsed_s": 8.62,
+      "rps": 8.1,
+      "mean_ms": 1191.36,
+      "p50_ms": 1125.21,
+      "p95_ms": 1786.64,
+      "p99_ms": 1920.32,
+      "max_ms": 1935.33,
+      "nodes_live": 50,
+      "heartbeats": 9156
+    },
+    {
+      "concurrency": 25,
+      "requests": 89,
+      "ok": 89,
+      "errors": 0,
+      "elapsed_s": 9.83,
+      "rps": 9.1,
+      "mean_ms": 2508.38,
+      "p50_ms": 2589.08,
+      "p95_ms": 2958.56,
+      "p99_ms": 2983.93,
+      "max_ms": 2991.92,
+      "nodes_live": 50,
+      "heartbeats": 9269
+    },
+    {
+      "concurrency": 50,
+      "requests": 122,
+      "ok": 122,
+      "errors": 0,
+      "elapsed_s": 10.16,
+      "rps": 12.0,
+      "mean_ms": 3811.47,
+      "p50_ms": 3811.48,
+      "p95_ms": 5364.49,
+      "p99_ms": 5509.38,
+      "max_ms": 5512.25,
+      "nodes_live": 50,
+      "heartbeats": 9392
+    }
+  ]
+}

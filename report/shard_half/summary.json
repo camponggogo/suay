@@ -1,0 +1,8 @@
+{
+  "1048576": {
+    "best_chunks": 1,
+    "speedup": 1.0,
+    "efficiency": 1.0,
+    "sequential_ms": 120.42
+  }
+}

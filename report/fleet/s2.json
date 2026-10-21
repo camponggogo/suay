@@ -1,0 +1,17 @@
+{
+  "targets": [
+    {
+      "target": "http://127.0.0.1:8082/hb",
+      "levels": [
+        {
+          "concurrency": 4,
+          "seconds": 6.6,
+          "ok": 884,
+          "rps": 133.7,
+          "p50_ms": 27.45,
+          "p95_ms": 42.17
+        }
+      ]
+    }
+  ]
+}

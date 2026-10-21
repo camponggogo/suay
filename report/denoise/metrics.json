@@ -1,0 +1,68 @@
+{
+  "samples": 963,
+  "results": {
+    "raw (no filter)": {
+      "rmse": 629.04,
+      "snr_before_db": 12.14,
+      "snr_after_db": 12.14,
+      "snr_gain_db": 0.0,
+      "edge_rmse": 605.26,
+      "inner_rmse": 629.94,
+      "smoothness": 61.48
+    },
+    "Savitzky\u2013Golay": {
+      "rmse": 550.97,
+      "snr_before_db": 12.14,
+      "snr_after_db": 13.29,
+      "snr_gain_db": 1.15,
+      "edge_rmse": 542.2,
+      "inner_rmse": 551.31,
+      "smoothness": 35.52
+    },
+    "Savitzky\u2013Golay (log-space)": {
+      "rmse": 549.71,
+      "snr_before_db": 12.14,
+      "snr_after_db": 13.31,
+      "snr_gain_db": 1.17,
+      "edge_rmse": 649.95,
+      "inner_rmse": 545.44,
+      "smoothness": 35.71
+    },
+    "Median filter (15)": {
+      "rmse": 612.84,
+      "snr_before_db": 12.14,
+      "snr_after_db": 12.37,
+      "snr_gain_db": 0.23,
+      "edge_rmse": 557.14,
+      "inner_rmse": 614.9,
+      "smoothness": 38.73
+    },
+    "Wavelet (db4, soft)": {
+      "rmse": 619.59,
+      "snr_before_db": 12.14,
+      "snr_after_db": 12.27,
+      "snr_gain_db": 0.13,
+      "edge_rmse": 599.72,
+      "inner_rmse": 620.35,
+      "smoothness": 54.51
+    },
+    "TabDAE (window 9)": {
+      "rmse": 592.71,
+      "snr_before_db": 12.14,
+      "snr_after_db": 12.66,
+      "snr_gain_db": 0.52,
+      "edge_rmse": 558.6,
+      "inner_rmse": 593.99,
+      "smoothness": 42.62
+    },
+    "DeepFilterNet-style gate": {
+      "rmse": 642.84,
+      "snr_before_db": 12.14,
+      "snr_after_db": 11.95,
+      "snr_gain_db": -0.19,
+      "edge_rmse": 674.1,
+      "inner_rmse": 641.59,
+      "smoothness": 58.03
+    }
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "samples": 6000,
+  "accuracy": 0.9015,
+  "accuracy_by_tier": {
+    "ambiguous": 1.0,
+    "easy": 1.0,
+    "adversarial": 0.5075
+  },
+  "per_class": {
+    "legal": {
+      "precision": 0.9329,
+      "recall": 0.9354,
+      "f1": 0.9342
+    },
+    "chemistry": {
+      "precision": 1.0,
+      "recall": 0.8013,
+      "f1": 0.8897
+    },
+    "general": {
+      "precision": 0.7736,
+      "recall": 1.0,
+      "f1": 0.8723
+    }
+  },
+  "confusion": {
+    "legal": {
+      "legal": 2114,
+      "chemistry": 0,
+      "general": 146
+    },
+    "chemistry": {
+      "legal": 152,
+      "chemistry": 1795,
+      "general": 293
+    },
+    "general": {
+      "legal": 0,
+      "chemistry": 0,
+      "general": 1500
+    }
+  },
+  "confidence_sweep": [
+    {
+      "threshold": 0.0,
+      "coverage": 1.0,
+      "accuracy": 0.9015
+    },
+    {
+      "threshold": 0.1,
+      "coverage": 0.6515,
+      "accuracy": 1.0
+    },
+    {
+      "threshold": 0.2,
+      "coverage": 0.6515,
+      "accuracy": 1.0
+    },
+    {
+      "threshold": 0.3,
+      "coverage": 0.6515,
+      "accuracy": 1.0
+    },
+    {
+      "threshold": 0.4,
+      "coverage": 0.602,
+      "accuracy": 1.0
+    },
+    {
+      "threshold": 0.5,
+      "coverage": 0.602,
+      "accuracy": 1.0
+    }
+  ],
+  "latency_us": {
+    "mean": 45.1,
+    "p50": 31.5,
+    "p95": 93.1,
+    "p99": 175.9,
+    "max": 8723.7
+  }
+}

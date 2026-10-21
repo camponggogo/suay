@@ -1,0 +1,76 @@
+{
+  "rows": [
+    {
+      "backend": "sqlite",
+      "concurrency": 1,
+      "ops": 120,
+      "ops_per_s": 46.8,
+      "p50_ms": 20.95,
+      "p95_ms": 23.99,
+      "max_ms": 28.64
+    },
+    {
+      "backend": "postgresql",
+      "concurrency": 1,
+      "ops": 120,
+      "ops_per_s": 28.0,
+      "p50_ms": 33.41,
+      "p95_ms": 48.92,
+      "max_ms": 55.12
+    },
+    {
+      "backend": "sqlite",
+      "concurrency": 4,
+      "ops": 480,
+      "ops_per_s": 71.2,
+      "p50_ms": 40.27,
+      "p95_ms": 120.85,
+      "max_ms": 440.01
+    },
+    {
+      "backend": "postgresql",
+      "concurrency": 4,
+      "ops": 480,
+      "ops_per_s": 75.7,
+      "p50_ms": 50.55,
+      "p95_ms": 71.39,
+      "max_ms": 95.5
+    },
+    {
+      "backend": "sqlite",
+      "concurrency": 8,
+      "ops": 960,
+      "ops_per_s": 80.3,
+      "p50_ms": 42.03,
+      "p95_ms": 267.93,
+      "max_ms": 2369.66
+    },
+    {
+      "backend": "postgresql",
+      "concurrency": 8,
+      "ops": 960,
+      "ops_per_s": 65.2,
+      "p50_ms": 109.92,
+      "p95_ms": 218.55,
+      "max_ms": 461.12
+    },
+    {
+      "backend": "sqlite",
+      "concurrency": 16,
+      "ops": 1920,
+      "ops_per_s": 86.9,
+      "p50_ms": 39.79,
+      "p95_ms": 740.01,
+      "max_ms": 9008.21
+    },
+    {
+      "backend": "postgresql",
+      "concurrency": 16,
+      "ops": 1920,
+      "ops_per_s": 70.1,
+      "p50_ms": 188.88,
+      "p95_ms": 473.59,
+      "max_ms": 1296.13
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "best_throughput": {
+    "cpu_pct": 10.0,
+    "rps_c8": 13.42,
+    "rps_c1_at_that_point": 11.0
+  },
+  "plateau_from_pct": 10,
+  "liveness_min": 47.2,
+  "liveness_max": 49.0,
+  "dispatch_ms_min": 27.82,
+  "dispatch_ms_max": 39.69,
+  "throughput_at_80_pct": {
+    "c1": 8.23,
+    "c8": 8.26
+  },
+  "throughput_at_10_pct": {
+    "c1": 11.0,
+    "c8": 13.42
+  }
+}

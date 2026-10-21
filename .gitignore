@@ -26,3 +26,15 @@ node_modules/
 
 versions/python/control/data/
 versions/rust/target/
+
+# local benchmark binaries and models (not part of the source tree)
+sim/compare/llama/
+sim/compare/models/
+sim/compare/*.log
+report/compare/*.log
+
+# local agent scratch and preview artefacts
+.zwork/
+.preview/
+.local/
+

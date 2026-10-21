@@ -1,0 +1,32 @@
+{
+  "steps": [
+    {
+      "concurrency": 16,
+      "requests": 123,
+      "ok": 123,
+      "errors": 0,
+      "elapsed_s": 6.536,
+      "rps": 18.82,
+      "success_rps": 18.82,
+      "mean_ms": 822.31,
+      "p50_ms": 468.65,
+      "p95_ms": 2276.03,
+      "p99_ms": 3384.44,
+      "max_ms": 4573.68,
+      "stdev_ms": 729.46,
+      "bandwidth_mbps": 0.059,
+      "bytes_per_request": 392.0,
+      "nodes_live": 48,
+      "server": {
+        "dispatch_mean_ms": 0,
+        "dispatch_p95_ms": 0.0,
+        "upstream_mean_ms": 642.35,
+        "upstream_p95_ms": 1992.72,
+        "requests_delta": 62,
+        "nodes_dispatched": 0,
+        "fairness_min": 0,
+        "fairness_max": 0
+      }
+    }
+  ]
+}

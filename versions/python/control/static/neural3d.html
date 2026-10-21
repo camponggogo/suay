@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SUAY · Neural fabric 3D</title>
+<link rel="stylesheet" href="/neural.css">
+<script defer src="/neural3d.js" type="module"></script>
+</head>
+<body>
+<main class="stage" aria-label="แผนภาพ 3 มิติของการเชื่อมต่อเครื่องในสวอร์ม">
+  <div id="fabric"></div>
+</main>
+
+<section class="hud" aria-live="polite">
+  <p class="eyebrow"><span class="dot live"></span> NEURAL FABRIC · 3D</p>
+  <h1>โครงข่ายสวอร์ม</h1>
+  <dl class="stats">
+    <div><dt>โหนดที่ออนไลน์</dt><dd id="stat-live">–</dd></div>
+    <div><dt>ทั้งหมด</dt><dd id="stat-total">–</dd></div>
+    <div><dt>อีเวนต์/วินาที</dt><dd id="stat-rate">–</dd></div>
+    <div><dt>โซน</dt><dd id="stat-zones">–</dd></div>
+  </dl>
+  <p class="status" id="stat-status">กำลังเชื่อมต่อ…</p>
+</section>
+
+<section class="legend" aria-label="คำอธิบายสี">
+  <span class="chip live">ออนไลน์</span>
+  <span class="chip stale">สัญญาณขาด</span>
+  <span class="chip offline">ออฟไลน์</span>
+  <span class="chip hub">ศูนย์กลาง</span>
+  <span class="chip pulse">ก้อนไฟ = ข้อมูลจริง</span>
+</section>
+
+<aside class="tooltip" id="tooltip" hidden></aside>
+<p class="hint">ทุก heartbeat และทุกคำขอจะยิงก้อนไฟตามทิศทางการไหลจริง · ลากเพื่อหมุน · สกรอลล์เพื่อซูม · คลิกโฟกัส · Esc ล้าง</p>
+</body>
+</html>

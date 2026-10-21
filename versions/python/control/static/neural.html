@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SUAY · Neural fabric</title>
+<link rel="stylesheet" href="/neural.css">
+<script defer src="/neural.js"></script>
+</head>
+<body>
+<main class="stage" aria-label="แผนภาพการเชื่อมต่อของเครื่องในสวอร์ม">
+  <canvas id="fabric"></canvas>
+</main>
+
+<section class="hud" aria-live="polite">
+  <p class="eyebrow"><span class="dot live"></span> NEURAL FABRIC</p>
+  <h1>การเชื่อมต่อของสวอร์ม</h1>
+  <dl class="stats">
+    <div><dt>โหนดที่ออนไลน์</dt><dd id="stat-live">–</dd></div>
+    <div><dt>ทั้งหมด</dt><dd id="stat-total">–</dd></div>
+    <div><dt>สัญญาณ/วินาที</dt><dd id="stat-rate">–</dd></div>
+    <div><dt>โซน</dt><dd id="stat-zones">–</dd></div>
+  </dl>
+  <p class="status" id="stat-status">กำลังเชื่อมต่อ…</p>
+</section>
+
+<section class="legend" aria-label="คำอธิบายสี">
+  <span class="chip live">ออนไลน์</span>
+  <span class="chip stale">สัญญาณขาด</span>
+  <span class="chip offline">ออฟไลน์</span>
+  <span class="chip hub">ศูนย์กลาง</span>
+</section>
+
+<aside class="tooltip" id="tooltip" hidden></aside>
+<p class="hint">คลิกโหนดเพื่อโฟกัสเส้นใยของมัน · กด Esc เพื่อล้าง</p>
+</body>
+</html>

@@ -1,0 +1,70 @@
+{
+  "runs": [
+    {
+      "label": "node-plane-10s",
+      "target": "http://127.0.0.1:8081/hb",
+      "results": [
+        {
+          "machines": 100,
+          "interval_s": 10.0,
+          "seconds": 22.3,
+          "delivered": 200,
+          "errors": 0,
+          "error_kinds": [],
+          "offered_rps": 10.0,
+          "achieved_rps": 9.0,
+          "delivered_pct": 89.6,
+          "p50_ms": 744.7,
+          "p95_ms": 1199.7,
+          "p99_ms": 1362.6,
+          "mean_ms": 660.9
+        },
+        {
+          "machines": 250,
+          "interval_s": 10.0,
+          "seconds": 26.4,
+          "delivered": 500,
+          "errors": 0,
+          "error_kinds": [],
+          "offered_rps": 25.0,
+          "achieved_rps": 18.9,
+          "delivered_pct": 75.7,
+          "p50_ms": 1313.5,
+          "p95_ms": 4769.6,
+          "p99_ms": 5515.4,
+          "mean_ms": 1593.0
+        },
+        {
+          "machines": 500,
+          "interval_s": 10.0,
+          "seconds": 30.3,
+          "delivered": 770,
+          "errors": 0,
+          "error_kinds": [],
+          "offered_rps": 50.0,
+          "achieved_rps": 25.4,
+          "delivered_pct": 50.9,
+          "p50_ms": 5036.8,
+          "p95_ms": 8248.7,
+          "p99_ms": 8335.9,
+          "mean_ms": 4525.7
+        },
+        {
+          "machines": 1000,
+          "interval_s": 10.0,
+          "seconds": 29.1,
+          "delivered": 1085,
+          "errors": 0,
+          "error_kinds": [],
+          "offered_rps": 100.0,
+          "achieved_rps": 37.3,
+          "delivered_pct": 37.3,
+          "p50_ms": 13611.9,
+          "p95_ms": 15132.4,
+          "p99_ms": 15231.6,
+          "mean_ms": 11467.3
+        }
+      ]
+    }
+  ]
+}

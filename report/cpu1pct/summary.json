@@ -1,0 +1,32 @@
+{
+  "points": {
+    "1": {
+      "five_pct": {
+        "rps": 9.49,
+        "mean_ms": 105.4
+      },
+      "one_pct": {
+        "rps": 3.04,
+        "mean_ms": 329.29
+      }
+    },
+    "8": {
+      "five_pct": {
+        "rps": 7.91,
+        "mean_ms": 986.65
+      },
+      "one_pct": {
+        "rps": 3.69,
+        "mean_ms": 2149.8
+      }
+    }
+  },
+  "nodes_live_range_1pct": [
+    28,
+    39
+  ],
+  "dispatch_ms_1pct": {
+    "mean": 132.85,
+    "p95": 319.4
+  }
+}

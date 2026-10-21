@@ -1,0 +1,168 @@
+name: suay-sim
+
+x-image: &image
+  build:
+    context: ../..
+    dockerfile: sim/docker/Dockerfile
+
+services:
+  upstream:
+    <<: *image
+    command: ["uvicorn", "mock_upstream:app", "--host", "0.0.0.0", "--port", "9000", "--log-level", "warning", "--workers", "2"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request;urllib.request.urlopen('http://127.0.0.1:9000/healthz')"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: suay
+      POSTGRES_DB: suay
+      POSTGRES_HOST_AUTH_METHOD: trust
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U suay"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    ports:
+      - "55432:5432"
+
+  hub:
+    <<: *image
+    command: ["uvicorn", "hub_app:app", "--host", "0.0.0.0", "--port", "8080", "--log-level", "warning", "--workers", "2"]
+    environment:
+      SUAY_UPSTREAM: http://upstream:9000/v1/chat/completions
+      SUAY_SIM_MODELS: sim-model
+      SUAY_SWARM_KEY: sim-swarm-key
+      SUAY_SIM_KEY: suay_sim_loadgen_key
+      SUAY_SIM_DB: /data/sim.sqlite3
+      SUAY_NODE_PLANE: http://nodeplane:8081
+    volumes:
+      - hub-data:/data
+    ports:
+      - "8080:8080"
+    depends_on:
+      upstream:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request;urllib.request.urlopen('http://127.0.0.1:8080/logo.svg')"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+
+  # Two extra single-worker gateways on their own ports, sharing the same SQLite volume. Used to measure whether
+  # spreading listen sockets across processes beats uvicorn's shared-socket workers (report/MULTIPORT.md).
+  hub2:
+    <<: *image
+    command: ["uvicorn", "hub_app:app", "--host", "0.0.0.0", "--port", "8080", "--log-level", "warning", "--workers", "1"]
+    environment:
+      SUAY_UPSTREAM: http://upstream:9000/v1/chat/completions
+      SUAY_SIM_MODELS: sim-model
+      SUAY_SWARM_KEY: sim-swarm-key
+      SUAY_SIM_KEY: suay_sim_loadgen_key
+      SUAY_SIM_DB: /data/sim.sqlite3
+      SUAY_NODE_PLANE: http://nodeplane:8081
+    volumes:
+      - hub-data:/data
+    ports:
+      - "8082:8080"
+    depends_on:
+      upstream:
+        condition: service_healthy
+
+  hub3:
+    <<: *image
+    command: ["uvicorn", "hub_app:app", "--host", "0.0.0.0", "--port", "8080", "--log-level", "warning", "--workers", "1"]
+    environment:
+      SUAY_UPSTREAM: http://upstream:9000/v1/chat/completions
+      SUAY_SIM_MODELS: sim-model
+      SUAY_SWARM_KEY: sim-swarm-key
+      SUAY_SIM_KEY: suay_sim_loadgen_key
+      SUAY_SIM_DB: /data/sim.sqlite3
+      SUAY_NODE_PLANE: http://nodeplane:8081
+    volumes:
+      - hub-data:/data
+    ports:
+      - "8083:8080"
+    depends_on:
+      upstream:
+        condition: service_healthy
+
+  # Node plane: heartbeats live in memory and are flushed in batches, so the fleet size is decoupled from the
+  # inference gateway. Scale by adding replicas behind a hash of node_id (SUAY_NODE_PLANE_PEERS).
+  nodeplane:
+    <<: *image
+    command: ["uvicorn", "node_plane:app", "--host", "0.0.0.0", "--port", "8081", "--log-level", "warning", "--workers", "2"]
+    environment:
+      SUAY_SIM_DB: /data/sim.sqlite3
+      SUAY_FLUSH_S: "10"
+      SUAY_SWARM_KEY: sim-swarm-key
+      SUAY_NODE_PLANE_PEERS: ""
+    volumes:
+      - hub-data:/data
+    ports:
+      - "8081:8081"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request;urllib.request.urlopen('http://127.0.0.1:8081/healthz')"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+
+  # 50 simulated machines, split across three zones: 20 + 20 + 10.
+  node-a:
+    <<: *image
+    command: ["python", "node_agent.py"]
+    environment:
+      SUAY_PLANE: http://nodeplane:8081
+      SUAY_SWARM_KEY: sim-swarm-key
+      SUAY_ZONE: floor-1
+      SUAY_HEARTBEAT_S: "10"
+    deploy:
+      replicas: 20
+    mem_limit: 64m
+    cpus: 0.01
+    depends_on:
+      nodeplane:
+        condition: service_healthy
+
+  node-b:
+    <<: *image
+    command: ["python", "node_agent.py"]
+    environment:
+      SUAY_PLANE: http://nodeplane:8081
+      SUAY_SWARM_KEY: sim-swarm-key
+      SUAY_ZONE: floor-2
+      SUAY_HEARTBEAT_S: "10"
+    deploy:
+      replicas: 20
+    mem_limit: 64m
+    cpus: 0.01
+    depends_on:
+      nodeplane:
+        condition: service_healthy
+
+  node-c:
+    <<: *image
+    command: ["python", "node_agent.py"]
+    environment:
+      SUAY_PLANE: http://nodeplane:8081
+      SUAY_SWARM_KEY: sim-swarm-key
+      SUAY_ZONE: floor-3
+      SUAY_HEARTBEAT_S: "10"
+    deploy:
+      replicas: 10
+    mem_limit: 64m
+    cpus: 0.01
+    depends_on:
+      nodeplane:
+        condition: service_healthy
+
+volumes:
+  hub-data:
+  pg-data:
