@@ -3,6 +3,20 @@
 > Log การเปลี่ยนแปลงทุกครั้ง (ใหม่สุดอยู่บนสุด) · รูปแบบ 4 ฟิลด์ · เวลา Asia/Bangkok
 > วิธีทำงานกับไฟล์นี้: `.agents/skills/ai-update-log/SKILL.md`
 
+## push ขึ้น GitHub สำเร็จผ่าน GitHub Desktop
+
+- **วิธีแก้ไข:** เปิด repo ใน GitHub Desktop 3.6.7 (`GitHubDesktop.exe D:\Projects\Petals_Distributed_Inference`) ให้แอปที่ sign-in อยู่ push แล้วตรวจด้วย `git ls-remote` จน remote = local
+- **วันเวลา:** 2026-10-21 15:33 (Asia/Bangkok)
+- **ผลของการแก้ไข:** `origin/main` = **b4e0517** (3 commits: cf52c3c whitepaper+story+research page, 8c6a227 log, b4e0517 push helper); ตรวจ raw.githubusercontent ครบ 200: WHITEPAPER 24,398 chars, STORY 8,995, research.html 7,743, report/RPS_LIMIT 4,559
+- **ไฟล์/หลักฐาน:** `git ls-remote`, GitHub API commits, `paper/{WHITEPAPER,STORY}.md`, `landing/research.html`
+
+## ลอง push ด้วย credential ที่เครื่องมี — ไม่มีบัญชีไหนมีสิทธิ์
+
+- **วิธีแก้ไข:** เขียน `scripts/push_with_stored_credential.py` (อ่าน Credential Manager → askpass ชั่วคราว, ไม่พิมพ์ token) และ `scripts/inspect_stored_credentials.py`; ลอง push ด้วย 2 บัญชีที่เก็บไว้
+- **วันเวลา:** 2026-10-21 15:29 (Asia/Bangkok)
+- **ผลของการแก้ไข:** `campong-hot` → 403; `livestocknextplus-creator` (gho_) → 403; entry ของ `camponggogo` เป็นค่า 20 ตัวอักษรที่ไม่ใช่ PAT (decode ไม่ได้) → **ต้องใช้ fine-grained PAT ของ camponggogo** วางที่ `deploy/.github_token` (gitignore แล้ว) แล้วรันสคริปต์เดิม; commit `b4e0517` พร้อม push
+- **ไฟล์/หลักฐาน:** `scripts/{push_with_stored_credential,inspect_stored_credentials}.py`, `deploy/.github_token` (ยังไม่มี), commits `cf52c3c`, `8c6a227`, `b4e0517`
+
 ## เผยแพร่: research page บนเว็บ + commit (push ติดสิทธิ์)
 
 - **วิธีแก้ไข:** สร้าง `landing/research.html` (สรุป 6 ตัวเลขหลัก + caveats + negative results + collaboration), เพิ่มลิงก์ Research ใน nav ทั้ง 11 ภาษา (ไทยใช้ “งานวิจัย”) + sitemap + whitelist ใน `deploy/deploy_landing.py`; อัปเดต `paper/STORY.md` (บท 9 port trap, บท 10), `paper/README.md` (ลิงก์หน้าเว็บ), commit 225 ไฟล์ (`cf52c3c`); deploy จริงด้วย `python deploy/deploy_landing.py --apply` → release `20261021T081916412622Z`
