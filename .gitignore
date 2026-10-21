@@ -38,3 +38,7 @@ report/compare/*.log
 .preview/
 .local/
 
+
+# local push credential (never commit)
+deploy/.github_token
+
