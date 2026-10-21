@@ -3,6 +3,13 @@
 > Log การเปลี่ยนแปลงทุกครั้ง (ใหม่สุดอยู่บนสุด) · รูปแบบ 4 ฟิลด์ · เวลา Asia/Bangkok
 > วิธีทำงานกับไฟล์นี้: `.agents/skills/ai-update-log/SKILL.md`
 
+## เปลี่ยนหน้า Research เป็น timeline + push + deploy web
+
+- **วิธีแก้ไข:** เขียน `landing/research.html` ใหม่เป็น log 16 รายการเรียงจากล่าสุดขึ้นบน (chip เขียว/เหลือง/เทา = กำไร/ล้มเหลว/โมเดล + ลิงก์ report ทุกตัว), แถบหัวระบุ White paper v1.1 · 2026-10-21; ตรวจว่า white paper บน GitHub เหมือน local ทุกไบต์ (24,398 chars); push ผ่าน GitHub Desktop จน remote = `8dfd391`; deploy ซ้ำด้วย `deploy_landing.py --apply`
+- **วันเวลา:** 2026-10-21 15:51 (Asia/Bangkok)
+- **ผลของการแก้ไข:** เว็บ live เป็น timeline (16 entries, 19,598 bytes, title “SUAY Research Log”), release `20261021T085027270119Z`, nginx syntax ok + HTTPS ผ่านทั้งสองโดเมน; `origin/main` = `8dfd391`; raw.githubusercontent มี research.html ใหม่ (19,598 chars)
+- **ไฟล์/หลักฐาน:** `landing/research.html`, `scripts/check_research_page.py`, `deploy/deploy_landing.py`, `deploy/DEPLOYED.md`
+
 ## push ขึ้น GitHub สำเร็จผ่าน GitHub Desktop
 
 - **วิธีแก้ไข:** เปิด repo ใน GitHub Desktop 3.6.7 (`GitHubDesktop.exe D:\Projects\Petals_Distributed_Inference`) ให้แอปที่ sign-in อยู่ push แล้วตรวจด้วย `git ls-remote` จน remote = local
