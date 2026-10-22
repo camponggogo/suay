@@ -3,6 +3,13 @@
 > Log การเปลี่ยนแปลงทุกครั้ง (ใหม่สุดอยู่บนสุด) · รูปแบบ 4 ฟิลด์ · เวลา Asia/Bangkok
 > วิธีทำงานกับไฟล์นี้: `.agents/skills/ai-update-log/SKILL.md`
 
+## สร้างภาพ isometric animation อธิบายระบบ + performance
+
+- **วิธีแก้ไข:** เขียน `pasadhi/web/anatomy/pasadhi-pool.html` (SVG isometric: ฐาน + plinth + laptop/server/desktop/GPU + bus มี port + เข็มวัด GFLOP/s + counter) พร้อม SMIL packet วิ่งไป-กลับตามสาย; สไลเดอร์ CPU/GPU/RAM ขับเข็ม + counter + ตัวเลข ตามโมเดล impact; เขียน `scripts/build_pool_scene.py` ให้ geometry deterministic
+- **วันเวลา:** 2026-10-22 23:58 (Asia/Bangkok)
+- **ผลของการแก้ไข:** ภาพนิ่ง `pasadhi/web/anatomy/pasadhi-pool.png` (50 polygons, 12 paths, 4 เส้นทาง packet) · 30% CPU → **533 GFLOP/s (24 เครื่อง × 74 × 30%)**, **711 ฿/เดือน**, เข็มที่ -48°, counter 0711; ตรวจภาพซูมแล้ว
+- **ไฟล์/หลักฐาน:** `pasadhi/web/anatomy/{pasadhi-pool.html,pasadhi-pool.png}`, `scripts/build_pool_scene.py`, commit (pasadhi)
+
 ## เปลี่ยนโทน landing เป็นสว่าง/เป็นมิตร + deploy ใหม่
 
 - **วิธีแก้ไข:** เขียน `landing-pasadhi/style.css` ใหม่เป็นธีมสว่าง (ครีม #fbf9f3, เขียวมินต์ #159a72, ซัน #ffd166, คอรัล #ff8a5b), Nunito, การ์ดมน + เงาอ่อน; เพิ่ม SVG hero (pool + laptop/server/desktop), banner ฟรี, tag 3 สี, ปุ่มดาวน์โหลดพร้อม OS glyph; deploy ซ้ำới `deploy_pasadhi.py --apply`
