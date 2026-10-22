@@ -3,6 +3,13 @@
 > Log การเปลี่ยนแปลงทุกครั้ง (ใหม่สุดอยู่บนสุด) · รูปแบบ 4 ฟิลด์ · เวลา Asia/Bangkok
 > วิธีทำงานกับไฟล์นี้: `.agents/skills/ai-update-log/SKILL.md`
 
+## ออกแบบ public + satellite/interplanetary (ความหน่วงแสงเป็นเพดาน)
+
+- **วิธีแก้ไข:** เขียน `pasadhi/core/orbit.py` (link budget fibre/LEO/GEO/Moon/Mars, sharded-GEMM efficiency, batch efficiency, min job ที่ 90%) + `bench/orbit_model.py`; เขียน `docs/OPEN_NETWORK.th.md` (public participation, redundant 2× + spot-check 5%, DTN store-and-forward, deadline scheduling, M6/M7); อัปเดต README/ROADMAP
+- **วันเวลา:** 2026-10-22 16:06 (Asia/Bangkok)
+- **ผลของการแก้ไข:** GEMM 4096³ ข้าม fibre ตรงข้ามโลกเหลือ **6.9%** (LEO 32.3%, GEO 2.8%, Moon 0.57%, Mars 0.004%); งาน batch 10 นาที รอดถึงดวงจันทร์ (99.6%) แต่ Mars เหลือ 62%/18%; งานสั้นสุดที่ยังคุ้ม 90% = 2 s (fibre) → 23 s (Moon) → 3,278 s (Mars ใกล้); กฎ: inner loop ต้องอยู่ L0–L1, ข้ามดาวได้เฉพาะงาน checkpointed
+- **ไฟล์/หลักฐาน:** `pasadhi/{core/orbit.py,bench/orbit_model.py,docs/OPEN_NETWORK.th.md,bench/results/{orbit_model.json,fig05_orbit.png}}`, commit `1af202f`
+
 ## โมเดล token economy (layer 10/40/50 + ส่วนลดจาก credit + reserve 10%)
 
 - **วิธีแก้ไข:** เขียน `pasadhi/commercial/token_model.py` — layer Free 10% / Standard 40% / Premium 50%, credit ฿2.5/ชม. เพดาน 50% ของบิล, reserve 10% ของกำไร (1 PSD = ฿1), opex ฿160k/เดือน; เขียน `docs/TOKEN_ECONOMY.th.md` + M4.5 ใน roadmap; **แก้ราคาใน BUSINESS/SALES_KIT** จาก ฿1,900/ปี → ฿1,490/เดือน (รายปี ฿15,900) เพราะหน่วยเดิมผิด 12 เท่า
