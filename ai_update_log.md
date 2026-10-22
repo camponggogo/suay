@@ -3,6 +3,13 @@
 > Log การเปลี่ยนแปลงทุกครั้ง (ใหม่สุดอยู่บนสุด) · รูปแบบ 4 ฟิลด์ · เวลา Asia/Bangkok
 > วิธีทำงานกับไฟล์นี้: `.agents/skills/ai-update-log/SKILL.md`
 
+## เพิ่ม heterogeneous fleet ตั้งแต่ GTX 1050 ถึง A100
+
+- **วิธีแก้ไข:** เขียน `pasadhi/core/hetero.py` (5 class: 1050/T4/3060/4090/A100, policy best_fit/fastest/worst_fit, list scheduler ที่มี VRAM constraint, per-class utilisation/finish) และ `bench/hetero_model.py` รัน 1,450 การ์ด × 4,000 งาน × 2 scenario; เขียน `docs/HETERO_FLEET.md` + M2.6 ใน roadmap + README
+- **วันเวลา:** 2026-10-22 15:48 (Asia/Bangkok)
+- **ผลของการแก้ไข:** aggregate **9.54 PFLOPS f32 / 47.7 POPS int8 / 143.5 kW / 8.9 TB VRAM**; งาน 35GB 2% ทำให้ A100 10 ใบทำงาน 92% ขณะ 1,440 ใบว่าง → makespan 13.19 s เท่ากันทุก policy; เมื่อตัด huge ออก policy มีผล **19×** (best_fit 0.38 s vs worst_fit 7.31 s) → กฎ: งานที่ใหญ่กว่า spare card ต้อง split ไม่ใช่รอคิว; ต้นทุนรวม ฿0.00007/TFLOP
+- **ไฟล์/หลักฐาน:** `pasadhi/{core/hetero.py,bench/hetero_model.py,docs/HETERO_FLEET.md,bench/results/{hetero_model.json,fig03_hetero_fleet.png}}`, commit `22b8bd6`
+
 ## เพิ่มชั้น GPU sharing: 1,000 × GTX 1050 2GB
 
 - **วิธีแก้ไข:** เขียน `pasadhi/core/gpu.py` (Device spec, DP4A, VRAM bin packing, shard efficiency, crossover, fleet, cost/TFLOP) และ `bench/gpu_model.py` จำลอง 1,000 การ์ด 2 โหมด (independent vs sharded) × 1/10 GbE × f32/int8; เขียน `docs/GPU_FLEET.md` + เพิ่ม M2.5 ใน roadmap + README; commit `2396eed`
