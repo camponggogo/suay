@@ -3,6 +3,13 @@
 > Log การเปลี่ยนแปลงทุกครั้ง (ใหม่สุดอยู่บนสุด) · รูปแบบ 4 ฟิลด์ · เวลา Asia/Bangkok
 > วิธีทำงานกับไฟล์นี้: `.agents/skills/ai-update-log/SKILL.md`
 
+## Landing page PASADHI + deploy จริง (campong path) และ vhost pasadhi.tech
+
+- **วิธีแก้ไข:** สร้าง `landing-pasadhi/` (EN + TH: ฟรีก่อน → AI Agent/Cloud/VPS → ราคา → on-prem → ดาวน์โหลด → FAQ) + `deploy/deploy_pasadhi.py` (allowlist, nginx include, vhost pasadhi.tech, health check, rollback); เปลี่ยน auth เป็น key `~/.ssh/ssh_hostinger_deploy` เพราะ password ถูกปฏิเสธ
+- **วันเวลา:** 2026-10-22 19:37 (Asia/Bangkok)
+- **ผลของการแก้ไข:** live **https://campong.online/projects/pasadhi/** (9,464 bytes) + `/th/` (8,229) + robots.txt 200 · release `20261022T123735421375Z` · vhost `pasadhi.tech` ผ่านเมื่อยิง Host header แต่ **DNS ยังชี้ 2.57.91.91 (parked)** → ต้องเปลี่ยน A record เป็น 187.52.120.204 แล้วรัน certbot
+- **ไฟล์/หลักฐาน:** `landing-pasadhi/{index.html,th/index.html,style.css,sitemap.xml,robots.txt,preview-*.png}`, `deploy/{deploy_pasadhi.py,PASADHI_DEPLOY.md}`, commit `9d5f945`
+
 ## เปลี่ยนการคิดมูลค่าการแชร์เป็นตามน้ำหนัก impact (%)
 
 - **วิธีแก้ไข:** เขียน `pasadhi/app/impact.py` (weights จาก resource_impact: CPU 98/RAM 0.4/Disk 1.0/Net 0.6 หรือ CPU 56.6/GPU 42.2; pool 2.50 ฿/ชม. ต่อ 4 threads; GPU 3.0 ฿/ชม. ต่อ 2GB) แล้วให้ `budget.hourly_earnings` และ `group.economics` เรียกใช้; เขียน `docs/IMPACT_PRICING.th.md` + แก้ตัวเลขใน `docs/GROUP.th.md` และเพิ่ม note ใน TOKEN_ECONOMY
