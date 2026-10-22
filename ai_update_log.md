@@ -3,6 +3,13 @@
 > Log การเปลี่ยนแปลงทุกครั้ง (ใหม่สุดอยู่บนสุด) · รูปแบบ 4 ฟิลด์ · เวลา Asia/Bangkok
 > วิธีทำงานกับไฟล์นี้: `.agents/skills/ai-update-log/SKILL.md`
 
+## เพิ่มฉาก isometric mesh: อุปกรณ์สำนักงาน + GPU หลายใบ เป็นใยแมงมุม
+
+- **วิธีแก้ไข:** เขียน `scripts/build_mesh_scene.py` (12 อุปกรณ์: desktop 3, laptop 2, server 2, phone 2, GPU node 3 ใบ ×2/×2/×3; 30 links = ring + spoke + cross; packet 10 เส้น) และ `pasadhi/web/anatomy/pasadhi-mesh.html` + ภาพ `pasadhi-mesh.png`; จัดลำดับการวาดตามความลึกและย้าย node ที่ทับ pool
+- **วันเวลา:** 2026-10-23 01:32 (Asia/Bangkok)
+- **ผลของการแก้ไข:** 143 polygons, 70 paths, 30 links, 10 animated paths; ที่ 30% → **266 GFLOP/s** (12 อุปกรณ์), **฿1,058/เดือน**, dial -48°; ภาพ PNG 1320×1000 พร้อมใช้
+- **ไฟล์/หลักฐาน:** `pasadhi/web/anatomy/{pasadhi-mesh.html,pasadhi-mesh.png}`, `scripts/build_mesh_scene.py`, commit (pasadhi)
+
 ## สร้างภาพ isometric animation อธิบายระบบ + performance
 
 - **วิธีแก้ไข:** เขียน `pasadhi/web/anatomy/pasadhi-pool.html` (SVG isometric: ฐาน + plinth + laptop/server/desktop/GPU + bus มี port + เข็มวัด GFLOP/s + counter) พร้อม SMIL packet วิ่งไป-กลับตามสาย; สไลเดอร์ CPU/GPU/RAM ขับเข็ม + counter + ตัวเลข ตามโมเดล impact; เขียน `scripts/build_pool_scene.py` ให้ geometry deterministic
