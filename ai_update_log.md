@@ -3,6 +3,13 @@
 > Log การเปลี่ยนแปลงทุกครั้ง (ใหม่สุดอยู่บนสุด) · รูปแบบ 4 ฟิลด์ · เวลา Asia/Bangkok
 > วิธีทำงานกับไฟล์นี้: `.agents/skills/ai-update-log/SKILL.md`
 
+## แก้ปัญหา “ยังไม่มี releases” — ทำ portable build จริง + workflow 4 OS
+
+- **วิธีแก้ไข:** ตรวจ API พบ `camponggogo/pasadhi` = **404** (repo ยังไม่มี จึงไม่มี release); สร้าง `PASADHI-0.1.0-win64-portable.zip` (ทดสอบรัน `service.py --once` ผ่าน), `PASADHI-0.1.0-source.zip`, `launcher.py`, และ `.github/workflows/release.yml` (windows/ubuntu/macos PyInstaller + android Briefcase + release job เมื่อ push tag `v*`); เปลี่ยนปุ่มดาวน์โหลดในหน้า EN/TH ให้ชี้ไฟล์ที่โฮสต์เอง ไม่ชี้ 404; deploy
+- **วันเวลา:** 2026-10-23 02:36 (Asia/Bangkok)
+- **ผลของการแก้ไข:** **/download/PASADHI-0.1.0-win64-portable.zip 200 · 86,208 bytes** และ **source.zip 87,991** · หน้าแรก 13,487 · release `20261022T193455809389Z`; `report/IMAGE_FACTS_KERNELS.md` บันทึก fig10 (90.15%, matrix 2 114/1 795/1 500) และ fig01 (74/83.3 GFLOP/s, int8 1.2)
+- **ไฟล์/หลักฐาน:** `pasadhi/{launcher.py,.github/workflows/release.yml}`, `landing-pasadhi/download/*.zip`, `deploy/deploy_pasadhi_assets.py`, `report/IMAGE_FACTS_KERNELS.md`
+
 ## เพิ่ม white paper PDF (solution ล้วน) + story timeline พร้อมภาพ isometric
 
 - **วิธีแก้ไข:** เขียน `pasadhi/paper/SOLUTION.md` (5 หน้า: abstract, ปัญหา, สถาปัตยกรรม 5 ชั้น, ตารางผลวัด, impact pricing, แผนฟลีต, roadmap, limits) + `scripts/build_solution_pdf.py` (Markdown→HTML→Edge→footer/เลขหน้าด้วย reportlab+pypdf); เขียน `scripts/build_story.py` สร้าง `story.html` + `th/story.html` 6 บท พร้อม SVG vignette เคลื่อนไหวต่อบท; เพิ่มปุ่มดาวน์โหลดในหน้าแรก/ไทย; deploy ด้วย `deploy_pasadhi_assets.py`
