@@ -3,6 +3,13 @@
 > Log การเปลี่ยนแปลงทุกครั้ง (ใหม่สุดอยู่บนสุด) · รูปแบบ 4 ฟิลด์ · เวลา Asia/Bangkok
 > วิธีทำงานกับไฟล์นี้: `.agents/skills/ai-update-log/SKILL.md`
 
+## เปลี่ยนการคิดมูลค่าการแชร์เป็นตามน้ำหนัก impact (%)
+
+- **วิธีแก้ไข:** เขียน `pasadhi/app/impact.py` (weights จาก resource_impact: CPU 98/RAM 0.4/Disk 1.0/Net 0.6 หรือ CPU 56.6/GPU 42.2; pool 2.50 ฿/ชม. ต่อ 4 threads; GPU 3.0 ฿/ชม. ต่อ 2GB) แล้วให้ `budget.hourly_earnings` และ `group.economics` เรียกใช้; เขียน `docs/IMPACT_PRICING.th.md` + แก้ตัวเลขใน `docs/GROUP.th.md` และเพิ่ม note ใน TOKEN_ECONOMY
+- **วันเวลา:** 2026-10-22 19:23 (Asia/Bangkok)
+- **ผลของการแก้ไข:** reference 4 threads เต็มร้อย = **2.50 ฿/ชม. พอดี**; เครื่อง 8 threads ที่ 35% → **฿711/เดือน** (weighted 19.75%); **Group 150 เครื่องที่ 30%: shared ฿53,460 (เดิม 175,032), hybrid −฿105,195** → 30% ไม่พอจ่าย subscription แล้ว; จุดคุ้มทุนต้อง share ~60% หรือลดราคาเหลือ ~฿350/เครื่อง/เดือน (sweep: 50%→฿843, 70%→฿1,456, 90%→฿2,186)
+- **ไฟล์/หลักฐาน:** `pasadhi/{app/impact.py,app/budget.py,app/group.py,docs/IMPACT_PRICING.th.md,bench/results/{group_share_sweep.json,fig07_group.png}}`, commit `3ba32ad`
+
 ## Group worker: 100–200 เครื่องใน LAN เดียว ภายใต้ group id
 
 - **วิธีแก้ไข:** เขียน `pasadhi/app/group.py` (Group, join token, utilisation รายเครื่อง, usable=min(share,1−util), เศรษฐศาสตร์ 3 โหมด) + `bench/group_figure.py`; เขียน `docs/GROUP.th.md` + M2.7 ใน roadmap + README
