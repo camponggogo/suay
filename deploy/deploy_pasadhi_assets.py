@@ -25,6 +25,7 @@ BASE = '/opt/pasadhi'
 
 FILES = (
     'index.html', 'th/index.html', 'style.css', 'sitemap.xml', 'robots.txt',
+    'story.html', 'th/story.html', 'download/PASADHI-solution.pdf',
     'anatomy/pool.html', 'anatomy/mesh.html', 'anatomy/pool.png', 'anatomy/mesh.png',
 )
 
@@ -91,6 +92,12 @@ def main() -> None:
             print(run("curl --fail --silent --show-error --max-time 20 -o /dev/null "
                       "-w 'mesh png: %{http_code} %{size_download}\\n' "
                       "https://campong.online/projects/pasadhi/anatomy/mesh.png").strip())
+            print(run("curl --fail --silent --show-error --max-time 20 -o /dev/null "
+                      "-w 'paper pdf: %{http_code} %{size_download}\\n' "
+                      "https://campong.online/projects/pasadhi/download/PASADHI-solution.pdf").strip())
+            print(run("curl --fail --silent --show-error --max-time 20 "
+                      "https://campong.online/projects/pasadhi/story.html | grep -F 'Six measurements' >/dev/null "
+                      "&& echo 'story page: passed'").strip())
             print('Release:', release)
     finally:
         client.close()
