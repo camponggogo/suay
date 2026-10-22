@@ -3,6 +3,13 @@
 > Log การเปลี่ยนแปลงทุกครั้ง (ใหม่สุดอยู่บนสุด) · รูปแบบ 4 ฟิลด์ · เวลา Asia/Bangkok
 > วิธีทำงานกับไฟล์นี้: `.agents/skills/ai-update-log/SKILL.md`
 
+## เพิ่มชั้น GPU sharing: 1,000 × GTX 1050 2GB
+
+- **วิธีแก้ไข:** เขียน `pasadhi/core/gpu.py` (Device spec, DP4A, VRAM bin packing, shard efficiency, crossover, fleet, cost/TFLOP) และ `bench/gpu_model.py` จำลอง 1,000 การ์ด 2 โหมด (independent vs sharded) × 1/10 GbE × f32/int8; เขียน `docs/GPU_FLEET.md` + เพิ่ม M2.5 ใน roadmap + README; commit `2396eed`
+- **วันเวลา:** 2026-10-22 15:44 (Asia/Bangkok)
+- **ผลของการแก้ไข:** independent **1.30 PFLOPS f32 / 2.60 POPS int8**; sharded 1 GbE เหลือ **0.16 PFLOPS (8.5%)** เพราะ 91.5% เวลารอ data; 10 GbE = 0.89 PFLOPS (48%) / int8 2.41 POPS (64.9%); crossover f32 1GbE n≈177k (เกิน 2GB), int8 10GbE n≈8.9k; VRAM 2GB → f32 square 15.5k / int8 31k, LLM int8 ≈1.5–1.8B; ต้นทุน ฿0.0003/TFLOP → ราคา margin 70% ฿0.0010 = **เท่าราคาเช่า A100** → กำไรต้องมาจาก software/support; 1,000 เครื่องกินไฟ 115 kW + 2 FTE
+- **ไฟล์/หลักฐาน:** `pasadhi/{core/gpu.py,bench/gpu_model.py,docs/GPU_FLEET.md,bench/results/{gpu_model.json,fig02_gpu_fleet.png}}`, commits `2396eed`
+
 ## เติมชั้นเชิงพาณิชย์ให้ PASADHI (ราคา/unit economics/sales kit)
 
 - **วิธีแก้ไข:** เขียน `pasadhi/commercial/pricing.py` คำนวณต้นทุนต่อเครื่อง/เดือน (ค่าเสื่อม ฿333 + ไฟ ฿138 + support ฿80 = ฿551), ราคาที่ margin 70% (฿1,838/เดือน, ฿22,052/ปี), เทียบคลาวด์ CPU/GPU ต่อ TFLOP และ fleet 10/50/200; เขียน `docs/BUSINESS.th.md` และ `docs/SALES_KIT.th.md` (one-pager, 10 สไลด์, discovery 12 ข้อ, objection 6 ข้อ, ใบเสนอราคา, SOW pilot) + เติมหัวข้อ Commercial ใน README
