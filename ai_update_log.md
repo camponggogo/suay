@@ -3,6 +3,13 @@
 > Log การเปลี่ยนแปลงทุกครั้ง (ใหม่สุดอยู่บนสุด) · รูปแบบ 4 ฟิลด์ · เวลา Asia/Bangkok
 > วิธีทำงานกับไฟล์นี้: `.agents/skills/ai-update-log/SKILL.md`
 
+## เปลี่ยนโทน landing เป็นสว่าง/เป็นมิตร + deploy ใหม่
+
+- **วิธีแก้ไข:** เขียน `landing-pasadhi/style.css` ใหม่เป็นธีมสว่าง (ครีม #fbf9f3, เขียวมินต์ #159a72, ซัน #ffd166, คอรัล #ff8a5b), Nunito, การ์ดมน + เงาอ่อน; เพิ่ม SVG hero (pool + laptop/server/desktop), banner ฟรี, tag 3 สี, ปุ่มดาวน์โหลดพร้อม OS glyph; deploy ซ้ำới `deploy_pasadhi.py --apply`
+- **วันเวลา:** 2026-10-22 23:45 (Asia/Bangkok)
+- **ผลของการแก้ไข:** live **https://campong.online/projects/pasadhi/** (11,968 bytes) + `/th/` (10,518) · release `20261022T164449632815Z` · path/vhost check ผ่าน; preview ใหม่ `preview-{en,th}.png`; commit `7686522`
+- **ไฟล์/หลักฐาน:** `landing-pasadhi/{style.css,index.html,th/index.html,preview-en.png,preview-th.png}`
+
 ## Landing page PASADHI + deploy จริง (campong path) และ vhost pasadhi.tech
 
 - **วิธีแก้ไข:** สร้าง `landing-pasadhi/` (EN + TH: ฟรีก่อน → AI Agent/Cloud/VPS → ราคา → on-prem → ดาวน์โหลด → FAQ) + `deploy/deploy_pasadhi.py` (allowlist, nginx include, vhost pasadhi.tech, health check, rollback); เปลี่ยน auth เป็น key `~/.ssh/ssh_hostinger_deploy` เพราะ password ถูกปฏิเสธ
