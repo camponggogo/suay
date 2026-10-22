@@ -3,6 +3,9 @@
 <title>PASADHI — share the machines you already own</title>
 <meta name="description" content="PASADHI turns office PCs into a shared AI compute pool. Free while the network is being built: run AI agents on hardware you already own, earn credits by sharing what is idle.">
 <link rel="canonical" href="https://pasadhi.tech/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap">
 <link rel="stylesheet" href="./style.css">
 <meta property="og:title" content="PASADHI — share the machines you already own">
 <meta property="og:description" content="Free AI agents on hardware you already own. Share idle capacity, earn credits, rent later.">
@@ -11,7 +14,7 @@
 </head><body>
 
 <header><div class="wrap nav">
-  <a class="brand" href="./"><b>PASADHI</b><small>ปัสสัทธิ</small></a>
+  <a class="brand" href="./"><span class="dot">◈</span><b>PASADHI</b><small>ปัสสัทธิ</small></a>
   <nav>
     <a href="#free">Free first</a><a href="#products">Products</a><a href="#pricing">Pricing</a>
     <a href="#onprem">On-prem</a><a href="#download">Download</a>
@@ -19,27 +22,55 @@
   <a class="cta" href="#download">Get the app</a>
 </div></header>
 
-<section class="hero wrap" style="border-top:0">
+<section class="hero wrap">
   <div>
     <p class="eyebrow">Shared compute · AI agents · your own hardware</p>
-    <h1>Your office already has<br><span>the computer you need.</span></h1>
-    <p class="lead">PASADHI pools the PCs, servers and laptops an organisation already owns into one compute
-      surface. Run AI agents on it, keep the data inside the building, and earn credits by sharing what is idle.</p>
+    <h1>Your office already has<br><em>the computer you need.</em></h1>
+    <p class="lead">PASADHI pools the PCs, servers and laptops an organisation already owns into one friendly
+      compute surface. Run AI agents on it, keep the data inside the building, and earn credits by sharing
+      what would otherwise sit idle.</p>
     <div class="actions">
       <a class="btn primary" href="#download">Download · free</a>
       <a class="btn ghost" href="#pricing">See what sharing pays</a>
     </div>
+    <div class="trust"><span>No card</span><span>No trial timer</span><span>Leave anytime</span><span>MIT core</span></div>
   </div>
-  <aside class="free">
-    <h3>Free until the network is full</h3>
-    <p>While PASADHI is building its pool, everything that runs on it is <b>free</b> for people who also share.</p>
-    <ul>
-      <li>Share 20–30 % of a machine → run AI agents at no charge</li>
-      <li>No card, no trial timer, no per-token invoice</li>
-      <li>Paid rental opens only when the pool has spare capacity</li>
-    </ul>
-  </aside>
+
+  <div class="hero-art">
+    <svg viewBox="0 0 420 300" role="img" aria-label="A small office: laptops, a server and a desktop connected to one shared pool">
+      <rect x="0" y="0" width="420" height="300" rx="22" fill="none"/>
+      <circle cx="210" cy="150" r="72" fill="#d9f5e8"/>
+      <circle cx="210" cy="150" r="46" fill="#b7ecd7"/>
+      <text x="210" y="146" text-anchor="middle" font-family="Nunito, sans-serif" font-size="15" font-weight="800" fill="#0f6a4e">PASADHI</text>
+      <text x="210" y="166" text-anchor="middle" font-family="Nunito, sans-serif" font-size="10" fill="#2f7a61">one pool</text>
+      <g stroke="#7fcbb0" stroke-width="2" stroke-dasharray="5 5">
+        <line x1="210" y1="150" x2="86" y2="70"/><line x1="210" y1="150" x2="334" y2="70"/>
+        <line x1="210" y1="150" x2="84" y2="232"/><line x1="210" y1="150" x2="336" y2="232"/>
+      </g>
+      <g font-family="Nunito, sans-serif" font-size="10" font-weight="700">
+        <rect x="34" y="44" width="104" height="52" rx="12" fill="#fff" stroke="#dfeae4"/>
+        <text x="86" y="66" text-anchor="middle" fill="#2f7a61">laptop</text>
+        <text x="86" y="82" text-anchor="middle" fill="#8aa79b">30 % shared</text>
+        <rect x="282" y="44" width="104" height="52" rx="12" fill="#fff" stroke="#dfeae4"/>
+        <text x="334" y="66" text-anchor="middle" fill="#2f7a61">server</text>
+        <text x="334" y="82" text-anchor="middle" fill="#8aa79b">20 % shared</text>
+        <rect x="32" y="206" width="104" height="52" rx="12" fill="#fff" stroke="#dfeae4"/>
+        <text x="84" y="228" text-anchor="middle" fill="#2f7a61">desktop</text>
+        <text x="84" y="244" text-anchor="middle" fill="#8aa79b">25 % shared</text>
+        <rect x="284" y="206" width="104" height="52" rx="12" fill="#fff7e3" stroke="#f0dba0"/>
+        <text x="336" y="228" text-anchor="middle" fill="#8a5a00">you</text>
+        <text x="336" y="244" text-anchor="middle" fill="#a8874a">use it free</text>
+      </g>
+    </svg>
+    <p>Every machine keeps its own share limit. Nothing is taken that you did not offer.</p>
+  </div>
 </section>
+
+<div class="wrap"><div class="banner">
+  <strong>Free until the network is full</strong>
+  <span>Share 20–30 % of a machine and run AI agents at no charge. Paid rental opens only when the pool has spare capacity.</span>
+  <a href="#pricing">How it works →</a>
+</div></div>
 
 <section class="wrap" id="free">
   <p class="eyebrow">The order of things</p>
@@ -49,9 +80,9 @@
   <div class="grid3">
     <article class="card"><span class="tag live">AVAILABLE NOW</span><h3>1 · Share &amp; use free</h3>
       <p>Install the app, pick a share percentage, run agents. Credits offset any future paid use.</p></article>
-    <article class="card"><span class="tag">OPENS WITH CAPACITY</span><h3>2 · Rent monthly / yearly</h3>
+    <article class="card"><span class="tag next">OPENS WITH CAPACITY</span><h3>2 · Rent monthly / yearly</h3>
       <p>When the pool has headroom, rent a slice by the month or the year — no GPU purchase, no cloud egress.</p></article>
-    <article class="card"><span class="tag">ALWAYS AVAILABLE</span><h3>3 · On-prem licence</h3>
+    <article class="card"><span class="tag then">ALWAYS AVAILABLE</span><h3>3 · On-prem licence</h3>
       <p>Buy the software and run PASADHI only for your own organisation, inside your own network.</p></article>
   </div>
 </section>
@@ -66,18 +97,18 @@
         own model, with the data never leaving the building.</p>
       <ul><li>Runs on the shared pool or a single PC</li><li>Per-install device token</li>
         <li>Usage visible per department</li></ul></article>
-    <article class="card"><span class="tag">NEXT</span><h3>Cloud</h3>
+    <article class="card"><span class="tag next">NEXT</span><h3>Cloud</h3>
       <p>A hosted control plane for groups that do not want to run the coordinator themselves — same app, same
         quotas, managed for you.</p>
       <ul><li>Group id, join tokens, quotas</li><li>Monthly / yearly</li><li>Data residency selectable</li></ul></article>
-    <article class="card"><span class="tag">THEN</span><h3>VPS</h3>
+    <article class="card"><span class="tag then">THEN</span><h3>VPS</h3>
       <p>Slices of the pool sold as small virtual machines: a fixed number of cores, RAM and disk, billed by the
         month, good for services that need a box rather than a model.</p>
       <ul><li>Sized by measured capacity</li><li>Snapshot and migrate</li><li>Group-scoped networking</li></ul></article>
   </div>
 </section>
 
-<section class="wrap" id="pricing">
+<section class="pricing" id="pricing"><div class="wrap">
   <p class="eyebrow">Pricing</p>
   <h2>Pay per machine, or pay for the licence</h2>
   <p class="sub">Prices are per machine per month unless stated. A group is billed once, no matter how many
@@ -94,7 +125,7 @@
   <p class="note">On-prem means the software runs inside your network and never phones the public pool. One
     licence covers one group; departments inside it do not each need a licence. Enterprises can merge several
     group licences under one contract.</p>
-</section>
+</div></section>
 
 <section class="wrap" id="onprem">
   <p class="eyebrow">On-prem</p>
@@ -117,10 +148,10 @@
   <p class="sub">The app probes the machine, chooses a role by itself (coordinator, worker or client) and shows
     the share sliders with a live earnings estimate.</p>
   <div class="dl">
-    <a href="https://github.com/camponggogo/pasadhi/releases/latest"><b>Windows</b><span>.msi · x64</span></a>
-    <a href="https://github.com/camponggogo/pasadhi/releases/latest"><b>Linux</b><span>.deb · AppImage</span></a>
-    <a href="https://github.com/camponggogo/pasadhi/releases/latest"><b>macOS</b><span>.dmg · Apple silicon &amp; Intel</span></a>
-    <a href="https://github.com/camponggogo/pasadhi/releases/latest"><b>Android</b><span>.apk · foreground service</span></a>
+    <a href="https://github.com/camponggogo/pasadhi/releases/latest"><span class="os">🪟</span><b>Windows</b><span>.msi · x64</span></a>
+    <a href="https://github.com/camponggogo/pasadhi/releases/latest"><span class="os">🐧</span><b>Linux</b><span>.deb · AppImage</span></a>
+    <a href="https://github.com/camponggogo/pasadhi/releases/latest"><span class="os">🍎</span><b>macOS</b><span>.dmg · Apple silicon &amp; Intel</span></a>
+    <a href="https://github.com/camponggogo/pasadhi/releases/latest"><span class="os">🤖</span><b>Android</b><span>.apk · foreground service</span></a>
   </div>
   <p class="note">Builds are marked as they ship. Until a binary exists for your platform, the source runs with
     <code>python pasadhi/app/service.py</code>.</p>
