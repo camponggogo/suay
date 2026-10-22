@@ -3,6 +3,13 @@
 > Log การเปลี่ยนแปลงทุกครั้ง (ใหม่สุดอยู่บนสุด) · รูปแบบ 4 ฟิลด์ · เวลา Asia/Bangkok
 > วิธีทำงานกับไฟล์นี้: `.agents/skills/ai-update-log/SKILL.md`
 
+## เติมชั้นเชิงพาณิชย์ให้ PASADHI (ราคา/unit economics/sales kit)
+
+- **วิธีแก้ไข:** เขียน `pasadhi/commercial/pricing.py` คำนวณต้นทุนต่อเครื่อง/เดือน (ค่าเสื่อม ฿333 + ไฟ ฿138 + support ฿80 = ฿551), ราคาที่ margin 70% (฿1,838/เดือน, ฿22,052/ปี), เทียบคลาวด์ CPU/GPU ต่อ TFLOP และ fleet 10/50/200; เขียน `docs/BUSINESS.th.md` และ `docs/SALES_KIT.th.md` (one-pager, 10 สไลด์, discovery 12 ข้อ, objection 6 ข้อ, ใบเสนอราคา, SOW pilot) + เติมหัวข้อ Commercial ใน README
+- **วันเวลา:** 2026-10-22 15:29 (Asia/Bangkok)
+- **ผลของการแก้ไข:** ตัวเลขชี้ชัดว่า node ฿**0.016/TFLOP** ชนะคลาวด์ CPU (฿0.028, 1.8×) แต่แพ้ A100 (฿0.001, 17×) → ต้องขาย residency/ต้นทุนจม/งานเล็ก ไม่ใช่ “ถูกกว่า GPU”; ราคา Fleet ฿1,900/เครื่อง/ปี, Appliance ฿45,000/4 เครื่อง, Pilot ฿49,000 (เครดิตคืน), margin 70% ที่ 10/50/200 เครื่อง = ฿154k/฿772k/฿3.09M ต่อปี; commit `a75cec5`
+- **ไฟล์/หลักฐาน:** `pasadhi/{commercial/pricing.py,docs/{BUSINESS.th.md,SALES_KIT.th.md},commercial/results/{pricing.json,fig01_cost_per_tflop.png}}`, commit `a75cec5`
+
 ## เริ่มโปรเจกต์ใหม่ PASADHI (ปัสสัทธิ) — M0 baseline วัดจริง
 
 - **วิธีแก้ไข:** สร้าง repo ใหม่แยกใน `pasadhi/` (git init + commit `af492ca`), เขียน README/ARCHITECTURE/ROADMAP/GITHUB.md, kernel `core/matrix.py` (BLAS f32, tiled 128, int8 symmetric), runtime `core/layers.py` (multi-layer process + back-pressure, แก้ deadlock ของ sink และ sentinel), harness `bench/run.py` + `thread_worker.py`; วัดบน i7-8550U (4c/8t, AVX2, 8MB L3)
