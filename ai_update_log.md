@@ -3,6 +3,13 @@
 > Log การเปลี่ยนแปลงทุกครั้ง (ใหม่สุดอยู่บนสุด) · รูปแบบ 4 ฟิลด์ · เวลา Asia/Bangkok
 > วิธีทำงานกับไฟล์นี้: `.agents/skills/ai-update-log/SKILL.md`
 
+## เพิ่ม white paper PDF (solution ล้วน) + story timeline พร้อมภาพ isometric
+
+- **วิธีแก้ไข:** เขียน `pasadhi/paper/SOLUTION.md` (5 หน้า: abstract, ปัญหา, สถาปัตยกรรม 5 ชั้น, ตารางผลวัด, impact pricing, แผนฟลีต, roadmap, limits) + `scripts/build_solution_pdf.py` (Markdown→HTML→Edge→footer/เลขหน้าด้วย reportlab+pypdf); เขียน `scripts/build_story.py` สร้าง `story.html` + `th/story.html` 6 บท พร้อม SVG vignette เคลื่อนไหวต่อบท; เพิ่มปุ่มดาวน์โหลดในหน้าแรก/ไทย; deploy ด้วย `deploy_pasadhi_assets.py`
+- **วันเวลา:** 2026-10-23 02:30 (Asia/Bangkok)
+- **ผลของการแก้ไข:** live **/projects/pasadhi/download/PASADHI-solution.pdf** 271,006 bytes (5 หน้า) · **/story.html** 11,835 · **/th/story.html** 13,639 · หน้าแรก 13,483 · release `20261022T193008758094Z`; ทุก URL 200
+- **ไฟล์/หลักฐาน:** `pasadhi/paper/{SOLUTION.md,_build/solution.html}`, `landing-pasadhi/{story.html,th/story.html,download/PASADHI-solution.pdf}`, `scripts/{build_solution_pdf,build_story}.py`
+
 ## deploy หน้า isometric (pool + mesh) ขึ้นเว็บ + บันทึก image facts
 
 - **วิธีแก้ไข:** คัดลอก `pasadhi/web/anatomy/{pool,mesh}.html+png` → `landing-pasadhi/anatomy/`, เพิ่มส่วน “How it works” ในหน้า EN/TH, เขียน `deploy/deploy_pasadhi_assets.py` (SSH key เท่านั้น) แล้ว deploy; เขียน `report/IMAGE_FACTS.md` เก็บตัวเลข fig37–fig41 + หน้า proof ก่อนภาพถูกแทนที่
