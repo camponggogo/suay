@@ -3,6 +3,13 @@
 > Log การเปลี่ยนแปลงทุกครั้ง (ใหม่สุดอยู่บนสุด) · รูปแบบ 4 ฟิลด์ · เวลา Asia/Bangkok
 > วิธีทำงานกับไฟล์นี้: `.agents/skills/ai-update-log/SKILL.md`
 
+## เปลี่ยนภาพเป็น full-system isometric พร้อม % สีแดง
+
+- **วิธีแก้ไข:** เขียน `scripts/build_system_scene.py` + `pasadhi/web/anatomy/pasadhi-system.html` — วาง 4 platform บนพื้นเดียว (app ทอง → gateway ฟ้า → pool เขียว → storage ม่วง) มีสะพานเชื่อม, อุปกรณ์สำนักงานล้อมรอบส่งงานเข้า pool, การ์ดจอบน pool; ป้าย % สีแดง 6 จุด
+- **วันเวลา:** 2026-10-23 02:48 (Asia/Bangkok)
+- **ผลของการแก้ไข:** ภาพ `pasadhi-system.png` (1,360×1,000, 123 polygons, 12 badge strokes) · % ที่แสดง: devices **30 %**, prefix hit **88.7 %**, queue **96.5 %**, CPU **98 %**, GPU **42 %**, all layers; panel TEMPLATE มี 5 layer L1–L5
+- **ไฟล์/หลักฐาน:** `pasadhi/web/anatomy/{pasadhi-system.html,pasadhi-system.png}`, `scripts/build_system_scene.py`, `report/IMAGE_FACTS{,_KERNELS,_UI}.md`
+
 ## แก้ปัญหา “ยังไม่มี releases” — ทำ portable build จริง + workflow 4 OS
 
 - **วิธีแก้ไข:** ตรวจ API พบ `camponggogo/pasadhi` = **404** (repo ยังไม่มี จึงไม่มี release); สร้าง `PASADHI-0.1.0-win64-portable.zip` (ทดสอบรัน `service.py --once` ผ่าน), `PASADHI-0.1.0-source.zip`, `launcher.py`, และ `.github/workflows/release.yml` (windows/ubuntu/macos PyInstaller + android Briefcase + release job เมื่อ push tag `v*`); เปลี่ยนปุ่มดาวน์โหลดในหน้า EN/TH ให้ชี้ไฟล์ที่โฮสต์เอง ไม่ชี้ 404; deploy
