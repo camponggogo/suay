@@ -3,6 +3,13 @@
 > Log การเปลี่ยนแปลงทุกครั้ง (ใหม่สุดอยู่บนสุด) · รูปแบบ 4 ฟิลด์ · เวลา Asia/Bangkok
 > วิธีทำงานกับไฟล์นี้: `.agents/skills/ai-update-log/SKILL.md`
 
+## ทำ White paper เป็น PDF (20 หน้า)
+
+- **วิธีแก้ไข:** เขียน `paper/build_pdf.py` — Markdown → HTML พร้อม CSS สำหรับ A4 (ปก, สารบัญ, หัวข้อ, ตาราง, รูป) → พิมพ์ด้วย Edge headless (`--print-to-pdf`) → สองรอบเพื่อจับเลขหน้าเข้าสารบัญ → ประทับ footer/เลขหน้าด้วย reportlab + pypdf และใส่ metadata; อัปเดตหัว paper เป็น v1.1 · 2026-10-22 ให้ตรงกับหน้าปก
+- **วันเวลา:** 2026-10-22 11:40 (Asia/Bangkok)
+- **ผลของการแก้ไข:** ได้ `paper/SUAY-whitepaper.pdf` **20 หน้า 3.18 MB**, สารบัญ 9 หัวข้อมีเลขหน้าจริง (3,4,5,6,17,19,20,21,22), มีรูปครบ (14 ภาพ), footer ทุกหน้า “SUAY white paper · v1.1 · 22 October 2026” + n/m, metadata ครบ; ตรวจภาพหน้า 1/2/8/9/16/20 ด้วย PyMuPDF แล้ว
+- **ไฟล์/หลักฐาน:** `paper/build_pdf.py`, `paper/SUAY-whitepaper.pdf`, `paper/WHITEPAPER.md` (header v1.1), `paper/_build/`
+
 ## เปลี่ยนหน้า Research เป็น timeline + push + deploy web
 
 - **วิธีแก้ไข:** เขียน `landing/research.html` ใหม่เป็น log 16 รายการเรียงจากล่าสุดขึ้นบน (chip เขียว/เหลือง/เทา = กำไร/ล้มเหลว/โมเดล + ลิงก์ report ทุกตัว), แถบหัวระบุ White paper v1.1 · 2026-10-21; ตรวจว่า white paper บน GitHub เหมือน local ทุกไบต์ (24,398 chars); push ผ่าน GitHub Desktop จน remote = `8dfd391`; deploy ซ้ำด้วย `deploy_landing.py --apply`

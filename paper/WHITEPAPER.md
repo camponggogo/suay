@@ -1,6 +1,6 @@
 # Serving LLMs on an Office Fleet: Control-Plane Limits, Prefix Reuse and Expert Routing at 50–500 Machines
 
-**SUAY technical white paper · v1.0 · 2026-10-21**
+**SUAY technical white paper · v1.1 · 2026-10-22**
 Repo: `github.com/camponggogo/suay` (MIT) · Author: the SUAY project · Contact: issues on the repository
 
 ---
