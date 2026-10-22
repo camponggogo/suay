@@ -3,6 +3,13 @@
 > Log การเปลี่ยนแปลงทุกครั้ง (ใหม่สุดอยู่บนสุด) · รูปแบบ 4 ฟิลด์ · เวลา Asia/Bangkok
 > วิธีทำงานกับไฟล์นี้: `.agents/skills/ai-update-log/SKILL.md`
 
+## Full paper พื้นขาวทุกกราฟ + README ภาพ isometric และ Timeline research
+
+- **วิธีแก้ไข:** เพิ่ม `whiten()` ใน `scripts/build_paper_pdf.py` — ตรวจขอบภาพ (median luminance < 120) แล้วแปลงภาพพื้นเข้ม: พิกเซลสีพื้น (ต่างจากสีขอบ ≤ 40) → ขาว, พิกเซลเทา → กลับสี (ตัวอักษรขาว→ดำ, grid→เทาอ่อน), พิกเซลอิ่มสี → คงสีเดิม; เขียน `pasadhi/README.md` ใหม่: แทรกภาพ `web/anatomy/pasadhi-system-fig.png` + `pasadhi-install-fig.png`, ตาราง Papers พร้อมลิงก์โหลด 2 ฉบับ, ตาราง Research timeline 36 แถวเรียงใหม่สุดบน (2026-10-23 → 2026-10-20) และแก้ path คำสั่งให้ตรงโครงสร้าง repo (`bench/run.py`, `app/service.py`)
+- **วันเวลา:** 2026-10-23 03:13 (Asia/Bangkok)
+- **ผลของการแก้ไข:** full paper ภาพเข้ม 5 ใบ (fig5/6/7/8/9 พื้น (11,16,32)) กลายเป็นพื้นขาว ตรวจด้วย image recognition 3 หน้า: พื้นขาว ตัวอักษรอ่านได้ เส้นสีปกติ ไม่มี halo · ไฟล์ลด 7,637,957 → **7,504,286 B** ยัง 29 หน้า 46 กราฟ · deploy release `20261022T201327024128Z` · README 10,929 B
+- **ไฟล์/หลักฐาน:** `scripts/build_paper_pdf.py`, `pasadhi/README.md`, `landing-pasadhi/download/PASADHI-full-paper.pdf` (live 200)
+
 ## ขยาย white paper เป็นฉบับวิชาการ + full paper 46 กราฟ
 
 - **วิธีแก้ไข:** เขียน `SOLUTION.md` v1.1 ใหม่ทั้งฉบับ (problem statement เชิงคณิตศาสตร์, background, หลักการ 5 ข้อ, architecture, การติดตั้ง, ผลทดสอบ, price model, threats to validity) และสร้าง `SOLUTION_FULL.md` รวม 46 ภาพ/29 หน้า; เขียน `scripts/build_paper_pdf.py` (markdown → A4 PDF พร้อมภาพ) + `scripts/build_{system,install}_scene.py` + `scripts/build_paper_figures.py` (ภาพล้วน 2x แล้ว autocrop)

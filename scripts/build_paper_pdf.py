@@ -10,8 +10,10 @@ import io
 import re
 import subprocess
 from pathlib import Path
+from statistics import median
 
 import markdown
+from PIL import Image, ImageChops, ImageOps
 from pypdf import PdfReader, PdfWriter
 from reportlab.lib.units import mm
 from reportlab.pdfgen import canvas
@@ -51,8 +53,42 @@ COVERS = {
 }
 
 
-def inline_images(html: str) -> str:
-    """Rewrite relative image sources to absolute file URIs so headless Edge can load them."""
+def border_stats(path: Path) -> tuple[float, tuple[int, int, int]]:
+    """Median border luminance and colour, used to detect dark-background figures."""
+    im = Image.open(path).convert('RGB')
+    im.thumbnail((160, 160))
+    w, h = im.size
+    strips = (list(im.crop((0, 0, w, 2)).getdata()) + list(im.crop((0, h - 2, w, h)).getdata())
+              + list(im.crop((0, 0, 2, h)).getdata()) + list(im.crop((w - 2, 0, w, h)).getdata()))
+    lum = sorted(0.299 * r + 0.587 * g + 0.114 * b for r, g, b in strips)
+    rgb = tuple(int(median(pixel[channel] for pixel in strips)) for channel in range(3))
+    return lum[len(lum) // 2], rgb
+
+
+def whiten(path: Path, out: Path) -> None:
+    """Put a dark-background chart on white without changing its coloured lines.
+
+    Background-coloured pixels become white, grey pixels are inverted (white text becomes
+    black, the grey grid becomes light grey) and saturated pixels keep their colour.
+    """
+    im = Image.open(path).convert('RGB')
+    bg_colour = border_stats(path)[1]
+    background = Image.new('RGB', im.size, bg_colour)
+    diff = ImageChops.difference(im, background).convert('L')
+    bg_mask = diff.point(lambda value: 255 if value <= 40 else 0)
+    saturation = im.convert('HSV').split()[1]
+    coloured = saturation.point(lambda value: 255 if value >= 40 else 0)
+    inverted = ImageOps.invert(im)
+    kept = Image.composite(im, inverted, coloured)
+    result = Image.composite(Image.new('RGB', im.size, (255, 255, 255)), kept, bg_mask)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    result.save(out)
+
+
+def inline_images(html: str, build: Path) -> str:
+    """Rewrite relative image sources to absolute file URIs; whiten dark-background figures."""
+    whitened: list[str] = []
+
     def repl(match: re.Match[str]) -> str:
         src = match.group(1)
         if src.startswith(('http://', 'https://', 'file:')):
@@ -60,8 +96,21 @@ def inline_images(html: str) -> str:
         path = (ROOT / src).resolve()
         if not path.exists():
             raise SystemExit(f'missing figure: {src}')
-        return f'src="{path.as_uri()}"'
-    return re.sub(r'src="([^"]+)"', repl, html)
+        use = path
+        if path.suffix.lower() == '.png':
+            lum, _colour = border_stats(path)
+            if lum < 120:
+                candidate = build / 'white' / src.replace('/', '__')
+                if not candidate.exists() or candidate.stat().st_mtime < path.stat().st_mtime:
+                    whiten(path, candidate)
+                use = candidate
+                whitened.append(src)
+        return f'src="{use.as_uri()}"'
+
+    html = re.sub(r'src="([^"]+)"', repl, html)
+    if whitened:
+        print('whitened:', ', '.join(whitened))
+    return html
 
 
 def main() -> None:
@@ -82,7 +131,7 @@ def main() -> None:
     title = next(line[2:].strip() for line in lines if line.startswith('# '))
     body_md = '\n'.join(lines[1:])
     body_html = markdown.markdown(body_md, extensions=['tables', 'fenced_code', 'sane_lists'])
-    body_html = inline_images(body_html)
+    body_html = inline_images(body_html, BUILD)
 
     kicker, blurb = COVERS[args.kind]
     figures = body_html.count('<img')
