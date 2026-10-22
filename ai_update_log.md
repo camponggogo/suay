@@ -3,6 +3,13 @@
 > Log การเปลี่ยนแปลงทุกครั้ง (ใหม่สุดอยู่บนสุด) · รูปแบบ 4 ฟิลด์ · เวลา Asia/Bangkok
 > วิธีทำงานกับไฟล์นี้: `.agents/skills/ai-update-log/SKILL.md`
 
+## ออกแบบโลโก้สมอง–โครงข่ายนิวโรน 3 มิติ
+
+- **วิธีแก้ไข:** สร้าง 2 แบบด้วย Seedream 5.0 (แบบ glow พื้นน้ำเงินเข้ม / แบบ wireframe พื้นขาว) → ตรวจด้วย image recognition ว่าตรงโจทย์ (เงาสมอง + เส้นประสาท + 3D + ครบ 5 สี) → ตัดพื้นทำ transparent ด้วย skill `autoglm-remove-bg` (คัดลอกเป็น `scripts/remove_bg.py`): แบบขาว tolerance 45 ผ่านทันที · แบบเข้มลอง 3 รอบ (tolerance 45 → 60 → 75 + edge-to-edge) ตามขั้นของสกิล แล้วหยุดตามกติกา (2 รอบหลังผลคงที่) → ทดสอบย่อขนาด 360/220/120/64 px → เขียน `pasadhi/brand/preview.html`
+- **วันเวลา:** 2026-10-23 03:21 (Asia/Bangkok)
+- **ผลของการแก้ไข:** `logo-dark.png` 2048² (287,697 B) · `logo-light.png` 2048² (375,100 B) · `logo-light-transparent.png` 1415×1150 **สะอาด ใช้ได้ทุกพื้น** · `logo-dark-transparent-3.png` 1179×956 **ใช้เฉพาะพื้นเข้ม** (ขอบมืดบางค้าง — glow ไล่เฉดตัดพื้นสีเดียวไม่ได้ รายงานตามจริง) · ย่อได้ถึง 120 px ยังอ่านเป็นสมอง / 64 px เลือน
+- **ไฟล์/หลักฐาน:** `pasadhi/brand/{logo-dark,logo-light,logo-light-transparent,logo-dark-transparent-3}.png`, `pasadhi/brand/preview.html`, `scripts/remove_bg.py`
+
 ## Full paper พื้นขาวทุกกราฟ + README ภาพ isometric และ Timeline research
 
 - **วิธีแก้ไข:** เพิ่ม `whiten()` ใน `scripts/build_paper_pdf.py` — ตรวจขอบภาพ (median luminance < 120) แล้วแปลงภาพพื้นเข้ม: พิกเซลสีพื้น (ต่างจากสีขอบ ≤ 40) → ขาว, พิกเซลเทา → กลับสี (ตัวอักษรขาว→ดำ, grid→เทาอ่อน), พิกเซลอิ่มสี → คงสีเดิม; เขียน `pasadhi/README.md` ใหม่: แทรกภาพ `web/anatomy/pasadhi-system-fig.png` + `pasadhi-install-fig.png`, ตาราง Papers พร้อมลิงก์โหลด 2 ฉบับ, ตาราง Research timeline 36 แถวเรียงใหม่สุดบน (2026-10-23 → 2026-10-20) และแก้ path คำสั่งให้ตรงโครงสร้าง repo (`bench/run.py`, `app/service.py`)
