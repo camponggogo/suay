@@ -140,7 +140,8 @@ def build() -> str:
     for (x, y, w, d), label in rects:
         a = iso(x + 12, y + d + 30, Z + 30)
         S.append(f'<text x="{a[0]:.1f}" y="{a[1]:.1f}" font-family="Nunito, sans-serif" font-size="10.5" '
-                 f'font-weight="800" fill="#3f6154">{label}</text>')
+                 f'font-weight="800" fill="#3f6154" paint-order="stroke" stroke="#ffffff" '
+                 f'stroke-width="3" stroke-linejoin="round">{label}</text>')
 
     # red percentages
     S.append(badge(150, 130, Z + 40, '30% devices'))

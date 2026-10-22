@@ -3,6 +3,13 @@
 > Log การเปลี่ยนแปลงทุกครั้ง (ใหม่สุดอยู่บนสุด) · รูปแบบ 4 ฟิลด์ · เวลา Asia/Bangkok
 > วิธีทำงานกับไฟล์นี้: `.agents/skills/ai-update-log/SKILL.md`
 
+## ขยาย white paper เป็นฉบับวิชาการ + full paper 46 กราฟ
+
+- **วิธีแก้ไข:** เขียน `SOLUTION.md` v1.1 ใหม่ทั้งฉบับ (problem statement เชิงคณิตศาสตร์, background, หลักการ 5 ข้อ, architecture, การติดตั้ง, ผลทดสอบ, price model, threats to validity) และสร้าง `SOLUTION_FULL.md` รวม 46 ภาพ/29 หน้า; เขียน `scripts/build_paper_pdf.py` (markdown → A4 PDF พร้อมภาพ) + `scripts/build_{system,install}_scene.py` + `scripts/build_paper_figures.py` (ภาพล้วน 2x แล้ว autocrop)
+- **วันเวลา:** 2026-10-23 03:03 (Asia/Bangkok)
+- **ผลของการแก้ไข:** `PASADHI-solution.pdf` **8 หน้า 941,305 B** · `PASADHI-full-paper.pdf` **29 หน้า 7,637,957 B / 46 กราฟ** · deploy release `20261022T200212076736Z` (ไฟล์ 21) · หน้าเว็บ EN/TH มีการ์ดโหลด 3 ใบ · หน้า anatomy ใหม่ `pasadhi-system.html` (23,201 B) และ `pasadhi-install.html` (14,280 B)
+- **ไฟล์/หลักฐาน:** `pasadhi/paper/{SOLUTION.md,SOLUTION_FULL.md}`, `scripts/build_paper_pdf.py`, `report/IMAGE_FACTS_MODELS.md` (บันทึก fig01–fig05 ก่อนถูกแทนที่)
+
 ## เปลี่ยนภาพเป็น full-system isometric พร้อม % สีแดง
 
 - **วิธีแก้ไข:** เขียน `scripts/build_system_scene.py` + `pasadhi/web/anatomy/pasadhi-system.html` — วาง 4 platform บนพื้นเดียว (app ทอง → gateway ฟ้า → pool เขียว → storage ม่วง) มีสะพานเชื่อม, อุปกรณ์สำนักงานล้อมรอบส่งงานเข้า pool, การ์ดจอบน pool; ป้าย % สีแดง 6 จุด

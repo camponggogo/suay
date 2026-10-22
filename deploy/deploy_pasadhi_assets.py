@@ -26,8 +26,11 @@ BASE = '/opt/pasadhi'
 FILES = (
     'index.html', 'th/index.html', 'style.css', 'sitemap.xml', 'robots.txt',
     'story.html', 'th/story.html', 'download/PASADHI-solution.pdf',
+    'download/PASADHI-full-paper.pdf',
     'download/PASADHI-0.1.0-win64-portable.zip', 'download/PASADHI-0.1.0-source.zip',
     'anatomy/pool.html', 'anatomy/mesh.html', 'anatomy/pool.png', 'anatomy/mesh.png',
+    'anatomy/pasadhi-system.html', 'anatomy/pasadhi-system.png', 'anatomy/pasadhi-system-fig.png',
+    'anatomy/pasadhi-install.html', 'anatomy/pasadhi-install.png', 'anatomy/pasadhi-install-fig.png',
 )
 
 
