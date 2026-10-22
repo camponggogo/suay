@@ -46,3 +46,7 @@ deploy/.github_token
 # generated pdf build artefacts
 paper/_build/
 
+
+# PASADHI is its own repository (github.com/camponggogo/pasadhi)
+pasadhi/
+

@@ -3,6 +3,13 @@
 > Log การเปลี่ยนแปลงทุกครั้ง (ใหม่สุดอยู่บนสุด) · รูปแบบ 4 ฟิลด์ · เวลา Asia/Bangkok
 > วิธีทำงานกับไฟล์นี้: `.agents/skills/ai-update-log/SKILL.md`
 
+## เริ่มโปรเจกต์ใหม่ PASADHI (ปัสสัทธิ) — M0 baseline วัดจริง
+
+- **วิธีแก้ไข:** สร้าง repo ใหม่แยกใน `pasadhi/` (git init + commit `af492ca`), เขียน README/ARCHITECTURE/ROADMAP/GITHUB.md, kernel `core/matrix.py` (BLAS f32, tiled 128, int8 symmetric), runtime `core/layers.py` (multi-layer process + back-pressure, แก้ deadlock ของ sink และ sentinel), harness `bench/run.py` + `thread_worker.py`; วัดบน i7-8550U (4c/8t, AVX2, 8MB L3)
+- **วันเวลา:** 2026-10-22 15:25 (Asia/Bangkok)
+- **ผลของการแก้ไข:** f32 BLAS **58–74 GFLOP/s** (เป็นพื้นฐาน), tiled 7–11 และ int8 (numpy) 1.2 GFLOP/s **ช้ากว่า** → ต้องเขียน C/AVX2; thread scaling 38/59/**83**/78 ที่ 1/2/4/8; pipeline แพ้ single loop 0.26–0.55× เพราะ pickle 256KB ต่อ hop → M2 shared memory; สร้าง fig01 พื้นขาว 300dpi; repo พร้อม push แต่สร้าง repo GitHub ไม่ได้เพราะไม่มี credential
+- **ไฟล์/หลักฐาน:** `pasadhi/{README.md,docs/{ARCHITECTURE,ROADMAP,GITHUB}.md,core/{matrix,layers}.py,bench/run.py,bench/results/{summary.json,fig01_pasadhi_kernels.png}}`, commit `af492ca`
+
 ## ทำ White paper เป็น PDF (20 หน้า)
 
 - **วิธีแก้ไข:** เขียน `paper/build_pdf.py` — Markdown → HTML พร้อม CSS สำหรับ A4 (ปก, สารบัญ, หัวข้อ, ตาราง, รูป) → พิมพ์ด้วย Edge headless (`--print-to-pdf`) → สองรอบเพื่อจับเลขหน้าเข้าสารบัญ → ประทับ footer/เลขหน้าด้วย reportlab + pypdf และใส่ metadata; อัปเดตหัว paper เป็น v1.1 · 2026-10-22 ให้ตรงกับหน้าปก
