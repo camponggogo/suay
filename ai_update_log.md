@@ -3,6 +3,13 @@
 > Log การเปลี่ยนแปลงทุกครั้ง (ใหม่สุดอยู่บนสุด) · รูปแบบ 4 ฟิลด์ · เวลา Asia/Bangkok
 > วิธีทำงานกับไฟล์นี้: `.agents/skills/ai-update-log/SKILL.md`
 
+## Group worker: 100–200 เครื่องใน LAN เดียว ภายใต้ group id
+
+- **วิธีแก้ไข:** เขียน `pasadhi/app/group.py` (Group, join token, utilisation รายเครื่อง, usable=min(share,1−util), เศรษฐศาสตร์ 3 โหมด) + `bench/group_figure.py`; เขียน `docs/GROUP.th.md` + M2.7 ใน roadmap + README
+- **วันเวลา:** 2026-10-22 18:57 (Asia/Bangkok)
+- **ผลของการแก้ไข:** 150 เครื่อง (120 desktop/20 server/10 notebook) แบ่ง 30% = **3,564 GFLOP/s**, 35,100 node-hours/เดือน; **Internal −฿149,745 · Shared +฿175,032 · Hybrid −฿3,885 (เกือบเท่าทุน)** → ขายเป็น “ใช้ฟรีเมื่อปล่อยแชร์ 30%” ได้; controller เลือกใน LAN, งาน internal ทำงานได้แม้ WAN ล่ม; commit `39d9ea9`
+- **ไฟล์/หลักฐาน:** `pasadhi/{app/group.py,bench/group_figure.py,docs/GROUP.th.md,bench/results/{group_model.json,fig07_group.png}}`
+
 ## วัดผลกระทบของแต่ละทรัพยากร (% → throughput)
 
 - **วิธีแก้ไข:** เขียน `pasadhi/bench/resource_impact.py` วัด CPU duty cycle (10–100%), RAM working set (16–1024 MB), disk (write/read/4K IOPS), loopback network ตาม payload, GPU จากสเปก; เขียน `docs/RESOURCE_IMPACT.th.md` + fig06 + น้ำหนัก impact
