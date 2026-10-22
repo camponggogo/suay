@@ -3,6 +3,13 @@
 > Log การเปลี่ยนแปลงทุกครั้ง (ใหม่สุดอยู่บนสุด) · รูปแบบ 4 ฟิลด์ · เวลา Asia/Bangkok
 > วิธีทำงานกับไฟล์นี้: `.agents/skills/ai-update-log/SKILL.md`
 
+## วัดผลกระทบของแต่ละทรัพยากร (% → throughput)
+
+- **วิธีแก้ไข:** เขียน `pasadhi/bench/resource_impact.py` วัด CPU duty cycle (10–100%), RAM working set (16–1024 MB), disk (write/read/4K IOPS), loopback network ตาม payload, GPU จากสเปก; เขียน `docs/RESOURCE_IMPACT.th.md` + fig06 + น้ำหนัก impact
+- **วันเวลา:** 2026-10-22 18:51 (Asia/Bangkok)
+- **ผลของการแก้ไข:** CPU 10%→3.76, 50%→25.37, **90%→48.72** GFLOP/s แต่ **100%→32.35 (ช้ากว่า เพราะ thermal 15W)**; elasticity ที่ 35% = **+48.1%/10pp**; RAM ไม่เพิ่มความเร็ว (90–98 GFLOP/s ทุกขนาด) แต่กำหนดขนาดงาน; disk 0.9 s/GB (cold start เท่านั้น); net 1KB→12,327 jobs/s; น้ำหนัก impact: **CPU 98.0%** (ไม่มี GPU) หรือ **CPU 56.6% / GPU 42.2%** ถ้ามี GTX 1050
+- **ไฟล์/หลักฐาน:** `pasadhi/{bench/resource_impact.py,bench/resource_impact_figure.py,docs/RESOURCE_IMPACT.th.md,bench/results/{resource_impact.json,fig06_resource_impact.png}}`, commit `2c2a371`
+
 ## PASADHI App: service เดียว 3 role + สไลเดอร์ทรัพยากร + token + autostart
 
 - **วิธีแก้ไข:** สร้าง `pasadhi/app/` — `probe.py` (สเปกเครื่องข้าม OS), `roles.py` (ให้คะแนน→coordinator/worker/client พร้อมเหตุผล), `budget.py` (5 สไลเดอร์→เพดานจริง→บาท/ชม.), `identity.py` (token ต่อเครื่อง + rotate + HMAC), `service.py` (HTTP 127.0.0.1:8765 + worker duty-cycle ตามเพดาน CPU), `ui.py` (หน้าตั้งค่าภาษาไทย), `autostart.py` (Task Scheduler XML / systemd / launchd / Android FGS), `install.py`; เขียน `docs/APP_SERVICE.th.md` + README
