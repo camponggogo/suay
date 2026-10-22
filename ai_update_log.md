@@ -3,6 +3,13 @@
 > Log การเปลี่ยนแปลงทุกครั้ง (ใหม่สุดอยู่บนสุด) · รูปแบบ 4 ฟิลด์ · เวลา Asia/Bangkok
 > วิธีทำงานกับไฟล์นี้: `.agents/skills/ai-update-log/SKILL.md`
 
+## PASADHI App: service เดียว 3 role + สไลเดอร์ทรัพยากร + token + autostart
+
+- **วิธีแก้ไข:** สร้าง `pasadhi/app/` — `probe.py` (สเปกเครื่องข้าม OS), `roles.py` (ให้คะแนน→coordinator/worker/client พร้อมเหตุผล), `budget.py` (5 สไลเดอร์→เพดานจริง→บาท/ชม.), `identity.py` (token ต่อเครื่อง + rotate + HMAC), `service.py` (HTTP 127.0.0.1:8765 + worker duty-cycle ตามเพดาน CPU), `ui.py` (หน้าตั้งค่าภาษาไทย), `autostart.py` (Task Scheduler XML / systemd / launchd / Android FGS), `install.py`; เขียน `docs/APP_SERVICE.th.md` + README
+- **วันเวลา:** 2026-10-22 18:32 (Asia/Bangkok)
+- **ผลของการแก้ไข:** probe 210.8 ms, **role=worker score 18.2** (อธิบายเหตุผลรายบรรทัด), ตั้ง CPU 35%/RAM 20% → **฿1,189/เดือน** (จาก ฿674 ที่ค่าเริ่มต้น), token `psd_…` + rotate ได้, autostart สร้าง XML/snippet สำเร็จ, ภาพหน้าจอ UI ที่ `app/ui-screenshot.png`; commit `db19f33`
+- **ไฟล์/หลักฐาน:** `pasadhi/app/{probe,roles,budget,identity,service,ui,autostart,install}.py`, `pasadhi/docs/APP_SERVICE.th.md`, `pasadhi/app/ui-screenshot.png`
+
 ## ออกแบบ public + satellite/interplanetary (ความหน่วงแสงเป็นเพดาน)
 
 - **วิธีแก้ไข:** เขียน `pasadhi/core/orbit.py` (link budget fibre/LEO/GEO/Moon/Mars, sharded-GEMM efficiency, batch efficiency, min job ที่ 90%) + `bench/orbit_model.py`; เขียน `docs/OPEN_NETWORK.th.md` (public participation, redundant 2× + spot-check 5%, DTN store-and-forward, deadline scheduling, M6/M7); อัปเดต README/ROADMAP
