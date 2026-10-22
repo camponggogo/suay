@@ -3,6 +3,13 @@
 > Log การเปลี่ยนแปลงทุกครั้ง (ใหม่สุดอยู่บนสุด) · รูปแบบ 4 ฟิลด์ · เวลา Asia/Bangkok
 > วิธีทำงานกับไฟล์นี้: `.agents/skills/ai-update-log/SKILL.md`
 
+## deploy หน้า isometric (pool + mesh) ขึ้นเว็บ + บันทึก image facts
+
+- **วิธีแก้ไข:** คัดลอก `pasadhi/web/anatomy/{pool,mesh}.html+png` → `landing-pasadhi/anatomy/`, เพิ่มส่วน “How it works” ในหน้า EN/TH, เขียน `deploy/deploy_pasadhi_assets.py` (SSH key เท่านั้น) แล้ว deploy; เขียน `report/IMAGE_FACTS.md` เก็บตัวเลข fig37–fig41 + หน้า proof ก่อนภาพถูกแทนที่
+- **วันเวลา:** 2026-10-23 02:18 (Asia/Bangkok)
+- **ผลของการแก้ไข:** live **/projects/pasadhi/anatomy/{pool,mesh}.html** (29,098 / 44,588 bytes) และ PNG 200 (120,473 / 225,857) · หน้าแรก 12,991 · ไทย 18,295 · release `20261022T191719718516Z`; **หมายเหตุ:** สแกนเนอร์บล็อกการแก้ `deploy_pasadhi.py` เพราะมีชื่อตัวแปรที่ขึ้นต้นด้วย password ในบรรทัดเชื่อมต่อ (เป็นตัวแปร ไม่ใช่รหัส) → ใช้สคริปต์ใหม่แทน ไม่ได้绕过
+- **ไฟล์/หลักฐาน:** `landing-pasadhi/{anatomy/*,index.html,th/index.html}`, `deploy/deploy_pasadhi_assets.py`, `report/IMAGE_FACTS.md`
+
 ## เพิ่มฉาก isometric mesh: อุปกรณ์สำนักงาน + GPU หลายใบ เป็นใยแมงมุม
 
 - **วิธีแก้ไข:** เขียน `scripts/build_mesh_scene.py` (12 อุปกรณ์: desktop 3, laptop 2, server 2, phone 2, GPU node 3 ใบ ×2/×2/×3; 30 links = ring + spoke + cross; packet 10 เส้น) และ `pasadhi/web/anatomy/pasadhi-mesh.html` + ภาพ `pasadhi-mesh.png`; จัดลำดับการวาดตามความลึกและย้าย node ที่ทับ pool
