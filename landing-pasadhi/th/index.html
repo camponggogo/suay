@@ -144,13 +144,14 @@
   <h2>แอปเดียว Windows, Linux, macOS, Android</h2>
   <p class="sub">แอปจะตรวจสเปกเครื่อง เลือก role เอง (coordinator / worker / client) และแสดงสไลเดอร์แชร์พร้อมรายได้ประมาณการ</p>
   <div class="dl">
-    <a href="../download/PASADHI-solution.pdf"><span class="os">📄</span><b>White paper</b><span>PDF · 5 หน้า · เฉพาะ solution</span></a>
-    <a href="https://github.com/camponggogo/pasadhi/releases/latest"><span class="os">🪟</span><b>Windows</b><span>.msi · x64</span></a>
-    <a href="https://github.com/camponggogo/pasadhi/releases/latest"><span class="os">🐧</span><b>Linux</b><span>.deb · AppImage</span></a>
-    <a href="https://github.com/camponggogo/pasadhi/releases/latest"><span class="os">🍎</span><b>macOS</b><span>.dmg · Apple silicon &amp; Intel</span></a>
-    <a href="https://github.com/camponggogo/pasadhi/releases/latest"><span class="os">🤖</span><b>Android</b><span>.apk · foreground service</span></a>
+    <a href="../download/PASADHI-0.1.0-win64-portable.zip"><span class="os">🪟</span><b>Windows</b><span>0.1.0 portable · 86 KB</span></a>
+    <a href="../download/PASADHI-0.1.0-source.zip"><span class="os">📦</span><b>Source</b><span>รันได้บน Linux &amp; macOS</span></a>
+    <a href="../download/PASADHI-0.1.0-source.zip"><span class="os">🍎</span><b>macOS</b><span>จากซอร์ส · python3</span></a>
+    <a href="../download/PASADHI-0.1.0-source.zip"><span class="os">🤖</span><b>Android</b><span>Briefcase build ใน CI</span></a>
   </div>
-  <p class="note">ปุ่มจะเปิดใช้เมื่อ build พร้อม — ระหว่างนี้รันจากซอร์สได้ด้วย <code>python pasadhi/app/service.py</code></p>
+  <p class="note">Windows portable ใช้ได้วันนี้ (Python 3.10+) · Linux/macOS รันจากซอร์สด้วย
+    <code>python pasadhi/app/service.py</code> · ตัวติดตั้งที่เซ็นชื่อและ APK ผลิตโดย workflow <code>build</code>
+    ซึ่งจะทำงานเมื่อ repo ถูกเผยแพร่และ push tag <code>v*</code> — จึงยังไม่มี GitHub release ในตอนนี้</p>
   <div class="dl" style="grid-template-columns:1fr 1fr;margin-top:26px">
     <a href="../download/PASADHI-solution.pdf"><b>ดาวน์โหลด white paper</b><span>solution ที่วัดจริง · 5 หน้า · PDF</span></a>
     <a href="../story.html"><b>อ่านเรื่องราวการสร้าง</b><span>หกการวัด หกภาพ</span></a>

@@ -159,14 +159,15 @@
   <p class="sub">The app probes the machine, chooses a role by itself (coordinator, worker or client) and shows
     the share sliders with a live earnings estimate.</p>
   <div class="dl">
-    <a href="./download/PASADHI-solution.pdf"><span class="os">📄</span><b>White paper</b><span>PDF · 5 pages · solution only</span></a>
-    <a href="https://github.com/camponggogo/pasadhi/releases/latest"><span class="os">🪟</span><b>Windows</b><span>.msi · x64</span></a>
-    <a href="https://github.com/camponggogo/pasadhi/releases/latest"><span class="os">🐧</span><b>Linux</b><span>.deb · AppImage</span></a>
-    <a href="https://github.com/camponggogo/pasadhi/releases/latest"><span class="os">🍎</span><b>macOS</b><span>.dmg · Apple silicon &amp; Intel</span></a>
-    <a href="https://github.com/camponggogo/pasadhi/releases/latest"><span class="os">🤖</span><b>Android</b><span>.apk · foreground service</span></a>
+    <a href="./download/PASADHI-0.1.0-win64-portable.zip"><span class="os">🪟</span><b>Windows</b><span>0.1.0 portable · 86 KB</span></a>
+    <a href="./download/PASADHI-0.1.0-source.zip"><span class="os">📦</span><b>Source</b><span>runs on Linux &amp; macOS</span></a>
+    <a href="./download/PASADHI-0.1.0-source.zip"><span class="os">🍎</span><b>macOS</b><span>from source · python3</span></a>
+    <a href="./download/PASADHI-0.1.0-source.zip"><span class="os">🤖</span><b>Android</b><span>Briefcase build in CI</span></a>
   </div>
-  <p class="note">Builds are marked as they ship. Until a binary exists for your platform, the source runs with
-    <code>python pasadhi/app/service.py</code>.</p>
+  <p class="note">Windows portable runs today (Python 3.10+). Linux and macOS run from source with
+    <code>python pasadhi/app/service.py</code>. Signed installers and the Android APK are produced by the
+    <code>build</code> workflow — it fires when the repository is published and a <code>v*</code> tag is pushed, so
+    GitHub releases are pending until then.</p>
   <div class="dl" style="grid-template-columns:1fr 1fr;margin-top:26px">
     <a href="./download/PASADHI-solution.pdf"><b>Download the white paper</b><span>the solution, measured · 5 pages · PDF</span></a>
     <a href="./story.html"><b>Read the build story</b><span>six measurements, six pictures</span></a>
