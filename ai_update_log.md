@@ -3,6 +3,13 @@
 > Log การเปลี่ยนแปลงทุกครั้ง (ใหม่สุดอยู่บนสุด) · รูปแบบ 4 ฟิลด์ · เวลา Asia/Bangkok
 > วิธีทำงานกับไฟล์นี้: `.agents/skills/ai-update-log/SKILL.md`
 
+## โมเดล token economy (layer 10/40/50 + ส่วนลดจาก credit + reserve 10%)
+
+- **วิธีแก้ไข:** เขียน `pasadhi/commercial/token_model.py` — layer Free 10% / Standard 40% / Premium 50%, credit ฿2.5/ชม. เพดาน 50% ของบิล, reserve 10% ของกำไร (1 PSD = ฿1), opex ฿160k/เดือน; เขียน `docs/TOKEN_ECONOMY.th.md` + M4.5 ใน roadmap; **แก้ราคาใน BUSINESS/SALES_KIT** จาก ฿1,900/ปี → ฿1,490/เดือน (รายปี ฿15,900) เพราะหน่วยเดิมผิด 12 เท่า
+- **วันเวลา:** 2026-10-22 16:02 (Asia/Bangkok)
+- **ผลของการแก้ไข:** 1,450 เครื่อง → รายได้ **฿3.39M/เดือน**, credit ฿0.39M (11.5%), กำไร **฿2.04M (68.1%)**, reserve ฿204k; stress (ทุกเครื่องช่วย 720 ชม.) → ติดเพดาน 50% แต่ยังได้ margin **43.5%**; boot cost **฿0.0017 = 0.08% ของราคาหนึ่งชั่วโมง** → ยืนยันข้ออ้าง “ค่าเปิดเครื่องแทบเป็นศูนย์”
+- **ไฟล์/หลักฐาน:** `pasadhi/{commercial/token_model.py,docs/TOKEN_ECONOMY.th.md,commercial/results/{token_model.json,fig04_token_economy.png}}`, commit `8f06336`
+
 ## เพิ่ม heterogeneous fleet ตั้งแต่ GTX 1050 ถึง A100
 
 - **วิธีแก้ไข:** เขียน `pasadhi/core/hetero.py` (5 class: 1050/T4/3060/4090/A100, policy best_fit/fastest/worst_fit, list scheduler ที่มี VRAM constraint, per-class utilisation/finish) และ `bench/hetero_model.py` รัน 1,450 การ์ด × 4,000 งาน × 2 scenario; เขียน `docs/HETERO_FLEET.md` + M2.6 ใน roadmap + README
