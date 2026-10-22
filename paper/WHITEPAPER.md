@@ -190,7 +190,7 @@ At 2 000 tokens the gain is 40×; at 50 % reuse the median does not move.
 |---|---:|
 | clear | 100 % |
 | ambiguous | 100 % |
-| adversarial (`สัญญาณ NMR` contains `สัญญา`) | 50.75 % |
+| adversarial (a chemistry phrase whose opening characters spell the legal keyword for "contract") | 50.75 % |
 | **overall** | **90.15 %** |
 
 Routing cost 31.5 µs (p50). A confidence gate at 0.1 covers 65.2 % of traffic at 100 % precision.

@@ -102,7 +102,8 @@ At 50 % reuse the median did not move; p95 never moved. **The cache fixes the me
 
 A router that reads the question *and the document the user attached* sends legal work to a legal expert and
 chemistry to a chemistry expert. On 6 000 labelled queries it reached **90.15 %** accuracy (100 % on clear and
-ambiguous questions, **50.75 %** on adversarial substring traps such as "สัญญาณ NMR" containing "สัญญา"), in
+ambiguous questions, **50.75 %** on adversarial substring traps such as a chemistry phrase that opens with
+the legal word for "contract"), in
 **31.5 µs**.
 
 The capacity arithmetic then favoured specialisation: a dense 8B needs 15 machines for 0.06 req/s; a mixture of
