@@ -3,34 +3,32 @@
 <title>PASADHI — how it was built</title>
 <meta name="description" content="Six measured steps from a 50-machine test bed to a mesh of offices, GPUs and groups.">
 <link rel="canonical" href="https://pasadhi.tech/">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap">
 <style>
 :root{--paper:#fbf9f3;--ink:#14302a;--muted:#5c7168;--line:#e6e1d5;--brand:#159a72;--brand-d:#0f6a4e;--sun:#ffd166}
 *{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.7 "Nunito","Segoe UI",system-ui,sans-serif}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.7 "Nunito","TH Sarabun New", "Noto Sans","TH Sarabun New","Noto Sans",sans-serif}
 .wrap{width:min(1080px,92%);margin:0 auto;padding:26px 0 60px}
 header{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:14px}
-.brand{font:800 22px "Nunito",sans-serif;color:var(--brand-d);text-decoration:none}
+.brand{font:800 22px "Nunito","TH Sarabun New","Noto Sans","DejaVu Sans",sans-serif;color:var(--brand-d);text-decoration:none}
 header nav{display:flex;gap:18px;font-size:13.5px;font-weight:700}
 header a{color:#3d5a51;text-decoration:none}
 header a:hover{color:var(--brand)}
 .hero{padding:48px 0 26px;max-width:760px}
 .eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brand-d);font-weight:800}
-h1{font:800 clamp(32px,4.4vw,52px)/1.1 "Nunito",sans-serif;letter-spacing:-.03em;margin:12px 0 14px}
+h1{font:800 clamp(32px,4.4vw,52px)/1.1 "Nunito","TH Sarabun New","Noto Sans","DejaVu Sans",sans-serif;letter-spacing:-.03em;margin:12px 0 14px}
 h1 em{font-style:normal;color:var(--brand)}
 .lead{color:#3d5a51;font-size:17px}
 .tl{position:relative;margin-top:30px}
 .tl:before{content:"";position:absolute;left:52px;top:10px;bottom:10px;width:2px;background:#dfeee6}
 .chapter{display:grid;grid-template-columns:96px 200px 1fr;gap:22px;padding:22px 0;border-bottom:1px dashed #e4efe9;align-items:start}
 .chapter:last-child{border-bottom:0}
-.when{font:700 12px "Nunito",sans-serif;color:var(--muted);padding-top:8px}
+.when{font:700 12px "Nunito","TH Sarabun New","Noto Sans","DejaVu Sans",sans-serif;color:var(--muted);padding-top:8px}
 .dot{position:relative}
 .dot:before{content:"";position:absolute;left:-31px;top:10px;width:11px;height:11px;border-radius:50%;
   background:var(--brand);box-shadow:0 0 0 5px #e8f7f0}
-.body h2{font:800 22px/1.25 "Nunito",sans-serif;margin:0 0 6px}
+.body h2{font:800 22px/1.25 "Nunito","TH Sarabun New","Noto Sans","DejaVu Sans",sans-serif;margin:0 0 6px}
 .body p{color:#42604f;margin:0 0 10px;font-size:15px}
-.metric{display:inline-block;background:#e8f7f0;color:var(--brand-d);font:800 12.5px "Nunito",sans-serif;
+.metric{display:inline-block;background:#e8f7f0;color:var(--brand-d);font:800 12.5px "Nunito","TH Sarabun New","Noto Sans","DejaVu Sans",sans-serif;
   padding:6px 12px;border-radius:999px}
 .vig{width:100%;max-width:190px;height:auto;display:block;margin:6px 0 0}
 .vig .pulse{animation:pulse 2s ease-in-out infinite}
@@ -53,9 +51,12 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;color:v
 @media(max-width:860px){.chapter{grid-template-columns:74px 1fr}.vig-wrap{grid-column:2;max-width:220px}.body{grid-column:2}}
 @media(max-width:760px){.tl:before{left:8px}.chapter{grid-template-columns:1fr;gap:6px;padding-left:26px}
   .dot:before{left:-26px}.two{grid-template-columns:1fr}}
+.brand{display:inline-flex;align-items:center;gap:10px}.brand-logo{width:74px;height:60px;object-fit:contain;flex-shrink:0}
 </style>
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="./theme.css">
 </head><body><div class="wrap">
-<header><a class="brand" href="">PASADHI</a>
+<header><a class="brand" href=""><img class="brand-logo" src="./brand/logo-light-transparent.png" alt="" width="74" height="60">PASADHI</a>
   <nav><a href="#how">How it works</a><a href="#pricing">Pricing</a>
   <a href="#download">Download</a><a href="th/story.html">ไทย</a></nav></header>
 <div class="hero"><p class="eyebrow">The build log, told as a story</p><h1>Six measurements that turned<br><em>a room of PCs into a pool</em></h1><p class="lead">Every step below changed the architecture because a number said so. The failed ideas are kept in the repository, because they are the part that saves the next team a week.</p></div>
@@ -164,4 +165,5 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;color:v
   <a href="anatomy/mesh.html"><img src="anatomy/mesh.png" alt="mesh"><b>See the mesh move (isometric)</b></a>
 </div>
 <footer>© 2026 PASADHI contributors · MIT for the open core · <a href="download/PASADHI-solution.pdf">Solution paper (PDF)</a></footer>
-</div></body></html>
+</div><script src="./motion.js" defer></script>
+</body></html>

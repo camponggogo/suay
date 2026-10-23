@@ -17,6 +17,8 @@ from PIL import Image, ImageChops, ImageOps
 from pypdf import PdfReader, PdfWriter
 from reportlab.lib.units import mm
 from reportlab.pdfgen import canvas
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 
 ROOT = Path(__file__).resolve().parents[1]
 BUILD = ROOT / 'pasadhi' / 'paper' / '_build'
@@ -24,8 +26,8 @@ EDGE = Path(r'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe')
 
 CSS = """
 @page { size: A4; margin: 18mm 17mm 20mm 17mm; }
-body { font-family: "Charter", Georgia, "Times New Roman", serif; font-size: 10.2pt; line-height: 1.55; color: #14302a; }
-h1, h2, h3 { font-family: "Segoe UI", Arial, sans-serif; color: #0f4f3c; }
+body { font-family: "Noto Serif", "TH Sarabun New", "DejaVu Sans", serif; font-size: 10.2pt; line-height: 1.55; color: #14302a; }
+h1, h2, h3 { font-family: "Noto Sans", "TH Sarabun New", "DejaVu Sans", sans-serif; color: #0f4f3c; }
 h1 { font-size: 23pt; line-height: 1.14; margin: 0 0 5mm; letter-spacing: -0.01em; }
 h2 { font-size: 13.5pt; margin: 7mm 0 2.6mm; break-after: avoid; }
 h3 { font-size: 11pt; margin: 5mm 0 1.8mm; break-after: avoid; }
@@ -33,19 +35,33 @@ p { margin: 0 0 2.8mm; text-align: justify; }
 img { display: block; width: 100%; height: auto; margin: 2mm 0 1mm; border: 0.25mm solid #e2e9e5; border-radius: 1.2mm; }
 p > img + em, p em { color: #4a675c; }
 table { width: 100%; border-collapse: collapse; font-size: 8.6pt; margin: 2.5mm 0 4mm; break-inside: avoid; }
+.installation-steps { table-layout: fixed; }
+.installation-steps th:first-child, .installation-steps td:first-child { width: 19%; white-space: nowrap; }
+.installation-steps th:nth-child(2) { width: 27%; }
+.installation-steps th:nth-child(3) { width: 18%; }
+.installation-steps th:nth-child(4) { width: 20%; }
+.installation-steps th:nth-child(5) { width: 16%; }
+.installation-steps td { overflow-wrap: anywhere; }
 th { background: #e9f5ef; text-align: left; }
 th, td { border: 0.25mm solid #cfded6; padding: 1.5mm 1.9mm; vertical-align: top; }
-code { font-family: Consolas, monospace; font-size: 8.8pt; background: #f2f6f4; padding: 0.2mm 0.9mm; }
+code { font-family: "Noto Sans Mono", "DejaVu Sans", monospace; font-size: 8.8pt; background: #f2f6f4; padding: 0.2mm 0.9mm; }
 pre { background: #f5f9f7; border: 0.3mm solid #d9e7e0; border-radius: 1.4mm; padding: 3.4mm; break-inside: avoid; }
 pre code { font-size: 8.4pt; line-height: 1.42; background: none; }
 ul, ol { margin: 0 0 2.8mm 0; padding-left: 6mm; }
 li { margin-bottom: 1.2mm; }
 .cover { height: 246mm; display: flex; flex-direction: column; justify-content: space-between; break-after: page; }
-.cover .kicker { font: 700 9pt "Segoe UI", sans-serif; letter-spacing: 0.18em; color: #159a72; }
+.cover-logo { width: 62mm; height: auto; margin: 0 0 10mm; border: 0; border-radius: 0; }
+.cover .kicker { font: 700 9pt "Noto Sans", "DejaVu Sans", sans-serif; letter-spacing: 0.18em; color: #159a72; }
 .cover .rule { width: 44mm; height: 1.3mm; background: #159a72; margin: 5mm 0; }
-.cover .meta { font: 9pt "Segoe UI", sans-serif; color: #4a675c; line-height: 1.85; }
+.cover .meta { font: 9pt "Noto Sans", "DejaVu Sans", sans-serif; color: #4a675c; line-height: 1.85; }
 .cover .rule-bottom { border-top: 0.3mm solid #d7e5de; padding-top: 4mm; }
 """
+
+OPEN_FONT_DIR = ROOT / 'pasadhi/web/fonts'
+font_css = (OPEN_FONT_DIR / 'fonts.css').read_text(encoding='utf-8')
+font_css = re.sub(r"url\('\./([^']+)'\)", lambda m: "url('" + (OPEN_FONT_DIR / m[1]).as_uri() + "')", font_css)
+CSS = font_css + '\n' + CSS
+pdfmetrics.registerFont(TTFont('Noto Sans', str(OPEN_FONT_DIR / 'NotoSans.ttf')))
 
 COVERS = {
     'solution': ('PASADHI · SOLUTION PAPER', 'Solution paper'),
@@ -129,8 +145,11 @@ def main() -> None:
 
     lines = source.read_text(encoding='utf-8').splitlines()
     title = next(line[2:].strip() for line in lines if line.startswith('# '))
-    body_md = '\n'.join(lines[1:])
+    title_index = next(i for i, line in enumerate(lines) if line.startswith('# '))
+    body_md = '\n'.join(lines[title_index + 1:])
     body_html = markdown.markdown(body_md, extensions=['tables', 'fenced_code', 'sane_lists'])
+    body_html = body_html.replace('<th>Step</th>', '<th class="step-heading">Step</th>')
+    body_html = re.sub(r'<table>(?=\s*<thead>\s*<tr>\s*<th class="step-heading">)', '<table class="installation-steps">', body_html)
     body_html = inline_images(body_html, BUILD)
 
     kicker, blurb = COVERS[args.kind]
@@ -138,8 +157,9 @@ def main() -> None:
     html = f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><title>{title}</title>
 <style>{CSS}</style></head><body>
 <section class="cover">
-  <div><p class="kicker">{kicker}</p><div class="rule"></div><h1>{title}</h1>
-       <p style="font:10pt 'Segoe UI',sans-serif;color:#4a675c;margin-top:4mm">{blurb} · {figures} figures</p></div>
+  <div><img class="cover-logo" src="{(ROOT / 'pasadhi/brand/logo-light-transparent.png').as_uri()}" alt="PASADHI brain network logo">
+       <p class="kicker">{kicker}</p><div class="rule"></div><h1>{title}</h1>
+       <p style="font:10pt 'Noto Sans',sans-serif;color:#4a675c;margin-top:4mm">{blurb} · {figures} figures</p></div>
   <div class="meta"><div class="rule-bottom">
     PASADHI contributors · {args.version}<br>{args.date} · MIT for the open core<br>
     github.com/camponggogo/pasadhi · pasadhi.tech</div></div>
@@ -166,10 +186,10 @@ def main() -> None:
         if index > 0:
             buffer = io.BytesIO()
             width, height = float(page.mediabox.width), float(page.mediabox.height)
-            layer = canvas.Canvas(buffer, pagesize=(width, height))
+            layer = canvas.Canvas(buffer, pagesize=(width, height), initialFontName='Noto Sans')
             layer.setStrokeColorRGB(0.82, 0.87, 0.84)
             layer.line(17 * mm, 13.4 * mm, width - 17 * mm, 13.4 * mm)
-            layer.setFont('Helvetica', 7.1)
+            layer.setFont('Noto Sans', 7.1)
             layer.setFillColorRGB(0.33, 0.42, 0.38)
             layer.drawString(17 * mm, 9.8 * mm, f'PASADHI {COVERS[args.kind][1].lower()} · {args.version} · {args.date}')
             layer.drawRightString(width - 17 * mm, 9.8 * mm, f'{index + 1} / {total}')

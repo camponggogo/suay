@@ -26,6 +26,7 @@ def main() -> None:
         svg = match.group(0)
         svg = re.sub(r'viewBox="([^"]+)"', lambda m: f'viewBox="{m.group(1)}" preserveAspectRatio="xMidYMid meet"', svg)
         wrapper = f"""<!doctype html><html><head><meta charset="utf-8"><style>
+@import url("{(ROOT / 'pasadhi/web/fonts/fonts.css').as_uri()}");
 html,body{{margin:0;padding:0;background:#fff}}
 svg{{display:block;width:100vw;height:auto}}
 </style></head><body>{svg}</body></html>"""
