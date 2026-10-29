@@ -2,6 +2,8 @@
 
 <img src="landing/assets/suay-network.svg" width="86" height="86" alt="SUAY neural network logo">
 
+[![XERJ Corpus Hub contributor](https://hub.xerj.org/contributors/camponggogo/badge.svg)](https://hub.xerj.org/contributors/camponggogo)
+
 **Wake old machines. Run AI together.**
 
 **ปลุกเครื่องเก่า ให้ร่วมกันรัน AI — เปลี่ยนทรัพยากรที่มี ให้เป็นโอกาสใหม่ขององค์กร**
@@ -11,6 +13,20 @@ Distributed AI compute and local resource sharing for organizations with big amb
 [Website](https://campong.online/projects/suay/) · [ภาษาไทย](https://campong.online/projects/suay/th/) · [Source & community](https://github.com/camponggogo/suay) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [MIT license](LICENSE)
 
 [Star SUAY](https://github.com/camponggogo/suay) · [Support development](#support-the-project)
+
+## SUAY in the XERJ Corpus Hub
+
+SUAY is included in the [XERJ Corpus Hub](https://hub.xerj.org/contributors/camponggogo),
+where coding agents can retrieve attributed source implementations as worked
+references. XERJ selected the
+[publish-pasadhi-pitch-theme-downloads-and-open-font-papers commit](https://github.com/camponggogo/suay/commit/c7f97c6e8258d80634e564f79ed2e0c73846966f)
+and indexes the repository at that pinned revision. The selected change covers
+27 files across the landing pages, deployment configuration and publishing scripts.
+
+The contribution remains available under SUAY's [MIT license](LICENSE), with
+attribution to Supakrit Wapakpetch and Campong Innovation. Our related
+[PASADHI project](https://github.com/camponggogo/pasadhi) carries this shared-compute
+research forward with a hybrid-orchestration prototype and versioned evidence.
 
 ![SUAY shared-compute concept: older computers, phones, servers and edge boards linked by neural fibers](landing/assets/suay-device-landing.png)
 
